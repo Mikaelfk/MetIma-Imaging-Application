@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.media.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<VBox prefHeight="708.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+    <stylesheets>
+        <URL value="@MetIma_addNewImagePage_css/BasicApplication.css"/>
+    </stylesheets>
+    <MenuBar VBox.vgrow="NEVER">
+        <Menu mnemonicParsing="false" text="File">
+            <MenuItem mnemonicParsing="false" text="New"/>
+            <MenuItem mnemonicParsing="false" text="Open…"/>
+            <Menu mnemonicParsing="false" text="Open Recent"/>
+            <SeparatorMenuItem mnemonicParsing="false"/>
+            <MenuItem mnemonicParsing="false" text="Close"/>
+            <MenuItem mnemonicParsing="false" text="Save"/>
+            <MenuItem mnemonicParsing="false" text="Save As…"/>
+            <MenuItem mnemonicParsing="false" text="Revert"/>
+            <SeparatorMenuItem mnemonicParsing="false"/>
+            <MenuItem mnemonicParsing="false" text="Preferences…"/>
+            <SeparatorMenuItem mnemonicParsing="false"/>
+            <MenuItem mnemonicParsing="false" text="Quit"/>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Edit">
+            <MenuItem mnemonicParsing="false" text="Undo"/>
+            <MenuItem mnemonicParsing="false" text="Redo"/>
+            <SeparatorMenuItem mnemonicParsing="false"/>
+            <MenuItem mnemonicParsing="false" text="Cut"/>
+            <MenuItem mnemonicParsing="false" text="Copy"/>
+            <MenuItem mnemonicParsing="false" text="Paste"/>
+            <MenuItem mnemonicParsing="false" text="Delete"/>
+            <SeparatorMenuItem mnemonicParsing="false"/>
+            <MenuItem mnemonicParsing="false" text="Select All"/>
+            <MenuItem mnemonicParsing="false" text="Unselect All"/>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Help">
+            <MenuItem mnemonicParsing="false" text="About MyHelloApp"/>
+        </Menu>
+    </MenuBar>
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="463.0" layoutX="27.0" layoutY="114.0"
+                   stroke="BLACK" strokeType="INSIDE" width="970.0"/>
+        <Button layoutX="18.0" layoutY="14.0" mnemonicParsing="false" text="home page"/>
+        <Button layoutX="168.0" layoutY="14.0" mnemonicParsing="false" text="view gallery"/>
+        <TextField layoutX="732.0" layoutY="258.0" prefHeight="45.0" prefWidth="132.0"/>
+        <Text layoutX="756.0" layoutY="224.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Filename"/>
+        <Text layoutX="776.0" layoutY="398.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tags"/>
+        <TextField layoutX="732.0" layoutY="427.0" prefHeight="45.0" prefWidth="132.0"/>
+        <Text layoutX="204.0" layoutY="224.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Image preview"/>
+        <ImageView fitHeight="236.0" fitWidth="411.0" layoutX="85.0" layoutY="236.0" pickOnBounds="true"
+                   preserveRatio="true"/>
+        <Button layoutX="554.0" layoutY="594.0" mnemonicParsing="false" text="cancel"/>
+        <Button layoutX="355.0" layoutY="594.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="87.0"
+                text="add"/>
+    </AnchorPane>
+</VBox>
