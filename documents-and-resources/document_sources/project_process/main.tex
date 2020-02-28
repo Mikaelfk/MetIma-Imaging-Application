@@ -1,0 +1,19 @@
+\documentclass{article}
+\usepackage[utf8, margin=1.3in, top=1in, bottom=1in]{geometry}
+\usepackage{pdfpages}
+\usepackage{graphicx}
+
+\title{Project Process Document}
+\author{Mikkel Aas \and Magnus Gluppe \and Jakob Frantzvåg Karlsmoen \and Mikael Falkenberg Krog}
+\date{February 2020}
+
+\begin{document}
+
+\maketitle
+\includepdf[pages={1,2,3}]{Collaboration_Agreement_Gruppe2.pdf}
+\section*{Gantt Diagram}
+\includegraphics[width=\textwidth]{Gantt_Diagram.png}
+\includepdf[pages={1,2}]{Meetings.pdf}
+\includepdf[pages={1},pagecommand=\subsection*{Timetable},offset=0 -2cm]{"SUP Timetracking - Ark 1.pdf"}
+
+\end{document}
