@@ -42,7 +42,11 @@ public class GalleryPageController implements Initializable {
    */
   @FXML
   private void buttonAddImage(ActionEvent event) {
-    logger.info("Add image button pressed");
+    try {
+      MetImaApplication.getStage().setScene(new Scene(FXMLLoader.load(getClass().getResource("MetIma_AddImagePage.fxml"))));
+    } catch (IOException exception) {
+      logger.error("File not found", exception);
+    }
   }
 
   /**
