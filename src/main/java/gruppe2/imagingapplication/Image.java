@@ -8,5 +8,7 @@ import java.util.HashMap;
  * are all the different metadata of the image
  */
 public class Image {
-    HashMap<String, String> path = new HashMap<>();
+    private String filename;
+    private String tags;
+    private HashMap<String, String> path = new HashMap<>();
 }
