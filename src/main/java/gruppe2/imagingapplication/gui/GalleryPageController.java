@@ -15,26 +15,26 @@ public class GalleryPageController implements Initializable {
   public void initialize(URL url, ResourceBundle resourceBundle) {
   }
 
-  @FXML
   /**
    * This method handles what happens when the home button is pressed.
    */
+  @FXML
   private void buttonHome(ActionEvent event) {
     logger.info("Home button pressed");
   }
 
-  @FXML
   /**
    * This method handles what happens when the add image button is pressed.
    */
+  @FXML
   private void buttonAddImage(ActionEvent event) {
     logger.info("Add image button pressed");
   }
 
-  @FXML
   /**
    * This method handles what happens when the export button is pressed.
    */
+  @FXML
   private void buttonExport(ActionEvent event) {
     logger.info("Export button pressed");
   }
