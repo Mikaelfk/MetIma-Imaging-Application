@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 public class MetImaApplication extends Application {
 
   @Override
-  public void start(Stage stage) throws Exception{
+  public void start(Stage stage) throws Exception {
     Parent root = FXMLLoader.load(getClass().getResource("MetIma_GalleryPage.fxml"));
 
     Scene scene = new Scene(root, 1200, 800);
