@@ -2,10 +2,16 @@ package gruppe2.imagingapplication.gui;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -24,6 +30,16 @@ public class AddImagePageController implements Initializable {
     @FXML
     private void btnHome(ActionEvent event){
         logger.info("Home button pressed.");
+        Node node=(Node) event.getSource();
+        Stage stage=(Stage) node.getScene().getWindow();
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("MetIma_HomePage.fxml"));/* Exception */
+        } catch (IOException e){
+            logger.error("File not found", e);
+        }
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 
     /**
