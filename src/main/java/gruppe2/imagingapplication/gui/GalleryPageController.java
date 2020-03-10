@@ -19,4 +19,14 @@ public class GalleryPageController implements Initializable {
   private void buttonHome(ActionEvent event) {
     logger.info("Home button pressed");
   }
+
+  @FXML
+  private void buttonAddImage(ActionEvent event) {
+    logger.info("Add image button pressed");
+  }
+
+  @FXML
+  private void buttonExport(ActionEvent event) {
+    logger.info("Export button pressed");
+  }
 }
