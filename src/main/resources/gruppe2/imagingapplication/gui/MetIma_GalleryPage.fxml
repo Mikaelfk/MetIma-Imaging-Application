@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
@@ -8,24 +9,23 @@
 <?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.layout.VBox?>
 
-
-<BorderPane fx:controller="gruppe2.imagingapplication.gui.GalleryPageController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gruppe2.imagingapplication.gui.GalleryPageController">
    <top>
       <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                <children>
-                  <Button mnemonicParsing="false" text="Home" fx:id="btnHome" onAction="#buttonHome" />
+                  <Button fx:id="btnHome" mnemonicParsing="false" onAction="#buttonHome" text="Home" />
                </children>
             </VBox>
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                <children>
-                  <Button mnemonicParsing="false" text="Add image" fx:id="btnAddImage" onAction="#buttonAddImage"/>
+                  <Button fx:id="btnAddImage" mnemonicParsing="false" onAction="#buttonAddImage" text="Add image" />
                </children>
             </VBox>
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                <children>
-                  <Button mnemonicParsing="false" text="Export" fx:id="btnExport" onAction="#buttonExport"/>
+                  <Button fx:id="btnExport" mnemonicParsing="false" onAction="#buttonExport" text="Export" />
                </children>
             </VBox>
          </children>
@@ -34,17 +34,20 @@
    <center>
       <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
-            <HBox alignment="CENTER" prefHeight="34.0" prefWidth="600.0">
+            <HBox alignment="CENTER" prefHeight="34.0" prefWidth="600.0" VBox.vgrow="ALWAYS">
                <children>
                   <TextField promptText="Search" />
                </children>
             </HBox>
-            <HBox prefHeight="265.0" prefWidth="600.0">
+            <HBox alignment="CENTER" prefHeight="265.0" prefWidth="600.0" VBox.vgrow="ALWAYS">
                <children>
                   <ScrollPane prefHeight="265.0" prefWidth="613.0">
                      <content>
-                        <TilePane prefHeight="266.0" prefWidth="594.0" />
+                        <TilePane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" />
                      </content>
+                     <HBox.margin>
+                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                     </HBox.margin>
                   </ScrollPane>
                </children>
             </HBox>
