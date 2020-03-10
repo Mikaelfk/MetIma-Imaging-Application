@@ -12,8 +12,10 @@ public class MetImaApplication extends Application {
   public void start(Stage stage) throws Exception{
     Parent root = FXMLLoader.load(getClass().getResource("MetIma_GalleryPage.fxml"));
 
-    Scene scene = new Scene(root, 300, 275);
+    Scene scene = new Scene(root, 1200, 800);
 
+    stage.setMinWidth(1000);
+    stage.setMinHeight(600);
     stage.setTitle("no");
     stage.setScene(scene);
     stage.show();

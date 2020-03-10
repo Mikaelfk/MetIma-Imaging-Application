@@ -15,6 +15,7 @@ import java.util.ResourceBundle;
 
 public class GalleryPageController implements Initializable {
   Logger logger = LoggerFactory.getLogger(GalleryPageController.class);
+
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
   }
