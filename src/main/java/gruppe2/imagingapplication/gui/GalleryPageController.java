@@ -2,7 +2,11 @@ package gruppe2.imagingapplication.gui;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,7 +25,15 @@ public class GalleryPageController implements Initializable {
    */
   @FXML
   private void buttonHome(ActionEvent event) {
-    logger.info("Home button pressed");
+    try {
+      FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MetIma_HomePage.fxml"));
+      Parent root = (Parent) fxmlLoader.load();
+      Stage stage = new Stage();
+      stage.setScene(new Scene(root));
+      stage.show();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
   }
 
   /**
