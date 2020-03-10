@@ -15,9 +15,20 @@ public class HomePageController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
     }
+
     @FXML
+    /**
+     * This method handles what happens when the view gallery button is pressed.
+     */
     private void viewGallery(ActionEvent event) {
-        logger.info("View Gallery button pressed");
+        logger.info("View Gallery button was pressed");
+    }
+    @FXML
+    /**
+     * This method handles what heppens when the view gallery button is pressed.
+     */
+    private void addImage(ActionEvent event){
+        logger.info("Add Image button was pressed");
     }
 
 }
