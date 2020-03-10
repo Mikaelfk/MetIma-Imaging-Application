@@ -9,12 +9,21 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * A class representing an image with metadata and tags.
+ */
 public class Image {
     private String imageName;
     private ArrayList<String> tags;
     private String path;
     private Metadata metadata;
 
+    /**
+     * @param absolutePath The absolute path to the image for the class to represent
+     * @param tags User-defined tags to describe image, set null for no tags
+     * @throws ImageProcessingException If filetype is unknown
+     * @throws IOException If file could not be found
+     */
     public Image(String absolutePath, ArrayList<String> tags) throws ImageProcessingException, IOException {
         this.path = absolutePath;
         this.metadata = ImageMetadataReader.readMetadata(new File(path));
