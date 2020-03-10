@@ -22,6 +22,7 @@ public class GalleryPageController implements Initializable {
 
   /**
    * This method handles what happens when the home button is pressed.
+   * @param event The event is the event that occurs when the button is pressed
    */
   @FXML
   private void buttonHome(ActionEvent event) {
@@ -38,6 +39,7 @@ public class GalleryPageController implements Initializable {
 
   /**
    * This method handles what happens when the add image button is pressed.
+   * @param event The event is the event that occurs when the button is pressed
    */
   @FXML
   private void buttonAddImage(ActionEvent event) {
@@ -46,6 +48,7 @@ public class GalleryPageController implements Initializable {
 
   /**
    * This method handles what happens when the export button is pressed.
+   * @param event The event is the event that occurs when the button is pressed
    */
   @FXML
   private void buttonExport(ActionEvent event) {
