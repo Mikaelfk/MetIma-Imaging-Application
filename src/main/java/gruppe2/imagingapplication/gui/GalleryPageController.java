@@ -30,8 +30,6 @@ public class GalleryPageController implements Initializable {
   private void buttonHome(ActionEvent event) {
     try {
       FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MetIma_HomePage.fxml"));
-      Parent root = (Parent) fxmlLoader.load();
-      Stage stage = new Stage();
       stage.setScene(new Scene(root));
       stage.show();
     } catch (IOException exception) {
