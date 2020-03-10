@@ -8,16 +8,25 @@ import javafx.stage.Stage;
 
 public class MetImaApplication extends Application {
 
+  private static Stage stage;
+
   @Override
   public void start(Stage stage) throws Exception {
     Parent root = FXMLLoader.load(getClass().getResource("MetIma_GalleryPage.fxml"));
-
     Scene scene = new Scene(root, 1200, 800);
-
     stage.setMinWidth(1000);
     stage.setMinHeight(600);
     stage.setTitle("no");
     stage.setScene(scene);
+    setStage(stage);
     stage.show();
+  }
+
+  private void setStage(Stage stage) {
+    MetImaApplication.stage = stage;
+  }
+
+  public static Stage getStage() {
+    return stage;
   }
 }

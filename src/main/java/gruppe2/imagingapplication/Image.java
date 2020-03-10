@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class Image {
   private String imageName;
-  private ArrayList<String> tags;
+  private List<String> tags;
   private String path;
   private Metadata metadata;
 
@@ -24,7 +24,7 @@ public class Image {
    * @throws ImageProcessingException If filetype is unknown
    * @throws IOException              If file could not be found
    */
-  public Image(String absolutePath, ArrayList<String> tags) throws ImageProcessingException,
+  public Image(String absolutePath, List<String> tags) throws ImageProcessingException,
           IOException {
     this.path = absolutePath;
     this.metadata = ImageMetadataReader.readMetadata(new File(path));
