@@ -1,5 +1,8 @@
 package gruppe2.imagingapplication.gui;
 
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,9 +13,6 @@ import javafx.stage.Stage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
 
 public class GalleryPageController implements Initializable {
   Logger logger = LoggerFactory.getLogger(GalleryPageController.class);
@@ -23,6 +23,7 @@ public class GalleryPageController implements Initializable {
 
   /**
    * This method handles what happens when the home button is pressed.
+   *
    * @param event The event is the event that occurs when the button is pressed
    */
   @FXML
@@ -40,6 +41,7 @@ public class GalleryPageController implements Initializable {
 
   /**
    * This method handles what happens when the add image button is pressed.
+   *
    * @param event The event is the event that occurs when the button is pressed
    */
   @FXML
@@ -49,6 +51,7 @@ public class GalleryPageController implements Initializable {
 
   /**
    * This method handles what happens when the export button is pressed.
+   *
    * @param event The event is the event that occurs when the button is pressed
    */
   @FXML
