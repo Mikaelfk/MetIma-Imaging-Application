@@ -29,8 +29,7 @@ public class GalleryPageController implements Initializable {
   @FXML
   private void buttonHome(ActionEvent event) {
     try {
-      FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MetIma_HomePage.fxml"));
-      MetImaApplication.getStage().setScene(new Scene(fxmlLoader.load()));
+      MetImaApplication.getStage().setScene(new Scene(FXMLLoader.load(getClass().getResource("MetIma_HomePage.fxml"))));
     } catch (IOException exception) {
       logger.error("File not found", exception);
     }
