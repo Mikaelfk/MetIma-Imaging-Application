@@ -1,4 +1,4 @@
-package gruppe2.imagingApplication.gui;
+package gruppe2.imagingapplication.gui;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 public class MetImaApplication extends Application {
 
   @Override
-  public void start(Stage stage) throws Exception {
+  public void start(Stage stage) throws Exception{
     Parent root = FXMLLoader.load(getClass().getResource("MetIma_GalleryPage.fxml"));
 
     Scene scene = new Scene(root, 300, 275);
