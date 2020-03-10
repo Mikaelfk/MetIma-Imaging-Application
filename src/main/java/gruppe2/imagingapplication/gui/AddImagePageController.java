@@ -19,7 +19,7 @@ public class AddImagePageController implements Initializable {
 
     /**
      * This method handles what happens when the home button is pressed
-     * @param event
+     * @param event Represents the action when the button is pressed
      */
     @FXML
     private void btnHome(ActionEvent event){
