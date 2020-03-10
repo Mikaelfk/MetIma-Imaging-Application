@@ -1,34 +1,44 @@
 package gruppe2.imagingapplication;
 
-import java.util.HashMap;
+import com.drew.imaging.ImageMetadataReader;
+import com.drew.imaging.ImageProcessingException;
+import com.drew.metadata.Metadata;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Image {
-    private String filename;
-    private String tags;
+    private String imageName;
+    private ArrayList<String> tags;
     private String path;
+    private Metadata metadata;
 
-    /**
-     * This is a HashMap that contains the metadata of the images
-     * There is a unique HashMap for each image and the different keys
-     * are all the different metadata of the image
-     */
-    private HashMap<String, String> metadata = new HashMap<>();
-
-    public String getFilename() {
-        return filename;
+    public Image(String absolutePath, ArrayList<String> tags) throws ImageProcessingException, IOException {
+        this.path = absolutePath;
+        this.metadata = ImageMetadataReader.readMetadata(new File(path));
+        if (tags != null) {
+            this.tags = tags;
+        } else {
+            this.tags = new ArrayList<>();
+        }
     }
 
-    public void setFilename(String filename) {
-        this.filename = filename;
+    public String getImageName() {
+        return imageName;
     }
 
-    public String getTags() {
+    public void setImageName(String imageName) {
+        this.imageName= imageName;
+    }
+
+    public List<String> getTags() {
         return tags;
     }
 
-    public void setTags(String tags) {
-        this.tags = tags;
+    public void addTag(String tag) {
+        this.tags.add(tag);
     }
 
     public String getPath() {
@@ -39,11 +49,7 @@ public class Image {
         this.path = path;
     }
 
-    public HashMap<String, String> getMetadata() {
+    public Metadata getMetadata() {
         return metadata;
-    }
-
-    public void setMetadata(HashMap<String, String> metadata) {
-        this.metadata = metadata;
     }
 }
