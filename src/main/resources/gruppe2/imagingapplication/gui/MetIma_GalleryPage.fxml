@@ -20,12 +20,12 @@
             </VBox>
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                <children>
-                  <Button mnemonicParsing="false" text="Add image" />
+                  <Button mnemonicParsing="false" text="Add image" fx:id="btnAddImage" onAction="#buttonAddImage"/>
                </children>
             </VBox>
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                <children>
-                  <Button mnemonicParsing="false" text="Export" />
+                  <Button mnemonicParsing="false" text="Export" fx:id="btnExport" onAction="#buttonExport"/>
                </children>
             </VBox>
          </children>
