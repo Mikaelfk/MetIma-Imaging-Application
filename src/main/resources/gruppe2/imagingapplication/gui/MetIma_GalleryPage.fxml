@@ -44,7 +44,7 @@
                <children>
                   <ScrollPane prefHeight="265.0" prefWidth="613.0">
                      <content>
-                        <TilePane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" />
+                        <TilePane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"  fx:id="galleryImages" />
                      </content>
                      <HBox.margin>
                         <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />

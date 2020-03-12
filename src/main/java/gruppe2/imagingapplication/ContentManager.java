@@ -4,6 +4,7 @@ import com.drew.imaging.ImageProcessingException;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,13 +14,13 @@ public class ContentManager {
   /**
    * A makeshift HashMap for storing the images. This is just for storing the images for the MVP.
    */
-  private HashMap<String, Image> images;
+  private HashMap<String, gruppe2.imagingapplication.Image> images;
 
-  public ContentManager() {
+  public ContentManager() throws ImageProcessingException, IOException {
     images = new HashMap<>();
   }
 
-  public HashMap<String, Image> getImages() {
+  public HashMap<String, gruppe2.imagingapplication.Image> getImages() {
     return images;
   }
 
