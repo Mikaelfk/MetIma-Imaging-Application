@@ -1,22 +1,70 @@
 package gruppe2.imagingapplication.gui;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Arrays;
+import java.util.List;
 import java.util.ResourceBundle;
+import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class AddImagePageController implements Initializable {
 
+  public Text selectedFileText;
+  public ImageView imagePreview;
+  public TextField txtFileName;
+  public TextField txtTags;
+  public Button btnAddImage;
   Logger logger = LoggerFactory.getLogger(AddImagePageController.class);
+  boolean imageSelected = false;
+  File selectedFile;
 
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
+
+    btnAddImage.disableProperty().bind(Bindings.createBooleanBinding(
+        () -> txtFileName.getText().trim().isEmpty() || !imageSelected,
+        txtFileName.textProperty(), btnAddImage.defaultButtonProperty()
+    ));
+  }
+
+  @FXML
+  private void chooseFile(ActionEvent event)  {
+    FileChooser fileChooser = new FileChooser();
+    selectedFile = fileChooser.showOpenDialog(new Stage());
+    if (selectedFile != null) {
+      selectedFileText.setText(selectedFile.getName());
+      imagePreview.setImage(new Image("file:" + selectedFile.getAbsolutePath()));
+      if (!imagePreview.getImage().isError()) {
+        imageSelected = true;
+      }
+    }
+  }
+
+  @FXML
+  private void addImage(ActionEvent event) throws IOException {
+    List<String> tags = null;
+    if (!txtTags.getText().isEmpty()) {
+      tags = Arrays.asList(txtTags.getText().split("\\s*,\\s*"));
+    }
+    MetImaApplication.getContentManager().addImageToDB(selectedFile.getAbsolutePath(), tags);
+    MetImaApplication.getStage().setScene(
+        new Scene(FXMLLoader.load(getClass().getResource("MetIma_GalleryPage.fxml")))
+    );
   }
 
   /**
