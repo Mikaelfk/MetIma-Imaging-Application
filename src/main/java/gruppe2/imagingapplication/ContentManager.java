@@ -19,6 +19,10 @@ public class ContentManager {
     images = new HashMap<>();
   }
 
+  public HashMap<String, Image> getImages() {
+    return images;
+  }
+
   /**
    * Method for adding images to the DB with it's path.
    *
