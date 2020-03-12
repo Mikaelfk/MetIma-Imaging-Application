@@ -8,9 +8,6 @@
 <?import javafx.scene.text.Text?>
 
 <VBox fx:controller="gruppe2.imagingapplication.gui.HomePageController" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
-  <stylesheets>
-    <URL value="@BasicApplication.css" />
-  </stylesheets>
    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
       <children>
        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="MetIma">
