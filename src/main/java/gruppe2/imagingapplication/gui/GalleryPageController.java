@@ -7,9 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.stage.Stage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -29,7 +27,8 @@ public class GalleryPageController implements Initializable {
   @FXML
   private void buttonHome(ActionEvent event) {
     try {
-      MetImaApplication.getStage().setScene(new Scene(FXMLLoader.load(getClass().getResource("MetIma_HomePage.fxml"))));
+      MetImaApplication.getStage().setScene(
+              new Scene(FXMLLoader.load(getClass().getResource("MetIma_HomePage.fxml"))));
     } catch (IOException exception) {
       logger.error("File not found", exception);
     }
@@ -43,7 +42,8 @@ public class GalleryPageController implements Initializable {
   @FXML
   private void buttonAddImage(ActionEvent event) {
     try {
-      MetImaApplication.getStage().setScene(new Scene(FXMLLoader.load(getClass().getResource("MetIma_AddImagePage.fxml"))));
+      MetImaApplication.getStage().setScene(
+              new Scene(FXMLLoader.load(getClass().getResource("MetIma_AddImagePage.fxml"))));
     } catch (IOException exception) {
       logger.error("File not found", exception);
     }
