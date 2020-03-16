@@ -5,6 +5,7 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 
+import com.drew.imaging.ImageProcessingException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -34,12 +35,13 @@ public class GalleryPageController implements Initializable {
                 imagePreview.setFitHeight(100);
                 imagePreview.setSmooth(true);
 
-               // Jakob og Mikael, dette er en ide. Derfor har den en dark mode toggle.
                 imagePreview.setOnMouseClicked(e -> {
                   try {
-                    MetImaApplication.getStage().setScene(
-                            new Scene(FXMLLoader.load(getClass().getResource("MetIma_ViewImagePage.fxml"))));
-
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("MetIma_ViewImagePage.fxml"));
+                    ViewImagePageController controller = new ViewImagePageController();
+                    loader.setController(controller);
+                    controller.setImage(path);
+                    MetImaApplication.getStage().setScene(new Scene(loader.load()));
                   } catch (IOException exception) {
                     logger.error("File not found", exception);
                   }
