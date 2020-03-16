@@ -21,7 +21,7 @@
                </VBox>
                <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                   <children>
-                     <Button mnemonicParsing="false" text="Gallery" />
+                     <Button mnemonicParsing="false" onAction="#btnGallery" text="Gallery" />
                   </children>
                </VBox>
                <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
