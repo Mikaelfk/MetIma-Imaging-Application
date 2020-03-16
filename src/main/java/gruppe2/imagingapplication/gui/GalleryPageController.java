@@ -2,17 +2,11 @@ package gruppe2.imagingapplication.gui;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.HashMap;
 import java.util.ResourceBundle;
-
-import com.drew.imaging.ImageProcessingException;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.TilePane;
@@ -34,6 +28,7 @@ public class GalleryPageController implements Initializable {
                 imagePreview.setImage(new Image("file:" + path));
                 imagePreview.setFitHeight(100);
                 imagePreview.setSmooth(true);
+                imagePreview.setPreserveRatio(true);
 
                 imagePreview.setOnMouseClicked(e -> {
                   try {
@@ -48,13 +43,6 @@ public class GalleryPageController implements Initializable {
                 });
                 galleryImages.getChildren().add(imagePreview);
               });
-    ImageView imagePreview2 = new ImageView();
-    imagePreview2.setImage(new Image("file:C:\\Users\\Ukhur\\Pictures\\Profile Pictures\\Ichika-01.jpg"));
-    imagePreview2.setFitWidth(200);
-    imagePreview2.setPreserveRatio(true);
-
-    imagePreview2.setViewport(new Rectangle2D(100,100,100,100));
-    galleryImages.getChildren().add(imagePreview2);
   }
 
   /**
