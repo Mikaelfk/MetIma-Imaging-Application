@@ -33,6 +33,17 @@ public class GalleryPageController implements Initializable {
                 imagePreview.setImage(new Image("file:" + path));
                 imagePreview.setFitHeight(100);
                 imagePreview.setSmooth(true);
+
+               // Jakob og Mikael, dette er en ide. Derfor har den en dark mode toggle.
+                imagePreview.setOnMouseClicked(e -> {
+                  try {
+                    MetImaApplication.getStage().setScene(
+                            new Scene(FXMLLoader.load(getClass().getResource("MetIma_ViewImagePage.fxml"))));
+
+                  } catch (IOException exception) {
+                    logger.error("File not found", exception);
+                  }
+                });
                 galleryImages.getChildren().add(imagePreview);
               });
     ImageView imagePreview2 = new ImageView();
