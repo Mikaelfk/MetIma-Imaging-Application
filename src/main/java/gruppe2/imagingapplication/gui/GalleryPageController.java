@@ -3,6 +3,7 @@ package gruppe2.imagingapplication.gui;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -23,26 +24,26 @@ public class GalleryPageController implements Initializable {
 
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
-      MetImaApplication.getContentManager().getImages().keySet().forEach(path -> {
-                ImageView imagePreview = new ImageView();
-                imagePreview.setImage(new Image("file:" + path));
-                imagePreview.setFitHeight(100);
-                imagePreview.setSmooth(true);
-                imagePreview.setPreserveRatio(true);
+    MetImaApplication.getContentManager().getImages().keySet().forEach(path -> {
+      ImageView imagePreview = new ImageView();
+      imagePreview.setImage(new Image("file:" + path));
+      imagePreview.setFitHeight(100);
+      imagePreview.setSmooth(true);
+      imagePreview.setPreserveRatio(true);
 
-                imagePreview.setOnMouseClicked(e -> {
-                  try {
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("MetIma_ViewImagePage.fxml"));
-                    ViewImagePageController controller = new ViewImagePageController();
-                    loader.setController(controller);
-                    controller.setImage(path);
-                    MetImaApplication.getStage().setScene(new Scene(loader.load()));
-                  } catch (IOException exception) {
-                    logger.error("File not found", exception);
-                  }
-                });
-                galleryImages.getChildren().add(imagePreview);
-              });
+      imagePreview.setOnMouseClicked(e -> {
+        try {
+          FXMLLoader loader = new FXMLLoader(getClass().getResource("MetIma_ViewImagePage.fxml"));
+          ViewImagePageController controller = new ViewImagePageController();
+          loader.setController(controller);
+          controller.setImage(path);
+          MetImaApplication.getStage().setScene(new Scene(loader.load()));
+        } catch (IOException exception) {
+          logger.error("File not found", exception);
+        }
+      });
+      galleryImages.getChildren().add(imagePreview);
+    });
   }
 
   /**
@@ -53,8 +54,14 @@ public class GalleryPageController implements Initializable {
   @FXML
   private void buttonHome(ActionEvent event) {
     try {
-      MetImaApplication.getStage().setScene(
-              new Scene(FXMLLoader.load(getClass().getResource("MetIma_HomePage.fxml"))));
+      if (MetImaApplication.getStage().isFullScreen()) {
+        MetImaApplication.getStage().setMaximized(true);
+        MetImaApplication.getStage().setScene(
+            new Scene(FXMLLoader.load(getClass().getResource("MetIma_HomePage.fxml"))));
+      } else {
+        MetImaApplication.getStage().setScene(
+            new Scene(FXMLLoader.load(getClass().getResource("MetIma_HomePage.fxml"))));
+      }
     } catch (IOException exception) {
       logger.error("File not found", exception);
     }
@@ -69,7 +76,7 @@ public class GalleryPageController implements Initializable {
   private void buttonAddImage(ActionEvent event) {
     try {
       MetImaApplication.getStage().setScene(
-              new Scene(FXMLLoader.load(getClass().getResource("MetIma_AddImagePage.fxml"))));
+          new Scene(FXMLLoader.load(getClass().getResource("MetIma_AddImagePage.fxml"))));
     } catch (IOException exception) {
       logger.error("File not found", exception);
     }
