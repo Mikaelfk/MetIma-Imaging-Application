@@ -9,8 +9,7 @@
 <?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-            prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gruppe2.imagingapplication.gui.GalleryPageController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gruppe2.imagingapplication.gui.GalleryPageController">
    <top>
       <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
@@ -37,14 +36,15 @@
          <children>
             <HBox alignment="CENTER" prefHeight="34.0" prefWidth="600.0" VBox.vgrow="ALWAYS">
                <children>
-                  <TextField promptText="Search" />
+                  <TextField fx:id="searchField" promptText="Search" />
+                  <Button onAction="#buttonSearch" mnemonicParsing="false" text="Search" />
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="265.0" prefWidth="600.0" VBox.vgrow="ALWAYS">
                <children>
                   <ScrollPane prefHeight="265.0" prefWidth="613.0">
                      <content>
-                        <TilePane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"  fx:id="galleryImages" />
+                        <TilePane fx:id="galleryImages" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" />
                      </content>
                      <HBox.margin>
                         <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />

@@ -11,10 +11,12 @@ import org.slf4j.LoggerFactory;
 
 public class ContentManager {
   Logger logger = LoggerFactory.getLogger(ContentManager.class);
+  Search search = new Search();
   /**
    * A makeshift HashMap for storing the images. This is just for storing the images for the MVP.
    */
   private HashMap<String, gruppe2.imagingapplication.Image> images;
+  private HashMap<String, gruppe2.imagingapplication.Image> searchResults;
 
   public ContentManager() throws ImageProcessingException, IOException {
     images = new HashMap<>();
@@ -42,5 +44,13 @@ public class ContentManager {
       logger.error("Could not find file", e);
       return false;
     }
+  }
+
+  public void performSearch(String searchTerm) {
+    this.searchResults = search.fullSearch(searchTerm);
+  }
+
+  public HashMap<String, Image> getSearchResults() {
+    return searchResults;
   }
 }

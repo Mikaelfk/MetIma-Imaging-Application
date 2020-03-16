@@ -2,6 +2,7 @@ package gruppe2.imagingapplication.gui;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
@@ -9,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.TilePane;
 import javafx.scene.image.Image;
@@ -17,6 +19,7 @@ import org.slf4j.LoggerFactory;
 
 
 public class GalleryPageController implements Initializable {
+  public TextField searchField;
   Logger logger = LoggerFactory.getLogger(GalleryPageController.class);
 
   @FXML
@@ -90,5 +93,58 @@ public class GalleryPageController implements Initializable {
   @FXML
   private void buttonExport(ActionEvent event) {
     logger.info("Export button pressed");
+  }
+
+  @FXML
+  public void buttonSearch(ActionEvent actionEvent) {
+    if (!searchField.getText().isEmpty()) {
+      galleryImages.getChildren().clear();
+
+      MetImaApplication.getContentManager().performSearch(searchField.getText());
+
+      MetImaApplication.getContentManager().getSearchResults().keySet().forEach(path -> {
+            ImageView imagePreview = new ImageView();
+            imagePreview.setImage(new Image("file:" + path));
+            imagePreview.setFitHeight(100);
+            imagePreview.setSmooth(true);
+            imagePreview.setPreserveRatio(true);
+
+            imagePreview.setOnMouseClicked(e -> {
+              try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("MetIma_ViewImagePage.fxml"));
+                ViewImagePageController controller = new ViewImagePageController();
+                loader.setController(controller);
+                controller.setImage(path);
+                MetImaApplication.getStage().setScene(new Scene(loader.load()));
+              } catch (IOException exception) {
+                logger.error("File not found", exception);
+              }
+            });
+            galleryImages.getChildren().add(imagePreview);
+          }
+      );
+    } else {
+      galleryImages.getChildren().clear();
+      MetImaApplication.getContentManager().getImages().keySet().forEach(path -> {
+        ImageView imagePreview = new ImageView();
+        imagePreview.setImage(new Image("file:" + path));
+        imagePreview.setFitHeight(100);
+        imagePreview.setSmooth(true);
+        imagePreview.setPreserveRatio(true);
+
+        imagePreview.setOnMouseClicked(e -> {
+          try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("MetIma_ViewImagePage.fxml"));
+            ViewImagePageController controller = new ViewImagePageController();
+            loader.setController(controller);
+            controller.setImage(path);
+            MetImaApplication.getStage().setScene(new Scene(loader.load()));
+          } catch (IOException exception) {
+            logger.error("File not found", exception);
+          }
+        });
+        galleryImages.getChildren().add(imagePreview);
+      });
+    }
   }
 }
