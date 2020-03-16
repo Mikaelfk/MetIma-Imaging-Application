@@ -31,8 +31,8 @@ public class ViewImagePageController implements Initializable {
   @FXML
   private void btnHome() {
     try {
-      MetImaApplication.getStage().setScene(
-              new Scene(FXMLLoader.load(getClass().getResource("MetIma_HomePage.fxml"))));
+        MetImaApplication.getStage().setScene(
+            new Scene(FXMLLoader.load(getClass().getResource("MetIma_HomePage.fxml"))));
     } catch (IOException exception) {
       logger.error("File not found", exception);
     }
@@ -41,8 +41,14 @@ public class ViewImagePageController implements Initializable {
   @FXML
   private void btnAddImage() {
     try {
-      MetImaApplication.getStage().setScene(
-              new Scene(FXMLLoader.load(getClass().getResource("MetIma_AddImagePage.fxml"))));
+      if(MetImaApplication.getStage().isFullScreen()) {
+        MetImaApplication.getStage().setMaximized(true);
+        MetImaApplication.getStage().setScene(
+            new Scene(FXMLLoader.load(getClass().getResource("MetIma_AddImagePage.fxml"))));
+      }
+      else {
+        new Scene(FXMLLoader.load(getClass().getResource("MetIma_HomePage.fxml")));
+      }
     } catch (IOException exception) {
       logger.error("File not found", exception);
     }
