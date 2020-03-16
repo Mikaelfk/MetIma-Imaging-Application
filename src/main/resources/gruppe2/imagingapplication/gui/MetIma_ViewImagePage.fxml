@@ -46,7 +46,7 @@
                      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Metadata" />
                      <ScrollPane prefHeight="473.0" prefWidth="528.0">
                         <content>
-                           <TextFlow prefHeight="505.0" prefWidth="508.0" />
+                           <TextFlow prefHeight="505.0" prefWidth="508.0" fx:id="textFlow"/>
                         </content></ScrollPane>
                   </children>
                </VBox>

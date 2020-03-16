@@ -10,6 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
+import javafx.scene.text.TextFlow;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,14 +19,20 @@ public class ViewImagePageController implements Initializable {
   public ImageView imageView;
   Logger logger = LoggerFactory.getLogger(ViewImagePageController.class);
   private Image image;
+  private TextFlow textFlow;
 
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
     imageView.setImage(new javafx.scene.image.Image("file:" + this.image.getPath()));
+    textFlow.setAccessibleText("Eksempel tekst");
   }
 
   public void setImage(String path) {
     this.image = MetImaApplication.getContentManager().getImages().get(path);
+  }
+
+  public void setMetadataText(String path){
+    this.textFlow.setAccessibleText(MetImaApplication.getContentManager().getImages().get(path).getMetadata().toString());
   }
 
   @FXML
