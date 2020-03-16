@@ -4,12 +4,15 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import com.drew.metadata.Directory;
+import com.drew.metadata.Tag;
 import gruppe2.imagingapplication.Image;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
+import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,12 +22,20 @@ public class ViewImagePageController implements Initializable {
   public ImageView imageView;
   Logger logger = LoggerFactory.getLogger(ViewImagePageController.class);
   private Image image;
+
+  @FXML
   private TextFlow textFlow;
 
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
     imageView.setImage(new javafx.scene.image.Image("file:" + this.image.getPath()));
-    textFlow.setAccessibleText("Eksempel tekst");
+    for (Directory directory : image.getMetadata().getDirectories()) {
+      for (Tag tag : directory.getTags()) {
+        Text text = new Text();
+        text.setText(tag.toString() + "\n");
+        textFlow.getChildren().add(text);
+      }
+    }
   }
 
   public void setImage(String path) {
