@@ -5,6 +5,8 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 
+import gruppe2.imagingapplication.Export;
+import gruppe2.imagingapplication.Search;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,6 +22,7 @@ import org.slf4j.LoggerFactory;
 
 public class GalleryPageController implements Initializable {
   public TextField searchField;
+  Export export = new Export();
   Logger logger = LoggerFactory.getLogger(GalleryPageController.class);
 
   @FXML
@@ -73,7 +76,9 @@ public class GalleryPageController implements Initializable {
    */
   @FXML
   private void buttonExport(ActionEvent event) {
-    logger.info("Export button pressed");
+    HashMap<String, gruppe2.imagingapplication.Image> images = new HashMap<>();
+    images = MetImaApplication.getContentManager().getSearchResults();
+    export.exportImagesToPdf(images, "filename");
   }
 
   @FXML
