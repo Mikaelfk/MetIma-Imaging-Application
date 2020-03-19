@@ -27,26 +27,7 @@ public class GalleryPageController implements Initializable {
 
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
-    MetImaApplication.getContentManager().getImages().keySet().forEach(path -> {
-      ImageView imagePreview = new ImageView();
-      imagePreview.setImage(new Image("file:" + path));
-      imagePreview.setFitHeight(100);
-      imagePreview.setSmooth(true);
-      imagePreview.setPreserveRatio(true);
-
-      imagePreview.setOnMouseClicked(e -> {
-        try {
-          FXMLLoader loader = new FXMLLoader(getClass().getResource("MetIma_ViewImagePage.fxml"));
-          ViewImagePageController controller = new ViewImagePageController();
-          loader.setController(controller);
-          controller.setImage(path);
-          MetImaApplication.getStage().setScene(new Scene(loader.load()));
-        } catch (IOException exception) {
-          logger.error("File not found", exception);
-        }
-      });
-      galleryImages.getChildren().add(imagePreview);
-    });
+    generateGallery(MetImaApplication.getContentManager().getImages());
   }
 
   /**
@@ -102,49 +83,33 @@ public class GalleryPageController implements Initializable {
 
       MetImaApplication.getContentManager().performSearch(searchField.getText());
 
-      MetImaApplication.getContentManager().getSearchResults().keySet().forEach(path -> {
-            ImageView imagePreview = new ImageView();
-            imagePreview.setImage(new Image("file:" + path));
-            imagePreview.setFitHeight(100);
-            imagePreview.setSmooth(true);
-            imagePreview.setPreserveRatio(true);
-
-            imagePreview.setOnMouseClicked(e -> {
-              try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("MetIma_ViewImagePage.fxml"));
-                ViewImagePageController controller = new ViewImagePageController();
-                loader.setController(controller);
-                controller.setImage(path);
-                MetImaApplication.getStage().setScene(new Scene(loader.load()));
-              } catch (IOException exception) {
-                logger.error("File not found", exception);
-              }
-            });
-            galleryImages.getChildren().add(imagePreview);
-          }
-      );
+      generateGallery(MetImaApplication.getContentManager().getSearchResults());
     } else {
       galleryImages.getChildren().clear();
-      MetImaApplication.getContentManager().getImages().keySet().forEach(path -> {
-        ImageView imagePreview = new ImageView();
-        imagePreview.setImage(new Image("file:" + path));
-        imagePreview.setFitHeight(100);
-        imagePreview.setSmooth(true);
-        imagePreview.setPreserveRatio(true);
-
-        imagePreview.setOnMouseClicked(e -> {
-          try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("MetIma_ViewImagePage.fxml"));
-            ViewImagePageController controller = new ViewImagePageController();
-            loader.setController(controller);
-            controller.setImage(path);
-            MetImaApplication.getStage().setScene(new Scene(loader.load()));
-          } catch (IOException exception) {
-            logger.error("File not found", exception);
-          }
-        });
-        galleryImages.getChildren().add(imagePreview);
-      });
+      generateGallery(MetImaApplication.getContentManager().getImages());
     }
+  }
+
+  public void generateGallery(HashMap<String, gruppe2.imagingapplication.Image> imageHashMap) {
+    imageHashMap.keySet().forEach(path -> {
+      ImageView imagePreview = new ImageView();
+      imagePreview.setImage(new Image("file:" + path));
+      imagePreview.setFitHeight(100);
+      imagePreview.setSmooth(true);
+      imagePreview.setPreserveRatio(true);
+
+      imagePreview.setOnMouseClicked(e -> {
+        try {
+          FXMLLoader loader = new FXMLLoader(getClass().getResource("MetIma_ViewImagePage.fxml"));
+          ViewImagePageController controller = new ViewImagePageController();
+          loader.setController(controller);
+          controller.setImage(path);
+          MetImaApplication.getStage().setScene(new Scene(loader.load()));
+        } catch (IOException exception) {
+          logger.error("File not found", exception);
+        }
+      });
+      galleryImages.getChildren().add(imagePreview);
+    });
   }
 }
