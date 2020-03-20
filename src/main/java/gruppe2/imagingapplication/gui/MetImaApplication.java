@@ -18,7 +18,7 @@ public class MetImaApplication extends Application {
     contentManager = new ContentManager();
     stage.setMinWidth(1000);
     stage.setMinHeight(600);
-    stage.setTitle("no");
+    stage.setTitle("MetIma");
     stage.setScene(scene);
     setStage(stage);
     stage.show();

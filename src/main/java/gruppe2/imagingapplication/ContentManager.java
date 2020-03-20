@@ -4,7 +4,7 @@ import com.drew.imaging.ImageProcessingException;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
-
+import javafx.scene.image.Image;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,9 +17,11 @@ public class ContentManager {
    */
   private HashMap<String, gruppe2.imagingapplication.Image> images;
   private HashMap<String, gruppe2.imagingapplication.Image> searchResults;
+  private HashMap<String, Image> javafxImages;
 
   public ContentManager() throws ImageProcessingException, IOException {
     images = new HashMap<>();
+    javafxImages = new HashMap<>();
   }
 
   public HashMap<String, gruppe2.imagingapplication.Image> getImages() {
@@ -35,7 +37,8 @@ public class ContentManager {
    */
   public boolean addImageToDB(String absolutePath, List<String> tags) {
     try {
-      images.put(absolutePath, new Image(absolutePath, tags));
+      images.put(absolutePath, new gruppe2.imagingapplication.Image(absolutePath, tags));
+      javafxImages.put(absolutePath, new Image("file:" + absolutePath));
       return true;
     } catch (ImageProcessingException e) {
       logger.error("Not and image file", e);
@@ -50,7 +53,11 @@ public class ContentManager {
     this.searchResults = search.fullSearch(searchTerm);
   }
 
-  public HashMap<String, Image> getSearchResults() {
+  public HashMap<String, gruppe2.imagingapplication.Image> getSearchResults() {
     return searchResults;
+  }
+
+  public HashMap<String, Image> getJavafxImages() {
+    return javafxImages;
   }
 }

@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.ResourceBundle;
 
 import gruppe2.imagingapplication.Export;
-import gruppe2.imagingapplication.Search;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,7 +14,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.TilePane;
-import javafx.scene.image.Image;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -76,7 +74,7 @@ public class GalleryPageController implements Initializable {
    */
   @FXML
   private void buttonExport(ActionEvent event) {
-    HashMap<String, gruppe2.imagingapplication.Image> images = new HashMap<>();
+    HashMap<String, gruppe2.imagingapplication.Image> images;
     images = MetImaApplication.getContentManager().getSearchResults();
     export.exportImagesToPdf(images, "filename");
   }
@@ -98,7 +96,7 @@ public class GalleryPageController implements Initializable {
   public void generateGallery(HashMap<String, gruppe2.imagingapplication.Image> imageHashMap) {
     imageHashMap.keySet().forEach(path -> {
       ImageView imagePreview = new ImageView();
-      imagePreview.setImage(new Image("file:" + path));
+      imagePreview.setImage(MetImaApplication.getContentManager().getJavafxImages().get(path));
       imagePreview.setFitHeight(100);
       imagePreview.setSmooth(true);
       imagePreview.setPreserveRatio(true);
