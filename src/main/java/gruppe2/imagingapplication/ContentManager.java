@@ -22,6 +22,7 @@ public class ContentManager {
   public ContentManager() throws ImageProcessingException, IOException {
     images = new HashMap<>();
     javafxImages = new HashMap<>();
+    searchResults = new HashMap<>();
   }
 
   public HashMap<String, gruppe2.imagingapplication.Image> getImages() {
