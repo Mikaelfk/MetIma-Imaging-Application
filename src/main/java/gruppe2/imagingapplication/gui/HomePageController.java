@@ -17,7 +17,10 @@ public class HomePageController implements Initializable {
 
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
-    //This method is currently empty because nothing needs to be started when the home page is accessed
+    /*
+     * This method is currently empty because nothing
+     * needs to be started when the home page is accessed
+     */
   }
 
   /**

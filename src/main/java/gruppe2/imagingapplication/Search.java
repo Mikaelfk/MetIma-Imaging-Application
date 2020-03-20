@@ -1,7 +1,6 @@
 package gruppe2.imagingapplication;
 
 import gruppe2.imagingapplication.gui.MetImaApplication;
-
 import java.util.HashMap;
 
 public class Search {

@@ -1,12 +1,11 @@
 package gruppe2.imagingapplication.gui;
 
-import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
-
 import com.drew.metadata.Directory;
 import com.drew.metadata.Tag;
 import gruppe2.imagingapplication.Image;
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -42,8 +41,9 @@ public class ViewImagePageController implements Initializable {
     this.image = MetImaApplication.getContentManager().getImages().get(path);
   }
 
-  public void setMetadataText(String path){
-    this.textFlow.setAccessibleText(MetImaApplication.getContentManager().getImages().get(path).getMetadata().toString());
+  public void setMetadataText(String path) {
+    this.textFlow.setAccessibleText(
+            MetImaApplication.getContentManager().getImages().get(path).getMetadata().toString());
   }
 
   @FXML
@@ -73,8 +73,7 @@ public class ViewImagePageController implements Initializable {
           new Scene(FXMLLoader.load(getClass().getResource("MetIma_AddImagePage.fxml"))));
 
 
-    } catch (
-        IOException exception) {
+    } catch (IOException exception) {
       logger.error("File not found", exception);
     }
 
