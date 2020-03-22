@@ -30,7 +30,20 @@ public class Export {
       try {
         PDPageContentStream contentStream = new PDPageContentStream(document, page);
         PDImageXObject imageXObject = PDImageXObject.createFromFile(path, document);
-        contentStream.drawImage(imageXObject, 0, 0);
+        double height = 0;
+        double width = 0;
+        if(imageXObject.getWidth() <= imageXObject.getHeight()) {
+          width = 900*((double)imageXObject.getWidth()/imageXObject.getHeight());
+          height = 900;
+          contentStream.drawImage(imageXObject, 200, 0, (float)width, (float)height);
+        } else {
+          height = 600*((double)imageXObject.getHeight()/imageXObject.getWidth());
+          width = 600;
+          contentStream.drawImage(imageXObject, 6, 300, (float)width, (float)height);
+        }
+        System.out.println(width);
+        System.out.println(height);
+
         contentStream.close();
         document.save(filename + ".pdf");
       } catch (IOException e) {
