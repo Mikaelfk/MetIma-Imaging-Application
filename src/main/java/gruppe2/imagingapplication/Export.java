@@ -1,8 +1,11 @@
 package gruppe2.imagingapplication;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
@@ -52,7 +55,13 @@ public class Export {
           logger.error("No images found", exception);
         }
       });
-      document.save(filename + ".pdf");
+      FileChooser fileChooser = new FileChooser();
+      File saveLocation = fileChooser.showSaveDialog(new Stage());
+      if (!saveLocation.getAbsolutePath().endsWith(".pdf")) {
+        document.save(saveLocation.getAbsolutePath() + ".pdf");
+      } else {
+        document.save(saveLocation.getAbsolutePath());
+      }
     }
   }
 }
