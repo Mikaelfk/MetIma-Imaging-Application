@@ -18,10 +18,8 @@ public class Export {
    * @param filename Takes a string that it sets as filename
    */
   public void exportImagesToPdf(HashMap<String, ImageData> images,
-                                String filename) {
+                                String filename) throws IOException {
     PDDocument document = new PDDocument();
-
-    // Might have to put this in the for each loop to generate one page per image.
 
     images.forEach((String key, ImageData image) -> {
       String path = image.getPath();
@@ -33,19 +31,20 @@ public class Export {
         double height = 0;
         double width = 0;
         if(imageXObject.getWidth() <= imageXObject.getHeight()) {
-          width = 900*((double)imageXObject.getWidth()/imageXObject.getHeight());
-          height = 900;
-          contentStream.drawImage(imageXObject, 200, 0, (float)width, (float)height);
+          width = 600*((double)imageXObject.getWidth()/imageXObject.getHeight());
+          height = 600;
+          contentStream.drawImage(imageXObject, 0, 0, (float)width, (float)height);
         } else {
           height = 600*((double)imageXObject.getHeight()/imageXObject.getWidth());
           width = 600;
           contentStream.drawImage(imageXObject, 6, 300, (float)width, (float)height);
         }
         contentStream.close();
-        document.save(filename + ".pdf");
+
       } catch (IOException e) {
         e.printStackTrace();
       }
     });
+    document.save(filename + ".pdf");
   }
 }

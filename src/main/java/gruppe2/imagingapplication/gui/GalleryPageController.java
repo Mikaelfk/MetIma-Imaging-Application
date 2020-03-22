@@ -74,7 +74,7 @@ public class GalleryPageController implements Initializable {
    * @param event The event is the event that occurs when the button is pressed
    */
   @FXML
-  private void buttonExport(ActionEvent event) {
+  private void buttonExport(ActionEvent event) throws IOException {
     HashMap<String, ImageData> images;
     if(!MetImaApplication.getContentManager().getSearchResults().isEmpty()) {
       images = MetImaApplication.getContentManager().getSearchResults();
