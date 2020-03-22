@@ -1,11 +1,10 @@
 package gruppe2.imagingapplication;
 
 import com.drew.imaging.ImageProcessingException;
+import gruppe2.imagingapplication.gui.MetImaApplication;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
-
-import gruppe2.imagingapplication.gui.MetImaApplication;
 import javafx.scene.image.Image;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,7 +28,7 @@ public class ContentManager {
 
   /**
    * Returns the images field.
-   * @return Returns it has HashMap<String, ImageData>
+   * @return Returns it has HashMap<>
    */
   public HashMap<String, ImageData> getImages() {
     return images;
@@ -38,12 +37,14 @@ public class ContentManager {
   /**
    * Method for adding images to the DB with it's path.
    * @param absolutePath The absolute path of the image to add
-   * @param tags         User-defined tags to describe image, set null for no tags
+   * @param tags User-defined tags to describe image, set null for no tags
    * @return True/False for image was added/image was not added to to error respectively
    */
   public boolean addImageToDB(String absolutePath, List<String> tags) {
     try {
-      images.put(absolutePath, new ImageData(absolutePath, tags, new Image("file:"+absolutePath)));
+      images.put(absolutePath,
+              new ImageData(absolutePath, tags,
+              new Image("file:" + absolutePath)));
       return true;
     } catch (ImageProcessingException e) {
       logger.error("Not and image file", e);
@@ -64,7 +65,7 @@ public class ContentManager {
 
   /**
    * Returns the search result.
-   * @return Returns the result as HashMap<String, ImageData>
+   * @return Returns the result as HashMap<>
    */
   public HashMap<String, ImageData> getSearchResults() {
     return searchResults;
@@ -102,13 +103,12 @@ public class ContentManager {
     HashMap<String, ImageData> gallery = MetImaApplication.getContentManager().getImages();
     HashMap<String, ImageData> results = new HashMap<>();
 
-    gallery.forEach((String key, ImageData image) -> {
+    gallery.forEach((String key, ImageData image) ->
       image.getTags().forEach(tag -> {
         if (tag.toLowerCase().contains(searchTerm)) {
           results.put(key, image);
         }
-      });
-    });
+      }));
 
     return results;
   }

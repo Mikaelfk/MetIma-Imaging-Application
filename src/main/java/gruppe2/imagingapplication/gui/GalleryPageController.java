@@ -19,7 +19,9 @@ import org.slf4j.LoggerFactory;
 
 
 public class GalleryPageController implements Initializable {
-  public TextField searchField;
+  @FXML
+  private TextField searchField;
+  private static final String FILE_NOT_FOUND = "File not found";
   Export export = new Export();
   Logger logger = LoggerFactory.getLogger(GalleryPageController.class);
 
@@ -51,7 +53,7 @@ public class GalleryPageController implements Initializable {
             new Scene(FXMLLoader.load(getClass().getResource("MetIma_HomePage.fxml"))));
       }
     } catch (IOException exception) {
-      logger.error("File not found", exception);
+      logger.error(FILE_NOT_FOUND, exception);
     }
   }
 
@@ -66,7 +68,7 @@ public class GalleryPageController implements Initializable {
       MetImaApplication.getStage().setScene(
           new Scene(FXMLLoader.load(getClass().getResource("MetIma_AddImagePage.fxml"))));
     } catch (IOException exception) {
-      logger.error("File not found", exception);
+      logger.error(FILE_NOT_FOUND, exception);
     }
   }
 
@@ -76,7 +78,7 @@ public class GalleryPageController implements Initializable {
    * @param event The event is the event that occurs when the button is pressed
    */
   @FXML
-  private void buttonExport(ActionEvent event) throws IOException {
+  private void buttonExport(ActionEvent event){
     HashMap<String, ImageData> images;
     if (!MetImaApplication.getContentManager().getSearchResults().isEmpty()) {
       images = MetImaApplication.getContentManager().getSearchResults();
@@ -126,7 +128,7 @@ public class GalleryPageController implements Initializable {
           controller.setImage(path);
           MetImaApplication.getStage().setScene(new Scene(loader.load()));
         } catch (IOException exception) {
-          logger.error("File not found", exception);
+          logger.error(FILE_NOT_FOUND, exception);
         }
       });
       galleryImages.getChildren().add(imagePreview);

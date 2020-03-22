@@ -26,6 +26,7 @@ public class ViewImagePageController implements Initializable {
   private Text tags;
   Logger logger = LoggerFactory.getLogger(ViewImagePageController.class);
   private ImageData image;
+  private static final String FILE_NOT_FOUND = "File not found";
 
   @FXML
   private TextFlow textFlow;
@@ -71,7 +72,7 @@ public class ViewImagePageController implements Initializable {
       MetImaApplication.getStage().setScene(
           new Scene(FXMLLoader.load(getClass().getResource("MetIma_HomePage.fxml"))));
     } catch (IOException exception) {
-      logger.error("File not found", exception);
+      logger.error(FILE_NOT_FOUND, exception);
     }
   }
 
@@ -84,7 +85,7 @@ public class ViewImagePageController implements Initializable {
       MetImaApplication.getStage().setScene(
           new Scene(FXMLLoader.load(getClass().getResource("MetIma_GalleryPage.fxml"))));
     } catch (IOException exception) {
-      logger.error("File not found", exception);
+      logger.error(FILE_NOT_FOUND, exception);
     }
   }
 
@@ -99,7 +100,7 @@ public class ViewImagePageController implements Initializable {
 
 
     } catch (IOException exception) {
-      logger.error("File not found", exception);
+      logger.error(FILE_NOT_FOUND, exception);
     }
 
   }
@@ -114,7 +115,7 @@ public class ViewImagePageController implements Initializable {
       MetImaApplication.getStage().setScene(
           new Scene(FXMLLoader.load(getClass().getResource("MetIma_GalleryPage.fxml"))));
     } catch (IOException exception) {
-      logger.error("File not found", exception);
+      logger.error(FILE_NOT_FOUND, exception);
     }
   }
 
