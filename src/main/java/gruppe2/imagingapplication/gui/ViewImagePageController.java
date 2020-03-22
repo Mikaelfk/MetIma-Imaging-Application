@@ -37,15 +37,26 @@ public class ViewImagePageController implements Initializable {
     }
   }
 
+  /**
+   * This sets the image you are viewing, it uses a getter to get the correct image
+   * @param path This is the image path
+   */
   public void setImage(String path) {
     this.image = MetImaApplication.getContentManager().getImages().get(path);
   }
 
+  /**
+   * This method displays the metadata text from an image, it uses a getter to get the metadata
+   * @param path This is the image path
+   */
   public void setMetadataText(String path) {
     this.textFlow.setAccessibleText(
             MetImaApplication.getContentManager().getImages().get(path).getMetadata().toString());
   }
 
+  /**
+   *This method handles the home button it takes the user to the homepage
+   */
   @FXML
   private void btnHome() {
     try {
@@ -56,6 +67,9 @@ public class ViewImagePageController implements Initializable {
     }
   }
 
+  /**
+   * This method handles the gallery button, it takes the user to the gallery page
+   */
   @FXML
   private void btnGallery() {
     try {
@@ -66,6 +80,9 @@ public class ViewImagePageController implements Initializable {
     }
   }
 
+  /**
+   * This method handles the add image button, it takes you to the add Image page
+   */
   @FXML
   private void btnAddImage() {
     try {
@@ -79,6 +96,9 @@ public class ViewImagePageController implements Initializable {
 
   }
 
+  /**
+   * This method handles the delete button, it deletes the viewed image
+   */
   @FXML
   private void btnDelete() {
     MetImaApplication.getContentManager().removeImage(this.image.getPath());
@@ -90,10 +110,18 @@ public class ViewImagePageController implements Initializable {
     }
   }
 
+  /**
+   * Getter for ImageView
+   * @return ImageView, this shows an image within JavaFX
+   */
   public ImageView getImageView() {
     return imageView;
   }
 
+  /**
+   * Setter for ImageView
+   * @param imageView This shows an image within JavaFX
+   */
   public void setImageView(ImageView imageView) {
     this.imageView = imageView;
   }

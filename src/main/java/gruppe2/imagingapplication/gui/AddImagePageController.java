@@ -66,11 +66,11 @@ public class AddImagePageController implements Initializable {
     }
   }
 
-  @FXML
   /**
    * This method the the chosen file and ads it to the gallery
    * Then it takes you to the gallery page
    */
+  @FXML
   private void addImage(ActionEvent event) throws IOException {
     List<String> tags = null;
     if (!txtTags.getText().isEmpty()) {
