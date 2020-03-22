@@ -48,6 +48,11 @@ public class AddImagePageController implements Initializable {
     ));
   }
 
+  /**
+   * This method promts the user tp choses a file from your library and
+   * opens the picture in the image preview
+   * @param event Selecting an image in your library
+   */
   @FXML
   private void chooseFile(ActionEvent event)  {
     FileChooser fileChooser = new FileChooser();
@@ -62,6 +67,10 @@ public class AddImagePageController implements Initializable {
   }
 
   @FXML
+  /**
+   * This method the the chosen file and ads it to the gallery
+   * Then it takes you to the gallery page
+   */
   private void addImage(ActionEvent event) throws IOException {
     List<String> tags = null;
     if (!txtTags.getText().isEmpty()) {
