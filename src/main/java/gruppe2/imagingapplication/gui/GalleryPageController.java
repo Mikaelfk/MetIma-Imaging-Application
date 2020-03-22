@@ -27,6 +27,9 @@ public class GalleryPageController implements Initializable {
   @FXML
   private TilePane galleryImages;
 
+  /**
+   * The generateGallery method is run when the gallery page is initialized.
+   */
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
     generateGallery(MetImaApplication.getContentManager().getImages());
@@ -34,7 +37,7 @@ public class GalleryPageController implements Initializable {
 
   /**
    * This method handles what happens when the home button is pressed.
-   *
+   * The button sets a new scene by using the MetIma_HomePage.fxml file
    * @param event The event is the event that occurs when the button is pressed
    */
   @FXML
@@ -55,7 +58,7 @@ public class GalleryPageController implements Initializable {
 
   /**
    * This method handles what happens when the add image button is pressed.
-   *
+   * The button sets a new scene by using the MetIma_AddImagePage.fxml file.
    * @param event The event is the event that occurs when the button is pressed
    */
   @FXML
@@ -70,7 +73,7 @@ public class GalleryPageController implements Initializable {
 
   /**
    * This method handles what happens when the export button is pressed.
-   *
+   * It exports everything that is shown in the gallery to a pdf document.
    * @param event The event is the event that occurs when the button is pressed
    */
   @FXML
@@ -84,6 +87,11 @@ public class GalleryPageController implements Initializable {
     export.exportImagesToPdf(images);
   }
 
+  /**
+   * This button handles what happens when the search button is pressed.
+   * It uses the performSearch method in ContentManager with the searchField text as its input.
+   * @param actionEvent The event is the event that occurs when the button is pressed
+   */
   @FXML
   public void buttonSearch(ActionEvent actionEvent) {
     if (!searchField.getText().isEmpty()) {
@@ -98,6 +106,11 @@ public class GalleryPageController implements Initializable {
     }
   }
 
+  /**
+   * This method generates a gallery by accessing the paths of the images.
+   * If an image in clicked by a mouse it will be taken to the view image page.
+   * @param imageHashMap Takes a HashMap<String, ImageData> as a parameter
+   */
   public void generateGallery(HashMap<String, ImageData> imageHashMap) {
     imageHashMap.keySet().forEach(path -> {
       ImageView imagePreview = new ImageView();
