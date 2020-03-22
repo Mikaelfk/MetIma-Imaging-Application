@@ -4,6 +4,8 @@ import com.drew.imaging.ImageProcessingException;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
+
+import gruppe2.imagingapplication.gui.MetImaApplication;
 import javafx.scene.image.Image;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,7 +13,6 @@ import org.slf4j.LoggerFactory;
 
 public class ContentManager {
   Logger logger = LoggerFactory.getLogger(ContentManager.class);
-  Search search = new Search();
   /**
    * A makeshift HashMap for storing the images. This is just for storing the images for the MVP.
    */
@@ -48,7 +49,7 @@ public class ContentManager {
   }
 
   public void performSearch(String searchTerm) {
-    this.searchResults = search.fullSearch(searchTerm);
+    this.searchResults = fullSearch(searchTerm);
   }
 
   public HashMap<String, ImageData> getSearchResults() {
@@ -58,5 +59,42 @@ public class ContentManager {
   public void removeImage(String path) {
     logger.info("Removed image: {}", path);
     images.remove(path);
+  }
+
+  public HashMap<String, ImageData> fullSearch(String searchTerm) {
+    HashMap<String, ImageData> results = new HashMap<>();
+
+    tagSearch(searchTerm).forEach(results::put);
+    imageNameSearch(searchTerm).forEach(results::put);
+
+    return results;
+  }
+
+  private HashMap<String, ImageData> tagSearch(String searchTerm) {
+    HashMap<String, ImageData> gallery = MetImaApplication.getContentManager().getImages();
+    HashMap<String, ImageData> results = new HashMap<>();
+
+    gallery.forEach((String key, ImageData image) -> {
+      image.getTags().forEach(tag -> {
+        if (tag.toLowerCase().contains(searchTerm)) {
+          results.put(key, image);
+        }
+      });
+    });
+
+    return results;
+  }
+
+  private HashMap<String, ImageData> imageNameSearch(String searchTerm) {
+    HashMap<String, ImageData> gallery = MetImaApplication.getContentManager().getImages();
+    HashMap<String, ImageData> results = new HashMap<>();
+
+    gallery.values().forEach((ImageData image) -> {
+      if (image.getImageName().toLowerCase().contains(searchTerm)) {
+        results.put(image.getPath(), image);
+      }
+    });
+
+    return results;
   }
 }
