@@ -50,7 +50,7 @@ public class AddImagePageController implements Initializable {
 
   /**
    * This method promts the user tp choses a file from your library and
-   * opens the picture in the image preview
+   * opens the picture in the image preview.
    * @param event Selecting an image in your library
    */
   @FXML
@@ -67,8 +67,8 @@ public class AddImagePageController implements Initializable {
   }
 
   /**
-   * This method the the chosen file and ads it to the gallery
-   * Then it takes you to the gallery page
+   * This method the the chosen file and ads it to the gallery.
+   * Then it takes you to the gallery page.
    */
   @FXML
   private void addImage(ActionEvent event) throws IOException {
@@ -86,7 +86,7 @@ public class AddImagePageController implements Initializable {
 
   /**
    * This method handles what happens when the home button is pressed.
-   *
+   * The button sets a new scene by using the MetIma_HomePage.fxml file.
    * @param event Represents the action when the button is pressed
    */
   @FXML
@@ -100,28 +100,8 @@ public class AddImagePageController implements Initializable {
   }
 
   /**
-   * This method handles what happens when the add button is pressed.
-   *
-   * @param event Represents the action when the button is pressed
-   */
-  @FXML
-  private void btnAdd(ActionEvent event) {
-    logger.info("Add button pressed.");
-  }
-
-  /**
-   * This method handles what happens when the cancel button is pressed.
-   *
-   * @param event Represents the action when the button is pressed
-   */
-  @FXML
-  private void btnCancel(ActionEvent event) {
-    logger.info("Cancel button pressed.");
-  }
-
-  /**
    * This method handles what happens when the gallery button is pressed.
-   *
+   * The button sets a new scene by using the MetIma_GalleryPage.fxml file.
    * @param event Represents the action when the button is pressed
    */
   @FXML
