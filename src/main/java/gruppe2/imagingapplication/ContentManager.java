@@ -19,18 +19,24 @@ public class ContentManager {
   private HashMap<String, ImageData> images;
   private HashMap<String, ImageData> searchResults;
 
-  public ContentManager() throws ImageProcessingException, IOException {
+  /**
+   * Constructs a new content manager object.
+   */
+  public ContentManager() {
     images = new HashMap<>();
     searchResults = new HashMap<>();
   }
 
+  /**
+   * Returns the images field.
+   * @return Returns it has HashMap<String, ImageData>
+   */
   public HashMap<String, ImageData> getImages() {
     return images;
   }
 
   /**
    * Method for adding images to the DB with it's path.
-   *
    * @param absolutePath The absolute path of the image to add
    * @param tags         User-defined tags to describe image, set null for no tags
    * @return True/False for image was added/image was not added to to error respectively
@@ -48,21 +54,33 @@ public class ContentManager {
     }
   }
 
+  /**
+   * Takes a search term and performs a search.
+   * @param searchTerm Takes a search term as String
+   */
   public void performSearch(String searchTerm) {
     this.searchResults = fullSearch(searchTerm);
   }
 
+  /**
+   * Returns the search result.
+   * @return Returns the result as HashMap<String, ImageData>
+   */
   public HashMap<String, ImageData> getSearchResults() {
     return searchResults;
   }
 
+  /**
+   * Removes an image from images by using the image path.
+   * @param path The path of the image as a String
+   */
   public void removeImage(String path) {
     logger.info("Removed image: {}", path);
     images.remove(path);
   }
 
   /**
-   * Method that combines tagSearch and imageNameSearch and searches for botbh
+   * Method that combines tagSearch and imageNameSearch and searches for both.
    * @param searchTerm String to search for
    * @return Matching results in a HashMap
    */

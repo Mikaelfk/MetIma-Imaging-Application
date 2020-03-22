@@ -49,7 +49,7 @@ public class AddImagePageController implements Initializable {
   }
 
   /**
-   * This method promts the user tp choses a file from your library and
+   * This method prompts the user tp chooses a file from your library and
    * opens the picture in the image preview.
    * @param event Selecting an image in your library
    */
