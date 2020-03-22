@@ -41,9 +41,6 @@ public class Export {
           width = 600;
           contentStream.drawImage(imageXObject, 6, 300, (float)width, (float)height);
         }
-        System.out.println(width);
-        System.out.println(height);
-
         contentStream.close();
         document.save(filename + ".pdf");
       } catch (IOException e) {
