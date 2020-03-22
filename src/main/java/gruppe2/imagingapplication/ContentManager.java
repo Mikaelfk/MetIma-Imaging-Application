@@ -15,17 +15,15 @@ public class ContentManager {
   /**
    * A makeshift HashMap for storing the images. This is just for storing the images for the MVP.
    */
-  private HashMap<String, gruppe2.imagingapplication.Image> images;
-  private HashMap<String, gruppe2.imagingapplication.Image> searchResults;
-  private HashMap<String, Image> javafxImages;
+  private HashMap<String, ImageData> images;
+  private HashMap<String, ImageData> searchResults;
 
   public ContentManager() throws ImageProcessingException, IOException {
     images = new HashMap<>();
-    javafxImages = new HashMap<>();
     searchResults = new HashMap<>();
   }
 
-  public HashMap<String, gruppe2.imagingapplication.Image> getImages() {
+  public HashMap<String, ImageData> getImages() {
     return images;
   }
 
@@ -38,8 +36,7 @@ public class ContentManager {
    */
   public boolean addImageToDB(String absolutePath, List<String> tags) {
     try {
-      images.put(absolutePath, new gruppe2.imagingapplication.Image(absolutePath, tags));
-      javafxImages.put(absolutePath, new Image("file:" + absolutePath));
+      images.put(absolutePath, new ImageData(absolutePath, tags, new Image("file:"+absolutePath)));
       return true;
     } catch (ImageProcessingException e) {
       logger.error("Not and image file", e);
@@ -54,11 +51,8 @@ public class ContentManager {
     this.searchResults = search.fullSearch(searchTerm);
   }
 
-  public HashMap<String, gruppe2.imagingapplication.Image> getSearchResults() {
+  public HashMap<String, ImageData> getSearchResults() {
     return searchResults;
   }
 
-  public HashMap<String, Image> getJavafxImages() {
-    return javafxImages;
-  }
 }

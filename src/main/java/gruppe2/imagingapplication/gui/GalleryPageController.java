@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.ResourceBundle;
+
+import gruppe2.imagingapplication.ImageData;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -73,7 +75,7 @@ public class GalleryPageController implements Initializable {
    */
   @FXML
   private void buttonExport(ActionEvent event) {
-    HashMap<String, gruppe2.imagingapplication.Image> images;
+    HashMap<String, ImageData> images;
     if(!MetImaApplication.getContentManager().getSearchResults().isEmpty()) {
       images = MetImaApplication.getContentManager().getSearchResults();
     } else {
@@ -96,10 +98,10 @@ public class GalleryPageController implements Initializable {
     }
   }
 
-  public void generateGallery(HashMap<String, gruppe2.imagingapplication.Image> imageHashMap) {
+  public void generateGallery(HashMap<String, ImageData> imageHashMap) {
     imageHashMap.keySet().forEach(path -> {
       ImageView imagePreview = new ImageView();
-      imagePreview.setImage(MetImaApplication.getContentManager().getJavafxImages().get(path));
+      imagePreview.setImage(MetImaApplication.getContentManager().getImages().get(path).getImage());
       imagePreview.setFitHeight(100);
       imagePreview.setSmooth(true);
       imagePreview.setPreserveRatio(true);

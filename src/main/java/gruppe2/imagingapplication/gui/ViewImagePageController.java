@@ -2,7 +2,7 @@ package gruppe2.imagingapplication.gui;
 
 import com.drew.metadata.Directory;
 import com.drew.metadata.Tag;
-import gruppe2.imagingapplication.Image;
+import gruppe2.imagingapplication.ImageData;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -20,7 +20,7 @@ import org.slf4j.LoggerFactory;
 public class ViewImagePageController implements Initializable {
   public ImageView imageView;
   Logger logger = LoggerFactory.getLogger(ViewImagePageController.class);
-  private Image image;
+  private ImageData image;
 
   @FXML
   private TextFlow textFlow;
