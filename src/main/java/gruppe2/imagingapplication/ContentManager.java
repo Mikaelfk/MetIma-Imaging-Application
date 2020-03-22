@@ -55,4 +55,8 @@ public class ContentManager {
     return searchResults;
   }
 
+  public void removeImage(String path) {
+    logger.info("Removed image: {}", path);
+    images.remove(path);
+  }
 }

@@ -79,6 +79,17 @@ public class ViewImagePageController implements Initializable {
 
   }
 
+  @FXML
+  private void btnDelete() {
+    MetImaApplication.getContentManager().removeImage(this.image.getPath());
+    try {
+      MetImaApplication.getStage().setScene(
+          new Scene(FXMLLoader.load(getClass().getResource("MetIma_GalleryPage.fxml"))));
+    } catch (IOException exception) {
+      logger.error("File not found", exception);
+    }
+  }
+
   public ImageView getImageView() {
     return imageView;
   }
