@@ -34,9 +34,10 @@ public class AddImagePageController implements Initializable {
   private TextField txtTags;
   @FXML
   private Button btnAddImage;
+  private boolean imageSelected = false;
+  private File selectedFile;
   Logger logger = LoggerFactory.getLogger(AddImagePageController.class);
-  boolean imageSelected = false;
-  File selectedFile;
+
 
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
