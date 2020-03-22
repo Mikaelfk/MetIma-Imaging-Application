@@ -25,6 +25,7 @@ public class HomePageController implements Initializable {
 
   /**
    * This method handles what happens when the view gallery button is pressed.
+   * The button sets a new scene by using the MetIma_GalleryPage.fxml file
    */
   @FXML
   private void viewGallery(ActionEvent event) {
@@ -39,6 +40,7 @@ public class HomePageController implements Initializable {
 
   /**
    * This method handles what happens when the view gallery button is pressed.
+   * The button sets a new scene by using the MetIma_AddImagePage.fxml file
    */
   @FXML
   private void addImage(ActionEvent event) {
