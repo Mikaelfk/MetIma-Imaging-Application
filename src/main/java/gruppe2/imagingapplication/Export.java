@@ -50,6 +50,7 @@ public class Export {
             logger.error("No images found", exception);
           }
         });
+        saveDocument(document);
       } catch(Exception e) {
         logger.error("Could not export to pdf");
       }
