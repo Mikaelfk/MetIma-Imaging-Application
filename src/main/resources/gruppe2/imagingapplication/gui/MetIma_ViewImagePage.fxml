@@ -38,7 +38,7 @@
             <children>
                <VBox alignment="CENTER" prefHeight="603.0" prefWidth="550.0">
                   <children>
-                     <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Filename" />
+                     <Text fx:id="imageName" strokeType="OUTSIDE" strokeWidth="0.0" text="Filename" />
                      <ImageView fx:id="imageView" fitHeight="476.0" fitWidth="515.0" pickOnBounds="true" preserveRatio="true" />
                   </children>
                </VBox>

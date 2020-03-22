@@ -19,6 +19,7 @@ import org.slf4j.LoggerFactory;
 
 public class ViewImagePageController implements Initializable {
   public ImageView imageView;
+  public Text imageName;
   Logger logger = LoggerFactory.getLogger(ViewImagePageController.class);
   private ImageData image;
 
@@ -28,6 +29,7 @@ public class ViewImagePageController implements Initializable {
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
     imageView.setImage(new javafx.scene.image.Image("file:" + this.image.getPath()));
+    imageName.setText(this.image.getImageName());
     for (Directory directory : image.getMetadata().getDirectories()) {
       for (Tag tag : directory.getTags()) {
         Text text = new Text();
