@@ -3,7 +3,6 @@ package gruppe2.imagingapplication;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
-
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.apache.pdfbox.pdmodel.PDDocument;
@@ -16,14 +15,16 @@ import org.slf4j.LoggerFactory;
 
 public class Export {
   Logger logger = LoggerFactory.getLogger(Export.class);
+
   /**
    * This method generates a pdf document and adds images to it based on the HashMap you give it.
-   * @param images   Takes a HashMap<String, gruppe2.imagingapplication.Image>
-   *                 that holds the images you wish to export to a pdf document
+   *
+   * @param images Takes a HashMap<String, ImageData>
+   *               that holds the images you wish to export to a pdf document
    */
   public void exportImagesToPdf(HashMap<String, ImageData> images) {
     if (images.isEmpty()) {
-        logger.info("No pictures.");
+      logger.info("No pictures.");
     } else {
       try (PDDocument document = new PDDocument()) {
         images.forEach((String key, ImageData image) -> {
@@ -51,7 +52,7 @@ public class Export {
           }
         });
         saveDocument(document);
-      } catch(Exception e) {
+      } catch (Exception e) {
         logger.error("Could not export to pdf");
       }
     }
@@ -59,6 +60,7 @@ public class Export {
 
   /**
    * Takes a PDDocument and saves it with a file chooser.
+   *
    * @param document Takes a PDDocument
    * @throws IOException Throws an exception if the document does not exist
    */

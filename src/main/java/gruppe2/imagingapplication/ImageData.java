@@ -1,14 +1,15 @@
 package gruppe2.imagingapplication;
 
+
 import com.drew.imaging.ImageMetadataReader;
 import com.drew.imaging.ImageProcessingException;
 import com.drew.metadata.Metadata;
-import javafx.scene.image.Image;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.scene.image.Image;
+
 
 /**
  * A class representing an image with metadata and tags.
@@ -27,8 +28,8 @@ public class ImageData {
    * @throws ImageProcessingException If filetype is unknown
    * @throws IOException              If file could not be found
    */
-  public ImageData(String absolutePath, List<String> tags, Image image) throws ImageProcessingException,
-          IOException {
+  public ImageData(String absolutePath, List<String> tags, Image image) throws
+          ImageProcessingException, IOException {
     this.path = absolutePath;
     this.metadata = ImageMetadataReader.readMetadata(new File(path));
     this.image = image;

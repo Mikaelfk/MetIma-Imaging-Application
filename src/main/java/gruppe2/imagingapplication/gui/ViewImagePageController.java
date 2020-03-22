@@ -46,7 +46,7 @@ public class ViewImagePageController implements Initializable {
   }
 
   /**
-   * This sets the image you are viewing, it uses a getter to get the correct image
+   * This sets the image you are viewing, it uses a getter to get the correct image.
    * @param path This is the image path
    */
   public void setImage(String path) {
@@ -54,7 +54,7 @@ public class ViewImagePageController implements Initializable {
   }
 
   /**
-   * This method displays the metadata text from an image, it uses a getter to get the metadata
+   * This method displays the metadata text from an image, it uses a getter to get the metadata.
    * @param path This is the image path
    */
   public void setMetadataText(String path) {
@@ -63,7 +63,7 @@ public class ViewImagePageController implements Initializable {
   }
 
   /**
-   *This method handles the home button it takes the user to the homepage
+   *This method handles the home button it takes the user to the homepage.
    */
   @FXML
   private void btnHome() {
@@ -76,7 +76,7 @@ public class ViewImagePageController implements Initializable {
   }
 
   /**
-   * This method handles the gallery button, it takes the user to the gallery page
+   * This method handles the gallery button, it takes the user to the gallery page.
    */
   @FXML
   private void btnGallery() {
@@ -89,7 +89,7 @@ public class ViewImagePageController implements Initializable {
   }
 
   /**
-   * This method handles the add image button, it takes you to the add Image page
+   * This method handles the add image button, it takes you to the add Image page.
    */
   @FXML
   private void btnAddImage() {
@@ -105,7 +105,7 @@ public class ViewImagePageController implements Initializable {
   }
 
   /**
-   * This method handles the delete button, it deletes the viewed image
+   * This method handles the delete button, it deletes the viewed image.
    */
   @FXML
   private void btnDelete() {
@@ -119,7 +119,7 @@ public class ViewImagePageController implements Initializable {
   }
 
   /**
-   * Getter for ImageView
+   * Getter for ImageView.
    * @return ImageView, this shows an image within JavaFX
    */
   public ImageView getImageView() {
@@ -127,7 +127,7 @@ public class ViewImagePageController implements Initializable {
   }
 
   /**
-   * Setter for ImageView
+   * Setter for ImageView.
    * @param imageView This shows an image within JavaFX
    */
   public void setImageView(ImageView imageView) {

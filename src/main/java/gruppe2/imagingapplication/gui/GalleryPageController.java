@@ -1,12 +1,11 @@
 package gruppe2.imagingapplication.gui;
 
 import gruppe2.imagingapplication.Export;
+import gruppe2.imagingapplication.ImageData;
 import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.ResourceBundle;
-
-import gruppe2.imagingapplication.ImageData;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -79,7 +78,7 @@ public class GalleryPageController implements Initializable {
   @FXML
   private void buttonExport(ActionEvent event) throws IOException {
     HashMap<String, ImageData> images;
-    if(!MetImaApplication.getContentManager().getSearchResults().isEmpty()) {
+    if (!MetImaApplication.getContentManager().getSearchResults().isEmpty()) {
       images = MetImaApplication.getContentManager().getSearchResults();
     } else {
       images = MetImaApplication.getContentManager().getImages();
@@ -109,7 +108,7 @@ public class GalleryPageController implements Initializable {
   /**
    * This method generates a gallery by accessing the paths of the images.
    * If an image in clicked by a mouse it will be taken to the view image page.
-   * @param imageHashMap Takes a HashMap<String, ImageData> as a parameter
+   * @param imageHashMap Takes a HashMap with a string as key and ImageData as value as a parameter
    */
   public void generateGallery(HashMap<String, ImageData> imageHashMap) {
     imageHashMap.keySet().forEach(path -> {
