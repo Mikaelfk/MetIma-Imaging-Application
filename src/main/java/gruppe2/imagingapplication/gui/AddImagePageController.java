@@ -24,11 +24,16 @@ import org.slf4j.LoggerFactory;
 
 public class AddImagePageController implements Initializable {
 
-  public Text selectedFileText;
-  public ImageView imagePreview;
-  public TextField txtFileName;
-  public TextField txtTags;
-  public Button btnAddImage;
+  @FXML
+  private Text selectedFileText;
+  @FXML
+  private ImageView imagePreview;
+  @FXML
+  private TextField txtFileName;
+  @FXML
+  private TextField txtTags;
+  @FXML
+  private Button btnAddImage;
   Logger logger = LoggerFactory.getLogger(AddImagePageController.class);
   boolean imageSelected = false;
   File selectedFile;
