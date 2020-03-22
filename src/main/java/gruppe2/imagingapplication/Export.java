@@ -21,10 +21,8 @@ public class Export {
    *
    * @param images   Takes a HashMap<String, gruppe2.imagingapplication.Image>
    *                 that holds the images you wish to export to a pdf document
-   * @param filename Takes a string that it sets as filename
    */
-  public void exportImagesToPdf(HashMap<String, ImageData> images,
-                                String filename) throws IOException {
+  public void exportImagesToPdf(HashMap<String, ImageData> images) throws IOException {
     if (images.isEmpty()) {
         logger.info("No pictures.");
     } else {
@@ -38,8 +36,8 @@ public class Export {
         try {
           PDPageContentStream contentStream = new PDPageContentStream(document, page);
           PDImageXObject imageXObject = PDImageXObject.createFromFile(path, document);
-          double height = 0;
-          double width = 0;
+          double height;
+          double width;
           if (imageXObject.getWidth() <= imageXObject.getHeight()) {
             width = 600 * ((double) imageXObject.getWidth() / imageXObject.getHeight());
             height = 600;
