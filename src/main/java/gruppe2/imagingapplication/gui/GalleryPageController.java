@@ -81,7 +81,7 @@ public class GalleryPageController implements Initializable {
     } else {
       images = MetImaApplication.getContentManager().getImages();
     }
-    export.exportImagesToPdf(images, "filename");
+    export.exportImagesToPdf(images);
   }
 
   @FXML

@@ -1,8 +1,11 @@
 package gruppe2.imagingapplication;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
@@ -18,10 +21,8 @@ public class Export {
    *
    * @param images   Takes a HashMap<String, gruppe2.imagingapplication.Image>
    *                 that holds the images you wish to export to a pdf document
-   * @param filename Takes a string that it sets as filename
    */
-  public void exportImagesToPdf(HashMap<String, ImageData> images,
-                                String filename) throws IOException {
+  public void exportImagesToPdf(HashMap<String, ImageData> images) throws IOException {
     if (images.isEmpty()) {
         logger.info("No pictures.");
     } else {
@@ -35,8 +36,8 @@ public class Export {
         try {
           PDPageContentStream contentStream = new PDPageContentStream(document, page);
           PDImageXObject imageXObject = PDImageXObject.createFromFile(path, document);
-          double height = 0;
-          double width = 0;
+          double height;
+          double width;
           if (imageXObject.getWidth() <= imageXObject.getHeight()) {
             width = 600 * ((double) imageXObject.getWidth() / imageXObject.getHeight());
             height = 600;
@@ -52,7 +53,13 @@ public class Export {
           logger.error("No images found", exception);
         }
       });
-      document.save(filename + ".pdf");
+      FileChooser fileChooser = new FileChooser();
+      File saveLocation = fileChooser.showSaveDialog(new Stage());
+      if (!saveLocation.getAbsolutePath().endsWith(".pdf")) {
+        document.save(saveLocation.getAbsolutePath() + ".pdf");
+      } else {
+        document.save(saveLocation.getAbsolutePath());
+      }
     }
   }
 }
