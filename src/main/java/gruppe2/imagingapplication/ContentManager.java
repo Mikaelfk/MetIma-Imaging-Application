@@ -61,6 +61,11 @@ public class ContentManager {
     images.remove(path);
   }
 
+  /**
+   * Method that combines tagSearch and imageNameSearch and searches for botbh
+   * @param searchTerm String to search for
+   * @return Matching results in a HashMap
+   */
   public HashMap<String, ImageData> fullSearch(String searchTerm) {
     HashMap<String, ImageData> results = new HashMap<>();
 
@@ -70,6 +75,11 @@ public class ContentManager {
     return results;
   }
 
+  /**
+   * Method that searches by tags and returns a hashmap with all matches.
+   * @param searchTerm String to search for
+   * @return Matching results in a HashMap
+   */
   private HashMap<String, ImageData> tagSearch(String searchTerm) {
     HashMap<String, ImageData> gallery = MetImaApplication.getContentManager().getImages();
     HashMap<String, ImageData> results = new HashMap<>();
@@ -85,6 +95,11 @@ public class ContentManager {
     return results;
   }
 
+  /**
+   * Method that searches by image names and returns a hashmap with all matches.
+   * @param searchTerm String to search for
+   * @return Matching results in a HashMap
+   */
   private HashMap<String, ImageData> imageNameSearch(String searchTerm) {
     HashMap<String, ImageData> gallery = MetImaApplication.getContentManager().getImages();
     HashMap<String, ImageData> results = new HashMap<>();
