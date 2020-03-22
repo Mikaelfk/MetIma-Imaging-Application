@@ -17,12 +17,11 @@ import org.slf4j.LoggerFactory;
 public class Export {
   Logger logger = LoggerFactory.getLogger(Export.class);
   /**
-   * This method generates a pdf document and adds images to it based on the HashMap you give it
-   *
+   * This method generates a pdf document and adds images to it based on the HashMap you give it.
    * @param images   Takes a HashMap<String, gruppe2.imagingapplication.Image>
    *                 that holds the images you wish to export to a pdf document
    */
-  public void exportImagesToPdf(HashMap<String, ImageData> images) throws IOException {
+  public void exportImagesToPdf(HashMap<String, ImageData> images) {
     if (images.isEmpty()) {
         logger.info("No pictures.");
     } else {
@@ -51,16 +50,24 @@ public class Export {
             logger.error("No images found", exception);
           }
         });
-        FileChooser fileChooser = new FileChooser();
-        File saveLocation = fileChooser.showSaveDialog(new Stage());
-        if (!saveLocation.getAbsolutePath().endsWith(".pdf")) {
-          document.save(saveLocation.getAbsolutePath() + ".pdf");
-        } else {
-          document.save(saveLocation.getAbsolutePath());
-        }
       } catch(Exception e) {
         logger.error("Could not export to pdf");
       }
+    }
+  }
+
+  /**
+   * Takes a PDDocument and saves it with a file chooser.
+   * @param document Takes a PDDocument
+   * @throws IOException Throws an exception if the document does not exist
+   */
+  public void saveDocument(PDDocument document) throws IOException {
+    FileChooser fileChooser = new FileChooser();
+    File saveLocation = fileChooser.showSaveDialog(new Stage());
+    if (!saveLocation.getAbsolutePath().endsWith(".pdf")) {
+      document.save(saveLocation.getAbsolutePath() + ".pdf");
+    } else {
+      document.save(saveLocation.getAbsolutePath());
     }
   }
 }
