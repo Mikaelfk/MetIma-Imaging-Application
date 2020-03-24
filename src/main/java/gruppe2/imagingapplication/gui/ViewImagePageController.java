@@ -54,14 +54,6 @@ public class ViewImagePageController implements Initializable {
     this.image = MetImaApplication.getContentManager().getImages().get(path);
   }
 
-  /**
-   * This method displays the metadata text from an image, it uses a getter to get the metadata.
-   * @param path This is the image path
-   */
-  public void setMetadataText(String path) {
-    this.textFlow.setAccessibleText(
-            MetImaApplication.getContentManager().getImages().get(path).getMetadata().toString());
-  }
 
   /**
    *This method handles the home button it takes the user to the homepage.
@@ -97,8 +89,6 @@ public class ViewImagePageController implements Initializable {
     try {
       MetImaApplication.getStage().setScene(
           new Scene(FXMLLoader.load(getClass().getResource("MetIma_AddImagePage.fxml"))));
-
-
     } catch (IOException exception) {
       logger.error(FILE_NOT_FOUND, exception);
     }

@@ -26,7 +26,7 @@ public class MetImaApplication extends Application {
     stage.show();
   }
 
-  private static void createContentManager() throws ImageProcessingException, IOException {
+  private static void createContentManager() {
     contentManager = new ContentManager();
   }
 

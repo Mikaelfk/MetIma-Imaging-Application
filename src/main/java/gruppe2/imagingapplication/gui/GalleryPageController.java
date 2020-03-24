@@ -137,7 +137,10 @@ public class GalleryPageController implements Initializable {
       imagePreview.setFitWidth(100);
       imagePreview.setFitHeight(100);
 
-      imagePreview.setOnMouseClicked(e -> {
+      VBox vBox = new VBox(imagePreview);
+      VBox.setMargin(imagePreview, new Insets(10, 10, 10, 10));
+      vBox.setStyle("-fx-border-color: purple;");
+      vBox.setOnMouseClicked(e -> {
         try {
           FXMLLoader loader = new FXMLLoader(getClass().getResource("MetIma_ViewImagePage.fxml"));
           ViewImagePageController controller = new ViewImagePageController();
@@ -148,10 +151,7 @@ public class GalleryPageController implements Initializable {
           logger.error(FILE_NOT_FOUND, exception);
         }
       });
-      VBox gridBox = new VBox(imagePreview);
-      VBox.setMargin(imagePreview, new Insets(10, 10, 10, 10));
-      gridBox.setStyle("-fx-border-color: purple;");
-      galleryImages.getChildren().add(gridBox);
+      galleryImages.getChildren().add(vBox);
     });
     galleryImages.setHgap(10);
     galleryImages.setVgap(10);
