@@ -10,9 +10,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.image.PixelReader;
+import javafx.scene.image.WritableImage;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import org.slf4j.Logger;
@@ -116,11 +120,19 @@ public class GalleryPageController implements Initializable {
   public void generateGallery(HashMap<String, ImageData> imageHashMap) {
     imageHashMap.keySet().forEach(path -> {
       ImageView imagePreview = new ImageView();
-      imagePreview.setImage(MetImaApplication.getContentManager().getImages().get(path).getImage());
-      imagePreview.setFitHeight(100);
-      imagePreview.setSmooth(true);
-      imagePreview.setPreserveRatio(true);
+      Image image = MetImaApplication.getContentManager().getImages().get(path).getImage();
 
+      if(image.getHeight()/image.getWidth()==1) {
+        imagePreview.setImage(image);
+
+      }
+      else {
+        PixelReader reader = image.getPixelReader();
+        WritableImage newImage = new WritableImage(reader, (int) (image.getWidth() / 6), (int) (image.getHeight() / 6), (int) (image.getWidth() / 1.5), (int) (image.getHeight() / 1.5));
+        imagePreview.setImage(newImage);
+      }
+      imagePreview.setFitWidth(100);
+      imagePreview.setFitHeight(100);
 
       imagePreview.setOnMouseClicked(e -> {
         try {
@@ -134,8 +146,11 @@ public class GalleryPageController implements Initializable {
         }
       });
       VBox gridBox = new VBox(imagePreview);
+      VBox.setMargin(imagePreview, new Insets(10,10,10,10));
       gridBox.setStyle("-fx-border-color: purple;");
       galleryImages.getChildren().add(gridBox);
     });
+    galleryImages.setHgap(10);
+    galleryImages.setVgap(10);
   }
 }
