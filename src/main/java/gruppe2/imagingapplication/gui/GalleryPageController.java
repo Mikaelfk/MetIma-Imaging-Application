@@ -44,6 +44,7 @@ public class GalleryPageController implements Initializable {
   /**
    * This method handles what happens when the home button is pressed.
    * The button sets a new scene by using the MetIma_HomePage.fxml file
+   *
    * @param event The event is the event that occurs when the button is pressed
    */
   @FXML
@@ -52,10 +53,10 @@ public class GalleryPageController implements Initializable {
       if (MetImaApplication.getStage().isFullScreen()) {
         MetImaApplication.getStage().setMaximized(true);
         MetImaApplication.getStage().setScene(
-            new Scene(FXMLLoader.load(getClass().getResource("MetIma_HomePage.fxml"))));
+                new Scene(FXMLLoader.load(getClass().getResource("MetIma_HomePage.fxml"))));
       } else {
         MetImaApplication.getStage().setScene(
-            new Scene(FXMLLoader.load(getClass().getResource("MetIma_HomePage.fxml"))));
+                new Scene(FXMLLoader.load(getClass().getResource("MetIma_HomePage.fxml"))));
       }
     } catch (IOException exception) {
       logger.error(FILE_NOT_FOUND, exception);
@@ -65,13 +66,14 @@ public class GalleryPageController implements Initializable {
   /**
    * This method handles what happens when the add image button is pressed.
    * The button sets a new scene by using the MetIma_AddImagePage.fxml file.
+   *
    * @param event The event is the event that occurs when the button is pressed
    */
   @FXML
   private void buttonAddImage(ActionEvent event) {
     try {
       MetImaApplication.getStage().setScene(
-          new Scene(FXMLLoader.load(getClass().getResource("MetIma_AddImagePage.fxml"))));
+              new Scene(FXMLLoader.load(getClass().getResource("MetIma_AddImagePage.fxml"))));
     } catch (IOException exception) {
       logger.error(FILE_NOT_FOUND, exception);
     }
@@ -80,10 +82,11 @@ public class GalleryPageController implements Initializable {
   /**
    * This method handles what happens when the export button is pressed.
    * It exports everything that is shown in the gallery to a pdf document.
+   *
    * @param event The event is the event that occurs when the button is pressed
    */
   @FXML
-  private void buttonExport(ActionEvent event){
+  private void buttonExport(ActionEvent event) {
     HashMap<String, ImageData> images;
     if (!MetImaApplication.getContentManager().getSearchResults().isEmpty()) {
       images = MetImaApplication.getContentManager().getSearchResults();
@@ -96,6 +99,7 @@ public class GalleryPageController implements Initializable {
   /**
    * This button handles what happens when the search button is pressed.
    * It uses the performSearch method in ContentManager with the searchField text as its input.
+   *
    * @param actionEvent The event is the event that occurs when the button is pressed
    */
   @FXML
@@ -115,6 +119,7 @@ public class GalleryPageController implements Initializable {
   /**
    * This method generates a gallery by accessing the paths of the images.
    * If an image in clicked by a mouse it will be taken to the view image page.
+   *
    * @param imageHashMap Takes a HashMap with a string as key and ImageData as value as a parameter
    */
   public void generateGallery(HashMap<String, ImageData> imageHashMap) {
@@ -122,11 +127,9 @@ public class GalleryPageController implements Initializable {
       ImageView imagePreview = new ImageView();
       Image image = MetImaApplication.getContentManager().getImages().get(path).getImage();
 
-      if(image.getHeight()/image.getWidth()==1) {
+      if (image.getHeight() / image.getWidth() == 1) {
         imagePreview.setImage(image);
-
-      }
-      else {
+      } else {
         PixelReader reader = image.getPixelReader();
         WritableImage newImage = new WritableImage(reader, (int) (image.getWidth() / 6), (int) (image.getHeight() / 6), (int) (image.getWidth() / 1.5), (int) (image.getHeight() / 1.5));
         imagePreview.setImage(newImage);
@@ -146,7 +149,7 @@ public class GalleryPageController implements Initializable {
         }
       });
       VBox gridBox = new VBox(imagePreview);
-      VBox.setMargin(imagePreview, new Insets(10,10,10,10));
+      VBox.setMargin(imagePreview, new Insets(10, 10, 10, 10));
       gridBox.setStyle("-fx-border-color: purple;");
       galleryImages.getChildren().add(gridBox);
     });
