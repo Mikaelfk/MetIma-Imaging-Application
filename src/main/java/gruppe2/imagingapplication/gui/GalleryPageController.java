@@ -50,14 +50,7 @@ public class GalleryPageController implements Initializable {
   @FXML
   private void buttonHome(ActionEvent event) {
     try {
-      if (MetImaApplication.getStage().isFullScreen()) {
-        MetImaApplication.getStage().setMaximized(true);
-        MetImaApplication.getStage().setScene(
-                new Scene(FXMLLoader.load(getClass().getResource("MetIma_HomePage.fxml"))));
-      } else {
-        MetImaApplication.getStage().setScene(
-                new Scene(FXMLLoader.load(getClass().getResource("MetIma_HomePage.fxml"))));
-      }
+      MetImaApplication.getScene().setRoot(FXMLLoader.load(getClass().getResource("MetIma_HomePage.fxml")));
     } catch (IOException exception) {
       logger.error(FILE_NOT_FOUND, exception);
     }
@@ -72,8 +65,7 @@ public class GalleryPageController implements Initializable {
   @FXML
   private void buttonAddImage(ActionEvent event) {
     try {
-      MetImaApplication.getStage().setScene(
-              new Scene(FXMLLoader.load(getClass().getResource("MetIma_AddImagePage.fxml"))));
+      MetImaApplication.getScene().setRoot(FXMLLoader.load(getClass().getResource("MetIma_AddImagePage.fxml")));
     } catch (IOException exception) {
       logger.error(FILE_NOT_FOUND, exception);
     }
@@ -146,7 +138,7 @@ public class GalleryPageController implements Initializable {
           ViewImagePageController controller = new ViewImagePageController();
           loader.setController(controller);
           controller.setImage(path);
-          MetImaApplication.getStage().setScene(new Scene(loader.load()));
+          MetImaApplication.getScene().setRoot(loader.load());
         } catch (IOException exception) {
           logger.error(FILE_NOT_FOUND, exception);
         }

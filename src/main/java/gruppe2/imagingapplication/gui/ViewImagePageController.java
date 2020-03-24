@@ -9,7 +9,6 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
@@ -61,8 +60,7 @@ public class ViewImagePageController implements Initializable {
   @FXML
   private void btnHome() {
     try {
-      MetImaApplication.getStage().setScene(
-          new Scene(FXMLLoader.load(getClass().getResource("MetIma_HomePage.fxml"))));
+      MetImaApplication.getScene().setRoot(FXMLLoader.load(getClass().getResource("MetIma_HomePage.fxml")));
     } catch (IOException exception) {
       logger.error(FILE_NOT_FOUND, exception);
     }
@@ -74,8 +72,7 @@ public class ViewImagePageController implements Initializable {
   @FXML
   private void btnGallery() {
     try {
-      MetImaApplication.getStage().setScene(
-          new Scene(FXMLLoader.load(getClass().getResource("MetIma_GalleryPage.fxml"))));
+      MetImaApplication.getScene().setRoot(FXMLLoader.load(getClass().getResource("MetIma_GalleryPage.fxml")));
     } catch (IOException exception) {
       logger.error(FILE_NOT_FOUND, exception);
     }
@@ -87,8 +84,7 @@ public class ViewImagePageController implements Initializable {
   @FXML
   private void btnAddImage() {
     try {
-      MetImaApplication.getStage().setScene(
-          new Scene(FXMLLoader.load(getClass().getResource("MetIma_AddImagePage.fxml"))));
+      MetImaApplication.getScene().setRoot(FXMLLoader.load(getClass().getResource("MetIma_AddImagePage.fxml")));
     } catch (IOException exception) {
       logger.error(FILE_NOT_FOUND, exception);
     }
@@ -102,8 +98,7 @@ public class ViewImagePageController implements Initializable {
   private void btnDelete() {
     MetImaApplication.getContentManager().removeImage(this.image.getPath());
     try {
-      MetImaApplication.getStage().setScene(
-          new Scene(FXMLLoader.load(getClass().getResource("MetIma_GalleryPage.fxml"))));
+      MetImaApplication.getScene().setRoot(FXMLLoader.load(getClass().getResource("MetIma_GalleryPage.fxml")));
     } catch (IOException exception) {
       logger.error(FILE_NOT_FOUND, exception);
     }

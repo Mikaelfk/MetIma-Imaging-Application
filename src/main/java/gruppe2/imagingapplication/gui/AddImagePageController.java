@@ -12,7 +12,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -86,9 +85,7 @@ public class AddImagePageController implements Initializable {
       MetImaApplication.getContentManager().getImages().get(selectedImage.getAbsolutePath())
           .setImageName(txtFileName.getText());
     }
-    MetImaApplication.getStage().setScene(
-        new Scene(FXMLLoader.load(getClass().getResource("MetIma_GalleryPage.fxml")))
-    );
+    MetImaApplication.getScene().setRoot(FXMLLoader.load(getClass().getResource("MetIma_GalleryPage.fxml")));
   }
 
   /**
@@ -100,8 +97,7 @@ public class AddImagePageController implements Initializable {
   @FXML
   private void btnHome(ActionEvent event) {
     try {
-      MetImaApplication.getStage().setScene(
-          new Scene(FXMLLoader.load(getClass().getResource("MetIma_HomePage.fxml"))));
+      MetImaApplication.getScene().setRoot(FXMLLoader.load(getClass().getResource("MetIma_HomePage.fxml")));
     } catch (IOException exception) {
       logger.error("File not found", exception);
     }
@@ -116,8 +112,7 @@ public class AddImagePageController implements Initializable {
   @FXML
   private void btnGallery(ActionEvent event) {
     try {
-      MetImaApplication.getStage().setScene(
-          new Scene(FXMLLoader.load(getClass().getResource("MetIma_GalleryPage.fxml"))));
+      MetImaApplication.getScene().setRoot(FXMLLoader.load(getClass().getResource("MetIma_GalleryPage.fxml")));
     } catch (IOException exception) {
       logger.error("File not found", exception);
     }
