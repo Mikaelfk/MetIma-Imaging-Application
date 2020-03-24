@@ -9,13 +9,13 @@
 <?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gruppe2.imagingapplication.gui.GalleryPageController">
+<BorderPane stylesheets="@MetIma_Style.css" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gruppe2.imagingapplication.gui.GalleryPageController">
    <top>
       <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                <children>
-                  <Button fx:id="btnHome" mnemonicParsing="false" onAction="#buttonHome" text="Home" />
+                  <Button fx:id="btnHome" mnemonicParsing="false" onAction="#buttonHome" text="Home"/>
                </children>
             </VBox>
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
