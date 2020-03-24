@@ -6,6 +6,7 @@ import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
+
 import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -36,6 +37,7 @@ public class AddImagePageController implements Initializable {
   private Button btnAddImage;
   private boolean imageSelected = false;
   private File selectedFile;
+  private List<File> MultipleFiles;
   Logger logger = LoggerFactory.getLogger(AddImagePageController.class);
 
 
@@ -51,17 +53,20 @@ public class AddImagePageController implements Initializable {
   /**
    * This method prompts the user tp chooses a file from your library and
    * opens the picture in the image preview.
+   *
    * @param event Selecting an image in your library
    */
   @FXML
-  private void chooseFile(ActionEvent event)  {
+  private void chooseFile(ActionEvent event) {
     FileChooser fileChooser = new FileChooser();
-    selectedFile = fileChooser.showOpenDialog(new Stage());
-    if (selectedFile != null) {
-      selectedFileText.setText(selectedFile.getName());
-      imagePreview.setImage(new Image("file:" + selectedFile.getAbsolutePath()));
-      if (!imagePreview.getImage().isError()) {
-        imageSelected = true;
+    MultipleFiles = fileChooser.showOpenMultipleDialog(new Stage());
+    for (File selectedImage : MultipleFiles) {
+      if (selectedImage != null) {
+        selectedFileText.setText(selectedImage.getName());
+        imagePreview.setImage(new Image("file:" + selectedImage.getAbsolutePath()));
+        if (!imagePreview.getImage().isError()) {
+          imageSelected = true;
+        }
       }
     }
   }
@@ -76,9 +81,12 @@ public class AddImagePageController implements Initializable {
     if (!txtTags.getText().isEmpty()) {
       tags = Arrays.asList(txtTags.getText().split("\\s*,\\s*"));
     }
-    MetImaApplication.getContentManager().addImageToDB(selectedFile.getAbsolutePath(), tags);
-    MetImaApplication.getContentManager().getImages().get(selectedFile.getAbsolutePath())
-        .setImageName(txtFileName.getText());
+    for (File selectedImage : MultipleFiles) {
+      MetImaApplication.getContentManager().addImageToDB(selectedImage.getAbsolutePath(), tags);
+      MetImaApplication.getContentManager().getImages().get(selectedImage.getAbsolutePath())
+          .setImageName(txtFileName.getText());
+
+    }
     MetImaApplication.getStage().setScene(
         new Scene(FXMLLoader.load(getClass().getResource("MetIma_GalleryPage.fxml")))
     );
@@ -87,13 +95,14 @@ public class AddImagePageController implements Initializable {
   /**
    * This method handles what happens when the home button is pressed.
    * The button sets a new scene by using the MetIma_HomePage.fxml file.
+   *
    * @param event Represents the action when the button is pressed
    */
   @FXML
   private void btnHome(ActionEvent event) {
     try {
       MetImaApplication.getStage().setScene(
-              new Scene(FXMLLoader.load(getClass().getResource("MetIma_HomePage.fxml"))));
+          new Scene(FXMLLoader.load(getClass().getResource("MetIma_HomePage.fxml"))));
     } catch (IOException exception) {
       logger.error("File not found", exception);
     }
@@ -102,13 +111,14 @@ public class AddImagePageController implements Initializable {
   /**
    * This method handles what happens when the gallery button is pressed.
    * The button sets a new scene by using the MetIma_GalleryPage.fxml file.
+   *
    * @param event Represents the action when the button is pressed
    */
   @FXML
   private void btnGallery(ActionEvent event) {
     try {
       MetImaApplication.getStage().setScene(
-              new Scene(FXMLLoader.load(getClass().getResource("MetIma_GalleryPage.fxml"))));
+          new Scene(FXMLLoader.load(getClass().getResource("MetIma_GalleryPage.fxml"))));
     } catch (IOException exception) {
       logger.error("File not found", exception);
     }

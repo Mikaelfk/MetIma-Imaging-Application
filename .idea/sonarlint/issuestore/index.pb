@@ -11,8 +11,6 @@ s
 Csrc/main/java/gruppe2/imagingapplication/gui/MetImaApplication.java,c/a/ca26655748a1b59849e765423f2286527c6ae273
 w
 Gsrc/main/java/gruppe2/imagingapplication/gui/GalleryPageController.java,3/f/3f11c600e8cc4e28e967afd0a2735f2ed17905d1
-z
-Jsrc/main/resources/gruppe2/imagingapplication/gui/MetIma_AddImagePage.fxml,4/a/4acb11c15395fbd72994ef2fbfd9cb447d2a8cf3
 l
 <src/main/java/gruppe2/imagingapplication/ContentManager.java,f/5/f510e9765d430471ec3db98bc15cbf9ec7d0e6e8
 y
