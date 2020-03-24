@@ -41,11 +41,11 @@
             </VBox>
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                <children>
-                  <Button fx:id="btnExport" mnemonicParsing="false" onAction="#buttonExport" prefHeight="84.0" prefWidth="90.0">
+                  <Button fx:id="btnExport" mnemonicParsing="false" onAction="#buttonExport">
                      <graphic>
                         <ImageView fitHeight="65.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../Icons/ic_file_upload_black_48dp.png" />
+                              <Image url="@../../../Icons/ic_picture_as_pdf_black_48dp.png" />
                            </image>
                         </ImageView>
                      </graphic></Button>
@@ -57,9 +57,9 @@
    <center>
       <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
-            <HBox alignment="CENTER" prefHeight="18.0" prefWidth="1200.0" VBox.vgrow="NEVER">
+            <HBox alignment="CENTER" prefHeight="53.0" prefWidth="1200.0" VBox.vgrow="NEVER">
                <children>
-                  <TextField fx:id="searchField" promptText="Search" />
+                  <TextField fx:id="searchField" prefHeight="48.0" prefWidth="152.0" promptText="Search" />
                   <Button mnemonicParsing="false" onAction="#buttonSearch" text="Search">
                      <graphic>
                         <ImageView fitHeight="31.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
