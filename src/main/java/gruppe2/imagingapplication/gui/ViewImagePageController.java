@@ -32,7 +32,7 @@ public class ViewImagePageController implements Initializable {
 
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
-    imageView.setImage(new javafx.scene.image.Image("file:" + this.image.getPath()));
+    imageView.setImage(MetImaApplication.getContentManager().getImages().get(this.image.getPath()).getImage());
     imageName.setText("FileName:" + this.image.getImageName());
     tags.setText("Tags:" + this.image.getTags());
 
