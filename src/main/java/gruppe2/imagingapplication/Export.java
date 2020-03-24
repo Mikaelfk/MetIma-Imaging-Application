@@ -22,6 +22,12 @@ public class Export {
    * @param images Takes a Map that holds the images you wish to export to a pdf document
    */
   public void exportImagesToPdf(Map<String, ImageData> images) {
+    // do nothing if there are no images
+    if (images.isEmpty()) {
+      logger.error("No images in gallery/search result to export...");
+      return;
+    }
+
     Document document = new Document();
 
     try {
