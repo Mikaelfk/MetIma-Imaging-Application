@@ -35,7 +35,7 @@ public class ViewImagePageController implements Initializable {
   public void initialize(URL url, ResourceBundle resourceBundle) {
     imageView.setImage(new javafx.scene.image.Image("file:" + this.image.getPath()));
     imageName.setText("FileName:" + this.image.getImageName());
-    tags.setText("Tags:" + String.valueOf(this.image.getTags()));
+    tags.setText("Tags:" + this.image.getTags());
 
     for (Directory directory : image.getMetadata().getDirectories()) {
       for (Tag tag : directory.getTags()) {
