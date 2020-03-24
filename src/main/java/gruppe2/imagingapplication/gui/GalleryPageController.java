@@ -14,6 +14,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.TilePane;
+import javafx.scene.layout.VBox;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -120,6 +121,7 @@ public class GalleryPageController implements Initializable {
       imagePreview.setSmooth(true);
       imagePreview.setPreserveRatio(true);
 
+
       imagePreview.setOnMouseClicked(e -> {
         try {
           FXMLLoader loader = new FXMLLoader(getClass().getResource("MetIma_ViewImagePage.fxml"));
@@ -131,7 +133,9 @@ public class GalleryPageController implements Initializable {
           logger.error(FILE_NOT_FOUND, exception);
         }
       });
-      galleryImages.getChildren().add(imagePreview);
+      VBox gridBox = new VBox(imagePreview);
+      gridBox.setStyle("-fx-border-color: purple;");
+      galleryImages.getChildren().add(gridBox);
     });
   }
 }
