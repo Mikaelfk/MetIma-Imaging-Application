@@ -38,6 +38,10 @@ public class GalleryPageController implements Initializable {
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
     generateGallery(MetImaApplication.getContentManager().getImages());
+
+    MetImaApplication.getStage().widthProperty().addListener((obs, oldVal, newVal) -> {
+      galleryImages.setPrefWidth(MetImaApplication.getStage().getWidth()-30);
+    });
   }
 
   /**
