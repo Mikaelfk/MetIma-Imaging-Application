@@ -14,21 +14,3 @@
     -fx-background-color: light-primary-color;
 }
 
-.button-home {
-    -fx-background-image:  url(/Icons/ic_home_black_48dp.png);
-}
-.button-gallery {
-    -fx-background-image: url(/Icons/ic_image_black_48dp.png);
-}
-.button-add{
-    -fx-background-image: url(/Icons/ic_add_box_black_48dp.png);
-}
-
-.button-export{
-    -fx-background-image: url(/Icons/ic_file_upload_black_48dp.png);
-}
-
-.button-delete{
-    -fx-background-image: url(/Icons/ic_delete_black_48dp.png);
-}
-
