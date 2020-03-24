@@ -85,7 +85,6 @@ public class AddImagePageController implements Initializable {
       MetImaApplication.getContentManager().addImageToDB(selectedImage.getAbsolutePath(), tags);
       MetImaApplication.getContentManager().getImages().get(selectedImage.getAbsolutePath())
           .setImageName(txtFileName.getText());
-
     }
     MetImaApplication.getStage().setScene(
         new Scene(FXMLLoader.load(getClass().getResource("MetIma_GalleryPage.fxml")))
