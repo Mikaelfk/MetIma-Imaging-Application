@@ -22,7 +22,7 @@ import javafx.stage.Stage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class AddImagePageController implements Initializable {
+public class AddSingleImagePageController implements Initializable {
 
   @FXML
   private Text selectedFileText;
@@ -37,7 +37,7 @@ public class AddImagePageController implements Initializable {
   private boolean imageSelected = false;
   private File selectedFile;
   private List<File> MultipleFiles;
-  Logger logger = LoggerFactory.getLogger(AddImagePageController.class);
+  Logger logger = LoggerFactory.getLogger(AddSingleImagePageController.class);
 
 
   @Override
