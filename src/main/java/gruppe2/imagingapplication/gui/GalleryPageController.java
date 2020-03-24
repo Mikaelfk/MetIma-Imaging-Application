@@ -131,7 +131,7 @@ public class GalleryPageController implements Initializable {
         imagePreview.setImage(image);
       } else {
         PixelReader reader = image.getPixelReader();
-        WritableImage newImage = new WritableImage(reader, (int) (image.getWidth() / 6), (int) (image.getHeight() / 6), (int) (image.getWidth() / 1.5), (int) (image.getHeight() / 1.5));
+        WritableImage newImage = new WritableImage(reader, (int) (image.getWidth() / 4), (int)(image.getHeight() / 4), (int) (image.getWidth() / 2), (int) (image.getHeight() / 2));
         imagePreview.setImage(newImage);
       }
       imagePreview.setFitWidth(100);
@@ -155,5 +155,6 @@ public class GalleryPageController implements Initializable {
     });
     galleryImages.setHgap(10);
     galleryImages.setVgap(10);
+    galleryImages.setPrefWidth(MetImaApplication.getStage().getWidth()-30);
   }
 }
