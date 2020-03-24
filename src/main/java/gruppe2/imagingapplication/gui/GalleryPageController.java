@@ -39,9 +39,8 @@ public class GalleryPageController implements Initializable {
   public void initialize(URL url, ResourceBundle resourceBundle) {
     generateGallery(MetImaApplication.getContentManager().getImages());
 
-    MetImaApplication.getStage().widthProperty().addListener((obs, oldVal, newVal) -> {
-      galleryImages.setPrefWidth(MetImaApplication.getStage().getWidth()-30);
-    });
+    MetImaApplication.getStage().widthProperty().addListener((obs, oldVal, newVal) ->
+            galleryImages.setPrefWidth(MetImaApplication.getStage().getWidth() - 30));
   }
 
   /**
@@ -53,7 +52,8 @@ public class GalleryPageController implements Initializable {
   @FXML
   private void buttonHome(ActionEvent event) {
     try {
-      MetImaApplication.getScene().setRoot(FXMLLoader.load(getClass().getResource("MetIma_HomePage.fxml")));
+      MetImaApplication.getScene().setRoot(
+              FXMLLoader.load(getClass().getResource("MetIma_HomePage.fxml")));
     } catch (IOException exception) {
       logger.error(FILE_NOT_FOUND, exception);
     }
@@ -68,7 +68,8 @@ public class GalleryPageController implements Initializable {
   @FXML
   private void buttonAddImage(ActionEvent event) {
     try {
-      MetImaApplication.getScene().setRoot(FXMLLoader.load(getClass().getResource("MetIma_AddImagePage.fxml")));
+      MetImaApplication.getScene().setRoot(
+              FXMLLoader.load(getClass().getResource("MetIma_AddImagePage.fxml")));
     } catch (IOException exception) {
       logger.error(FILE_NOT_FOUND, exception);
     }
@@ -126,16 +127,20 @@ public class GalleryPageController implements Initializable {
         imagePreview.setImage(image);
       } else {
         PixelReader reader = image.getPixelReader();
-        WritableImage newImage = new WritableImage(reader, (int) (image.getWidth() / 4), (int)(image.getHeight() / 4), (int) (image.getWidth() / 2), (int) (image.getHeight() / 2));
+        WritableImage newImage = new WritableImage(reader,
+                (int) (image.getWidth() / 4),
+                (int)(image.getHeight() / 4),
+                (int) (image.getWidth() / 2),
+                (int) (image.getHeight() / 2));
         imagePreview.setImage(newImage);
       }
       imagePreview.setFitWidth(100);
       imagePreview.setFitHeight(100);
 
-      VBox vBox = new VBox(imagePreview);
+      VBox vbox = new VBox(imagePreview);
       VBox.setMargin(imagePreview, new Insets(10, 10, 10, 10));
-      vBox.setStyle("-fx-border-color: purple;");
-      vBox.setOnMouseClicked(e -> {
+      vbox.setStyle("-fx-border-color: purple;");
+      vbox.setOnMouseClicked(e -> {
         try {
           FXMLLoader loader = new FXMLLoader(getClass().getResource("MetIma_ViewImagePage.fxml"));
           ViewImagePageController controller = new ViewImagePageController();
@@ -146,10 +151,10 @@ public class GalleryPageController implements Initializable {
           logger.error(FILE_NOT_FOUND, exception);
         }
       });
-      galleryImages.getChildren().add(vBox);
+      galleryImages.getChildren().add(vbox);
     });
     galleryImages.setHgap(10);
     galleryImages.setVgap(10);
-    galleryImages.setPrefWidth(MetImaApplication.getStage().getWidth()-30);
+    galleryImages.setPrefWidth(MetImaApplication.getStage().getWidth() - 30);
   }
 }

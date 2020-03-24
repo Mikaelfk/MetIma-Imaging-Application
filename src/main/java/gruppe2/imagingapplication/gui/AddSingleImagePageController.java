@@ -6,7 +6,6 @@ import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
-
 import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -36,7 +35,7 @@ public class AddSingleImagePageController implements Initializable {
   private Button btnAddImage;
   private boolean imageSelected = false;
   private File selectedFile;
-  private List<File> MultipleFiles;
+  private List<File> multipleFiles;
   Logger logger = LoggerFactory.getLogger(AddSingleImagePageController.class);
 
 
@@ -58,8 +57,8 @@ public class AddSingleImagePageController implements Initializable {
   @FXML
   private void chooseFile(ActionEvent event) {
     FileChooser fileChooser = new FileChooser();
-    MultipleFiles = fileChooser.showOpenMultipleDialog(new Stage());
-    for (File selectedImage : MultipleFiles) {
+    multipleFiles = fileChooser.showOpenMultipleDialog(new Stage());
+    for (File selectedImage : multipleFiles) {
       if (selectedImage != null) {
         selectedFileText.setText(selectedImage.getName());
         imagePreview.setImage(new Image("file:" + selectedImage.getAbsolutePath()));
@@ -80,12 +79,13 @@ public class AddSingleImagePageController implements Initializable {
     if (!txtTags.getText().isEmpty()) {
       tags = Arrays.asList(txtTags.getText().split("\\s*,\\s*"));
     }
-    for (File selectedImage : MultipleFiles) {
+    for (File selectedImage : multipleFiles) {
       MetImaApplication.getContentManager().addImageToDB(selectedImage.getAbsolutePath(), tags);
       MetImaApplication.getContentManager().getImages().get(selectedImage.getAbsolutePath())
           .setImageName(txtFileName.getText());
     }
-    MetImaApplication.getScene().setRoot(FXMLLoader.load(getClass().getResource("MetIma_GalleryPage.fxml")));
+    MetImaApplication.getScene().setRoot(
+            FXMLLoader.load(getClass().getResource("MetIma_GalleryPage.fxml")));
   }
 
   /**
@@ -97,7 +97,8 @@ public class AddSingleImagePageController implements Initializable {
   @FXML
   private void btnHome(ActionEvent event) {
     try {
-      MetImaApplication.getScene().setRoot(FXMLLoader.load(getClass().getResource("MetIma_HomePage.fxml")));
+      MetImaApplication.getScene().setRoot(
+              FXMLLoader.load(getClass().getResource("MetIma_HomePage.fxml")));
     } catch (IOException exception) {
       logger.error("File not found", exception);
     }
@@ -112,7 +113,8 @@ public class AddSingleImagePageController implements Initializable {
   @FXML
   private void btnGallery(ActionEvent event) {
     try {
-      MetImaApplication.getScene().setRoot(FXMLLoader.load(getClass().getResource("MetIma_GalleryPage.fxml")));
+      MetImaApplication.getScene().setRoot(
+              FXMLLoader.load(getClass().getResource("MetIma_GalleryPage.fxml")));
     } catch (IOException exception) {
       logger.error("File not found", exception);
     }

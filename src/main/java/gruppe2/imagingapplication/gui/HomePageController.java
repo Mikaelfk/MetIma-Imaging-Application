@@ -29,7 +29,8 @@ public class HomePageController implements Initializable {
   @FXML
   private void viewGallery(ActionEvent event) {
     try {
-      MetImaApplication.getScene().setRoot(FXMLLoader.load(getClass().getResource("MetIma_GalleryPage.fxml")));
+      MetImaApplication.getScene().setRoot(
+              FXMLLoader.load(getClass().getResource("MetIma_GalleryPage.fxml")));
     } catch (IOException exception) {
       logger.error("File not found", exception);
     }
@@ -43,7 +44,8 @@ public class HomePageController implements Initializable {
   @FXML
   private void addImage(ActionEvent event) {
     try {
-      MetImaApplication.getScene().setRoot(FXMLLoader.load(getClass().getResource("MetIma_AddImagePage.fxml")));
+      MetImaApplication.getScene().setRoot(
+              FXMLLoader.load(getClass().getResource("MetIma_AddImagePage.fxml")));
     } catch (IOException exception) {
       logger.error("File not found", exception);
     }

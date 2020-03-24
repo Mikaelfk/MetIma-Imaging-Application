@@ -32,7 +32,8 @@ public class ViewImagePageController implements Initializable {
 
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
-    imageView.setImage(MetImaApplication.getContentManager().getImages().get(this.image.getPath()).getImage());
+    imageView.setImage(
+            MetImaApplication.getContentManager().getImages().get(this.image.getPath()).getImage());
     imageName.setText("FileName:" + this.image.getImageName());
     tags.setText("Tags:" + this.image.getTags());
 
@@ -60,7 +61,8 @@ public class ViewImagePageController implements Initializable {
   @FXML
   private void btnHome() {
     try {
-      MetImaApplication.getScene().setRoot(FXMLLoader.load(getClass().getResource("MetIma_HomePage.fxml")));
+      MetImaApplication.getScene().setRoot(
+              FXMLLoader.load(getClass().getResource("MetIma_HomePage.fxml")));
     } catch (IOException exception) {
       logger.error(FILE_NOT_FOUND, exception);
     }
@@ -72,7 +74,8 @@ public class ViewImagePageController implements Initializable {
   @FXML
   private void btnGallery() {
     try {
-      MetImaApplication.getScene().setRoot(FXMLLoader.load(getClass().getResource("MetIma_GalleryPage.fxml")));
+      MetImaApplication.getScene().setRoot(
+              FXMLLoader.load(getClass().getResource("MetIma_GalleryPage.fxml")));
     } catch (IOException exception) {
       logger.error(FILE_NOT_FOUND, exception);
     }
@@ -84,7 +87,8 @@ public class ViewImagePageController implements Initializable {
   @FXML
   private void btnAddImage() {
     try {
-      MetImaApplication.getScene().setRoot(FXMLLoader.load(getClass().getResource("MetIma_AddImagePage.fxml")));
+      MetImaApplication.getScene().setRoot(
+              FXMLLoader.load(getClass().getResource("MetIma_AddImagePage.fxml")));
     } catch (IOException exception) {
       logger.error(FILE_NOT_FOUND, exception);
     }
@@ -98,7 +102,8 @@ public class ViewImagePageController implements Initializable {
   private void btnDelete() {
     MetImaApplication.getContentManager().removeImage(this.image.getPath());
     try {
-      MetImaApplication.getScene().setRoot(FXMLLoader.load(getClass().getResource("MetIma_GalleryPage.fxml")));
+      MetImaApplication.getScene().setRoot(
+              FXMLLoader.load(getClass().getResource("MetIma_GalleryPage.fxml")));
     } catch (IOException exception) {
       logger.error(FILE_NOT_FOUND, exception);
     }
