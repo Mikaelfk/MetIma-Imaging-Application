@@ -125,13 +125,22 @@ public class GalleryPageController implements Initializable {
 
       if (image.getHeight() / image.getWidth() == 1) {
         imagePreview.setImage(image);
-      } else {
+      } else if(image.getWidth() > image.getHeight()) {
         PixelReader reader = image.getPixelReader();
         WritableImage newImage = new WritableImage(reader,
-                (int) (image.getWidth() / 4),
+                (int) (image.getWidth() / 3),
                 (int)(image.getHeight() / 4),
-                (int) (image.getWidth() / 2),
+                (int) (image.getWidth() / 3),
                 (int) (image.getHeight() / 2));
+        imagePreview.setImage(newImage);
+      }
+      else {
+        PixelReader reader = image.getPixelReader();
+        WritableImage newImage = new WritableImage(reader,
+                (int) ((image.getWidth() / 4)-(image.getWidth()/50)),
+                (int)(image.getHeight() / 3),
+                (int) (image.getWidth() / 2),
+                (int) (image.getHeight() / 3));
         imagePreview.setImage(newImage);
       }
       imagePreview.setFitWidth(100);
