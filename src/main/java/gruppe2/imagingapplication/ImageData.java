@@ -3,22 +3,31 @@ package gruppe2.imagingapplication;
 
 import com.drew.imaging.ImageMetadataReader;
 import com.drew.imaging.ImageProcessingException;
-import com.drew.metadata.Metadata;
+import com.drew.metadata.Directory;
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import com.drew.metadata.Tag;
 import javafx.scene.image.Image;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Transient;
 
 
 /**
  * A class representing an image with metadata and tags.
  */
-public class ImageData {
-  private String imageName;
-  private List<String> tags;
+@Entity
+public class ImageData implements Serializable{
+  @Id
   private String path;
-  private Metadata metadata;
+  private String imageName;
+  @Transient
+  private List<String> tags;
+  private String metadata;
+  @Transient
   private Image image;
 
   /**
@@ -29,15 +38,26 @@ public class ImageData {
    * @throws IOException              If file could not be found
    */
   public ImageData(String absolutePath, List<String> tags, Image image) throws
-          ImageProcessingException, IOException {
+          ImageProcessingException, IOException
+  {
     this.path = absolutePath;
-    this.metadata = ImageMetadataReader.readMetadata(new File(path));
+    StringBuilder metaData = new StringBuilder();
+    for (Directory directory : ImageMetadataReader.readMetadata(new File(path)).getDirectories()) {
+      for (Tag tag : directory.getTags()) {
+        metaData.append(tag.toString()).append("\n");
+      }
+    }
+    this.metadata = metaData.toString();
     this.image = image;
     if (tags != null) {
       this.tags = tags;
     } else {
       this.tags = new ArrayList<>();
     }
+  }
+
+  public ImageData() {
+
   }
 
   public String getImageName() {
@@ -64,7 +84,7 @@ public class ImageData {
     this.path = path;
   }
 
-  public Metadata getMetadata() {
+  public String getMetadata() {
     return metadata;
   }
 
