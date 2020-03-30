@@ -28,7 +28,7 @@ public class ImageData implements Serializable {
   private String path;
   private String imageName;
   @Transient
-  private List<String> tags;
+  private gruppe2.imagingapplication.TagsList tags;
   private gruppe2.imagingapplication.MetadataSerializable metadata;
   @Transient
   private Image image;
@@ -47,9 +47,9 @@ public class ImageData implements Serializable {
     this.metadata = new MetadataSerializable(ImageMetadataReader.readMetadata(new File(path)));
     this.image = image;
     if (tags != null) {
-      this.tags = tags;
+      this.tags = new TagsList(tags);
     } else {
-      this.tags = new ArrayList<>();
+      this.tags = new TagsList(new ArrayList<>());
     }
   }
 
@@ -66,12 +66,12 @@ public class ImageData implements Serializable {
   }
 
   public List<String> getTags() {
-    return tags;
+    return tags.getTags();
   }
 
-  /*public void addTag(String tag) {
-    this.tags.add(tag);
-  }*/
+  public void addTag(String tag) {
+    this.tags.getTags().add(tag);
+  }
 
   public String getPath() {
     return path;
