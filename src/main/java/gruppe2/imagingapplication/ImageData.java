@@ -41,13 +41,7 @@ public class ImageData implements Serializable{
           ImageProcessingException, IOException
   {
     this.path = absolutePath;
-    StringBuilder metaData = new StringBuilder();
-    for (Directory directory : ImageMetadataReader.readMetadata(new File(path)).getDirectories()) {
-      for (Tag tag : directory.getTags()) {
-        metaData.append(tag.toString()).append("\n");
-      }
-    }
-    this.metadata = metaData.toString();
+    this.metadata = convertMetadataToString();
     this.image = image;
     if (tags != null) {
       this.tags = tags;
@@ -58,6 +52,22 @@ public class ImageData implements Serializable{
 
   public ImageData() {
 
+  }
+
+  /**
+   * This method converts the metadata into a listed String.
+   * @return Returns the metadata as a listed String
+   * @throws ImageProcessingException If filetype is unknown
+   * @throws IOException If file could not be found
+   */
+  public String convertMetadataToString() throws ImageProcessingException, IOException {
+    StringBuilder metaData = new StringBuilder();
+    for (Directory directory : ImageMetadataReader.readMetadata(new File(path)).getDirectories()) {
+      for (Tag tag : directory.getTags()) {
+        metaData.append(tag.toString()).append("\n");
+      }
+    }
+    return metaData.toString();
   }
 
   public String getImageName() {
