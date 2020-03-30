@@ -3,7 +3,6 @@ package gruppe2.imagingapplication;
 
 import com.drew.imaging.ImageMetadataReader;
 import com.drew.imaging.ImageProcessingException;
-import com.drew.metadata.Directory;
 
 import java.io.File;
 import java.io.IOException;
@@ -12,6 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.drew.metadata.Metadata;
+import gruppe2.imagingapplication.serializableclasses.MetadataSerializable;
+import gruppe2.imagingapplication.serializableclasses.TagsListSerializable;
 import javafx.scene.image.Image;
 
 import javax.persistence.Entity;
@@ -27,9 +28,8 @@ public class ImageData implements Serializable {
   @Id
   private String path;
   private String imageName;
-  @Transient
-  private gruppe2.imagingapplication.TagsList tags;
-  private gruppe2.imagingapplication.MetadataSerializable metadata;
+  private TagsListSerializable tags;
+  private MetadataSerializable metadata;
   @Transient
   private Image image;
 
@@ -47,9 +47,9 @@ public class ImageData implements Serializable {
     this.metadata = new MetadataSerializable(ImageMetadataReader.readMetadata(new File(path)));
     this.image = image;
     if (tags != null) {
-      this.tags = new TagsList(tags);
+      this.tags = new TagsListSerializable(tags);
     } else {
-      this.tags = new TagsList(new ArrayList<>());
+      this.tags = new TagsListSerializable(new ArrayList<>());
     }
   }
 

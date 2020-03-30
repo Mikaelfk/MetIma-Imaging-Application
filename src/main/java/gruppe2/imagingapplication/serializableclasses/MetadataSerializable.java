@@ -1,4 +1,4 @@
-package gruppe2.imagingapplication;
+package gruppe2.imagingapplication.serializableclasses;
 
 import com.drew.metadata.Metadata;
 

@@ -1,11 +1,12 @@
-package gruppe2.imagingapplication;
+package gruppe2.imagingapplication.serializableclasses;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class TagsList {
+public class TagsListSerializable implements Serializable {
   private List<String> tags;
 
-  public TagsList(List<String> tags) {
+  public TagsListSerializable(List<String> tags) {
     this.tags = tags;
   }
 
