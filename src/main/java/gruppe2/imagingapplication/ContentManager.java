@@ -2,9 +2,12 @@ package gruppe2.imagingapplication;
 
 import com.drew.imaging.ImageProcessingException;
 import gruppe2.imagingapplication.gui.MetImaApplication;
+
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
+
 import javafx.scene.image.Image;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 
 
 public class ContentManager {
@@ -30,14 +34,28 @@ public class ContentManager {
     images = new HashMap<>();
     searchResults = new HashMap<>();
     entityManagerFactory = Persistence.createEntityManagerFactory("AsukaBestGrill");
+    readFromDB();
   }
 
-  public void readFromDB(){
+  /**
+   * This method reads the image data from the database, and puts them
+   * in the images HashMap.
+   */
+  public void readFromDB() {
+    List<ImageData> imageDataList;
+    EntityManager entityManager = entityManagerFactory.createEntityManager();
 
+    String jdbcQuery = "SELECT image FROM ImageData image";
+    Query databaseQuery = entityManager.createQuery(jdbcQuery);
+    imageDataList = (List<ImageData>) databaseQuery.getResultList();
+    for (ImageData imageData : imageDataList) {
+      images.put(imageData.getPath(), imageData);
+    }
   }
 
   /**
    * Returns the images field.
+   *
    * @return Returns it as HashMap<>
    */
   public HashMap<String, ImageData> getImages() {
@@ -46,8 +64,9 @@ public class ContentManager {
 
   /**
    * Method for adding images to the DB with it's path.
+   *
    * @param absolutePath The absolute path of the image to add
-   * @param tags User-defined tags to describe image, set null for no tags
+   * @param tags         User-defined tags to describe image, set null for no tags
    * @return True/False for image was added/image was not added to to error respectively
    */
   public boolean addImageToDB(String absolutePath, List<String> tags) {
@@ -69,6 +88,7 @@ public class ContentManager {
 
   /**
    * Takes a search term and performs a search.
+   *
    * @param searchTerm Takes a search term as String
    */
   public void performSearch(String searchTerm) {
@@ -77,6 +97,7 @@ public class ContentManager {
 
   /**
    * Returns the search result.
+   *
    * @return Returns the result as HashMap<>
    */
   public HashMap<String, ImageData> getSearchResults() {
@@ -85,6 +106,7 @@ public class ContentManager {
 
   /**
    * Removes an image from images by using the image path.
+   *
    * @param path The path of the image as a String
    */
   public void removeImage(String path) {
@@ -94,6 +116,7 @@ public class ContentManager {
 
   /**
    * Method that combines tagSearch and imageNameSearch and searches for both.
+   *
    * @param searchTerm String to search for
    * @return Matching results in a HashMap
    */
@@ -108,6 +131,7 @@ public class ContentManager {
 
   /**
    * Method that searches by tags and returns a hashmap with all matches.
+   *
    * @param searchTerm String to search for
    * @return Matching results in a HashMap
    */
@@ -127,6 +151,7 @@ public class ContentManager {
 
   /**
    * Method that searches by image names and returns a hashmap with all matches.
+   *
    * @param searchTerm String to search for
    * @return Matching results in a HashMap
    */
