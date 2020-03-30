@@ -11,7 +11,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.drew.metadata.Tag;
+import com.drew.metadata.Metadata;
 import javafx.scene.image.Image;
 
 import javax.persistence.Entity;
@@ -27,8 +27,9 @@ public class ImageData implements Serializable {
   @Id
   private String path;
   private String imageName;
-  private String tags;
-  private String metadata;
+  @Transient
+  private List<String> tags;
+  private gruppe2.imagingapplication.MetadataSerializable metadata;
   @Transient
   private Image image;
 
@@ -43,47 +44,17 @@ public class ImageData implements Serializable {
   public ImageData(String absolutePath, List<String> tags, Image image) throws
       ImageProcessingException, IOException {
     this.path = absolutePath;
-    this.metadata = convertMetadataToString();
+    this.metadata = new MetadataSerializable(ImageMetadataReader.readMetadata(new File(path)));
     this.image = image;
     if (tags != null) {
-      this.tags = convertTagsToString(tags);
+      this.tags = tags;
     } else {
-      this.tags = "";
+      this.tags = new ArrayList<>();
     }
   }
 
   public ImageData() {
 
-  }
-
-  /**
-   * This method converts the metadata into a listed String.
-   *
-   * @return Returns the metadata as a listed String
-   * @throws ImageProcessingException If filetype is unknown
-   * @throws IOException              If file could not be found
-   */
-  public String convertMetadataToString() throws ImageProcessingException, IOException {
-    StringBuilder metaData = new StringBuilder();
-    for (Directory directory : ImageMetadataReader.readMetadata(new File(path)).getDirectories()) {
-      for (Tag tag : directory.getTags()) {
-        metaData.append(tag.toString()).append("\n");
-      }
-    }
-    return metaData.toString();
-  }
-
-  /**
-   * This method collects all the tags to a single string.
-   * @param tags A list of tags
-   * @return returns the String of tags
-   */
-  public String convertTagsToString(List<String> tags) {
-    StringBuilder allTheTags = new StringBuilder();
-    for(String tag: tags) {
-      allTheTags.append(tag).append("\n");
-    }
-    return allTheTags.toString();
   }
 
   public String getImageName() {
@@ -94,7 +65,7 @@ public class ImageData implements Serializable {
     this.imageName = imageName;
   }
 
-  public String getTags() {
+  public List<String> getTags() {
     return tags;
   }
 
@@ -110,8 +81,8 @@ public class ImageData implements Serializable {
     this.path = path;
   }
 
-  public String getMetadata() {
-    return metadata;
+  public Metadata getMetadata() {
+    return metadata.getMetadata();
   }
 
   public Image getImage() {
