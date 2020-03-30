@@ -41,11 +41,11 @@ public class ImageData implements Serializable {
    * @throws ImageProcessingException If filetype is unknown
    * @throws IOException              If file could not be found
    */
-  public ImageData(String absolutePath, List<String> tags, Image image) throws
+  public ImageData(String absolutePath, List<String> tags) throws
       ImageProcessingException, IOException {
     this.path = absolutePath;
     this.metadata = new MetadataSerializable(ImageMetadataReader.readMetadata(new File(path)));
-    this.image = image;
+    //this.image = image;
     if (tags != null) {
       this.tags = new TagsListSerializable(tags);
     } else {

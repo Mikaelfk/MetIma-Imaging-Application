@@ -9,6 +9,7 @@ import javafx.scene.image.Image;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
@@ -37,7 +38,7 @@ public class ContentManager {
 
   /**
    * Returns the images field.
-   * @return Returns it has HashMap<>
+   * @return Returns it as HashMap<>
    */
   public HashMap<String, ImageData> getImages() {
     return images;
@@ -50,10 +51,12 @@ public class ContentManager {
    * @return True/False for image was added/image was not added to to error respectively
    */
   public boolean addImageToDB(String absolutePath, List<String> tags) {
+    EntityManager entityManager = entityManagerFactory.createEntityManager();
+
     try {
-      images.put(absolutePath,
-              new ImageData(absolutePath, tags,
-              new Image("file:" + absolutePath)));
+      entityManager.getTransaction().begin();
+      entityManager.persist(new ImageData(absolutePath, tags));
+      entityManager.getTransaction().commit();
       return true;
     } catch (ImageProcessingException e) {
       logger.error("Not and image file", e);
