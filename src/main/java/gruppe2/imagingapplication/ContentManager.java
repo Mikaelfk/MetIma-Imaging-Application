@@ -9,8 +9,12 @@ import javafx.scene.image.Image;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
 
 public class ContentManager {
+  private EntityManagerFactory entityManagerFactory;
   Logger logger = LoggerFactory.getLogger(ContentManager.class);
   /**
    * A makeshift HashMap for storing the images. This is just for storing the images for the MVP.
@@ -24,6 +28,11 @@ public class ContentManager {
   public ContentManager() {
     images = new HashMap<>();
     searchResults = new HashMap<>();
+    entityManagerFactory = Persistence.createEntityManagerFactory("AsukaBestGrill");
+  }
+
+  public void readFromDB(){
+
   }
 
   /**
