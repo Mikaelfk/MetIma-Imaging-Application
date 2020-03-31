@@ -39,13 +39,11 @@ public class ViewImagePageController implements Initializable {
     this.image.getTags().forEach(tag -> tagText[0] += (tag.toString() + ", "));
     tags.setText(tagText[0]);
 
-    for (Directory directory : image.getMetadata().getDirectories()) {
-      for (Tag tag : directory.getTags()) {
-        Text text = new Text();
-        text.setText(tag.toString() + "\n");
-        textFlow.getChildren().add(text);
-      }
-    }
+    image.getMetadata().forEach((key, value) -> {
+      Text text = new Text();
+      text.setText(key + ": " + value + "\n");
+      textFlow.getChildren().add(text);
+    });
   }
 
   /**
