@@ -6,12 +6,17 @@ import com.drew.imaging.ImageProcessingException;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import com.drew.metadata.Directory;
 import com.drew.metadata.Metadata;
+import com.drew.metadata.Tag;
 import gruppe2.imagingapplication.serializableclasses.MetadataSerializable;
 import javafx.scene.image.Image;
 
+import javax.imageio.ImageReader;
 import javax.persistence.*;
 
 
@@ -26,7 +31,7 @@ public class ImageData implements Serializable {
   @ElementCollection
   private List<String> tags;
   @Transient
-  private MetadataSerializable metadata;
+  private HashMap<String, String> metadata = new HashMap<>();
   @Transient
   private Image image;
 
@@ -42,7 +47,13 @@ public class ImageData implements Serializable {
       ImageProcessingException, IOException {
     this.path = absolutePath;
     this.imageName = "";
-    this.metadata = new MetadataSerializable(ImageMetadataReader.readMetadata(new File(path)));
+    Metadata metadataObject = ImageMetadataReader.readMetadata(new File(path));
+    for (Directory directory : metadataObject.getDirectories()) {
+      for (Tag tag : directory.getTags()) {
+        metadata.put(tag.getTagName(), tag.getDescription());
+      }
+    }
+
     this.image = new Image("file:"+absolutePath);
     if (tags != null) {
       this.tags = tags;
@@ -76,8 +87,8 @@ public class ImageData implements Serializable {
     this.path = path;
   }
 
-  public Metadata getMetadata() {
-    return metadata.getMetadata();
+  public Map<String, String> getMetadata() {
+    return metadata;
   }
 
   public Image getImage() {
