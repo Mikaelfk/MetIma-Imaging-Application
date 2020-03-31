@@ -6,6 +6,8 @@ import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
+
+import com.drew.imaging.ImageProcessingException;
 import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -74,7 +76,7 @@ public class AddSingleImagePageController implements Initializable {
    * Then it takes you to the gallery page.
    */
   @FXML
-  private void addImage(ActionEvent event) throws IOException {
+  private void addImage(ActionEvent event) {
     List<String> tags = null;
     if (!txtTags.getText().isEmpty()) {
       tags = Arrays.asList(txtTags.getText().split("\\s*,\\s*"));
@@ -82,10 +84,14 @@ public class AddSingleImagePageController implements Initializable {
     for (File selectedImage : multipleFiles) {
       MetImaApplication.getContentManager().addImageToDB(selectedImage.getAbsolutePath(), tags);
       MetImaApplication.getContentManager().getImages().get(selectedImage.getAbsolutePath())
-          .setImageName(txtFileName.getText());
+         .setImageName(txtFileName.getText());
     }
-    MetImaApplication.getScene().setRoot(
-            FXMLLoader.load(getClass().getResource("MetIma_GalleryPage.fxml")));
+    try {
+      MetImaApplication.getScene().setRoot(
+              FXMLLoader.load(getClass().getResource("MetIma_GalleryPage.fxml")));
+    } catch(IOException e) {
+      logger.error("Could not change to gallery");
+    }
   }
 
   /**

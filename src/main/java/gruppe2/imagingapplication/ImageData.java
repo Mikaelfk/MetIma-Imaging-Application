@@ -28,7 +28,9 @@ public class ImageData implements Serializable {
   @Id
   private String path;
   private String imageName;
+  @Transient
   private TagsListSerializable tags;
+  @Transient
   private MetadataSerializable metadata;
   @Transient
   private Image image;
@@ -44,8 +46,9 @@ public class ImageData implements Serializable {
   public ImageData(String absolutePath, List<String> tags) throws
       ImageProcessingException, IOException {
     this.path = absolutePath;
+    this.imageName = "";
     this.metadata = new MetadataSerializable(ImageMetadataReader.readMetadata(new File(path)));
-    //this.image = image;
+    this.image = new Image("file:"+absolutePath);
     if (tags != null) {
       this.tags = new TagsListSerializable(tags);
     } else {

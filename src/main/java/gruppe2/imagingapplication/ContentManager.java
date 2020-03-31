@@ -3,12 +3,12 @@ package gruppe2.imagingapplication;
 import com.drew.imaging.ImageProcessingException;
 import gruppe2.imagingapplication.gui.MetImaApplication;
 
-import java.io.FileInputStream;
+import java.awt.*;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import javafx.scene.image.Image;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -49,7 +49,15 @@ public class ContentManager {
     Query databaseQuery = entityManager.createQuery(jdbcQuery);
     imageDataList = (List<ImageData>) databaseQuery.getResultList();
     for (ImageData imageData : imageDataList) {
-      images.put(imageData.getPath(), imageData);
+      try {
+        if(images.get(imageData.getPath()) == null) {
+          images.put(imageData.getPath(), new ImageData(imageData.getPath(), new ArrayList<>()));
+        }
+      } catch(ImageProcessingException e) {
+        logger.info("error");
+      } catch(IOException e) {
+        logger.info("nice");
+      }
     }
   }
 
@@ -69,21 +77,22 @@ public class ContentManager {
    * @param tags         User-defined tags to describe image, set null for no tags
    * @return True/False for image was added/image was not added to to error respectively
    */
-  public boolean addImageToDB(String absolutePath, List<String> tags) {
+  public void addImageToDB(String absolutePath, List<String> tags) {
     EntityManager entityManager = entityManagerFactory.createEntityManager();
-
-    try {
+    try{
+      ImageData image = new ImageData(absolutePath, tags);
       entityManager.getTransaction().begin();
-      entityManager.persist(new ImageData(absolutePath, tags));
+      entityManager.merge(image);
+      entityManager.flush();
       entityManager.getTransaction().commit();
-      return true;
     } catch (ImageProcessingException e) {
       logger.error("Not and image file", e);
-      return false;
     } catch (IOException e) {
       logger.error("Could not find file", e);
-      return false;
+    } finally {
+      entityManager.close();
     }
+    readFromDB();
   }
 
   /**
