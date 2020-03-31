@@ -50,8 +50,7 @@ public class ContentManager {
     imageDataList = (List<ImageData>) databaseQuery.getResultList();
     for (ImageData imageData : imageDataList) {
       try {
-        if(images.get(imageData.getPath()) == null) {
-
+        if((images.get(imageData.getPath()) == null) || !images.get(imageData.getPath()).getTags().equals(imageData.getTags())) {
           images.put(imageData.getPath(), new ImageData(imageData.getPath(), imageData.getTags()));
         }
       } catch(ImageProcessingException e) {
