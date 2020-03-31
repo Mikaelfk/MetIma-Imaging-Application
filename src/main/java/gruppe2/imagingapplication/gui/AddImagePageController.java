@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -56,7 +57,12 @@ public class AddImagePageController implements Initializable {
       entryContainer.getChildren()
           .add(createListEntry(imageFile.getAbsolutePath(), imageIdentifier));
     });
-  }
+
+    // populate name text boxes with suggested name from file
+    chosenImages.forEach((imageIdentifier, imageFile) -> {
+      TextField txtEntryName = (TextField) entryContainer.lookup("#txtEntryName" + imageIdentifier);
+      txtEntryName.setText(imageFile.getName());
+    });  }
 
   /**
    * Method for creating an HBox that represents the entries of chosen images.
