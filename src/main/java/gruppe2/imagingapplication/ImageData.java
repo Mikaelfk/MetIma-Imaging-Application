@@ -23,6 +23,7 @@ import javax.persistence.*;
 public class ImageData implements Serializable {
   @Id
   private String path;
+  @Column
   private String imageName;
   @ElementCollection
   private List<String> tags;
@@ -39,10 +40,10 @@ public class ImageData implements Serializable {
    * @throws ImageProcessingException If filetype is unknown
    * @throws IOException              If file could not be found
    */
-  public ImageData(String absolutePath, List<String> tags) throws
+  public ImageData(String absolutePath, List<String> tags, String name) throws
       ImageProcessingException, IOException {
     this.path = absolutePath;
-    this.imageName = "";
+    this.imageName = name;
     Metadata metadataObject = ImageMetadataReader.readMetadata(new File(path));
     metadata = new HashMap<>();
     for (Directory directory : metadataObject.getDirectories()) {

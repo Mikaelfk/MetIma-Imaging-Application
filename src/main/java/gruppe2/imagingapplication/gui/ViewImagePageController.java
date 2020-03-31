@@ -1,7 +1,5 @@
 package gruppe2.imagingapplication.gui;
 
-import com.drew.metadata.Directory;
-import com.drew.metadata.Tag;
 import gruppe2.imagingapplication.ImageData;
 
 import java.io.IOException;
@@ -36,7 +34,7 @@ public class ViewImagePageController implements Initializable {
   public void initialize(URL url, ResourceBundle resourceBundle) {
     imageView.setImage(
             MetImaApplication.getContentManager().getImages().get(this.image.getPath()).getImage());
-    imageName.setText("FileName:" + this.image.getImageName());
+    imageName.setText("FileName: " + this.image.getImageName());
     StringBuilder tagText = new StringBuilder();
     tagText.append("Tags: ");
     this.image.getTags().forEach(tag -> {

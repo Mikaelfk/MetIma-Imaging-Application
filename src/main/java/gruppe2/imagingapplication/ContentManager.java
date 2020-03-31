@@ -2,10 +2,7 @@ package gruppe2.imagingapplication;
 
 import com.drew.imaging.ImageProcessingException;
 import gruppe2.imagingapplication.gui.MetImaApplication;
-
-import java.awt.*;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -73,10 +70,10 @@ public class ContentManager {
    * @param tags         User-defined tags to describe image, set null for no tags
    * @return True/False for image was added/image was not added to to error respectively
    */
-  public void addImageToDB(String absolutePath, List<String> tags) {
+  public void addImageToDB(String absolutePath, List<String> tags, String name) {
     EntityManager entityManager = entityManagerFactory.createEntityManager();
     try {
-      ImageData image = new ImageData(absolutePath, tags);
+      ImageData image = new ImageData(absolutePath, tags, name);
       entityManager.getTransaction().begin();
       entityManager.merge(image);
       entityManager.flush();

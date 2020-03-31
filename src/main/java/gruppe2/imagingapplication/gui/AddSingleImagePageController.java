@@ -80,9 +80,8 @@ public class AddSingleImagePageController implements Initializable {
       tags = Arrays.asList(txtTags.getText().split("\\s*,\\s*"));
     }
     for (File selectedImage : multipleFiles) {
-      MetImaApplication.getContentManager().addImageToDB(selectedImage.getAbsolutePath(), tags);
-      MetImaApplication.getContentManager().getImages().get(selectedImage.getAbsolutePath())
-         .setImageName(txtFileName.getText());
+      MetImaApplication.getContentManager().addImageToDB(selectedImage.getAbsolutePath(),
+              tags,txtFileName.getText());
     }
     try {
       MetImaApplication.getScene().setRoot(
