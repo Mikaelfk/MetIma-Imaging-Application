@@ -130,7 +130,7 @@ public class GalleryPageController implements Initializable {
         WritableImage newImage = new WritableImage(reader,
                 (int) (image.getWidth() / 3),
                 (int)(image.getHeight() / 4),
-                (int) (image.getWidth() / 3),
+                (int) (image.getWidth() / 2),
                 (int) (image.getHeight() / 2));
         imagePreview.setImage(newImage);
       }

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import javafx.scene.image.Image;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -49,14 +50,9 @@ public class ContentManager {
     Query databaseQuery = entityManager.createQuery(jdbcQuery);
     imageDataList = (List<ImageData>) databaseQuery.getResultList();
     for (ImageData imageData : imageDataList) {
-      try {
-        if((images.get(imageData.getPath()) == null) || !images.get(imageData.getPath()).getTags().equals(imageData.getTags())) {
-          images.put(imageData.getPath(), new ImageData(imageData.getPath(), imageData.getTags()));
-        }
-      } catch(ImageProcessingException e) {
-        logger.info("error");
-      } catch(IOException e) {
-        logger.info("nice");
+      if ((images.get(imageData.getPath()) == null) || !images.get(imageData.getPath()).getTags().equals(imageData.getTags())) {
+        imageData.setImage(new Image("file:" + imageData.getPath()));
+        images.put(imageData.getPath(), imageData);
       }
     }
   }
@@ -79,7 +75,7 @@ public class ContentManager {
    */
   public void addImageToDB(String absolutePath, List<String> tags) {
     EntityManager entityManager = entityManagerFactory.createEntityManager();
-    try{
+    try {
       ImageData image = new ImageData(absolutePath, tags);
       entityManager.getTransaction().begin();
       entityManager.merge(image);
@@ -149,11 +145,11 @@ public class ContentManager {
     HashMap<String, ImageData> results = new HashMap<>();
 
     gallery.forEach((String key, ImageData image) ->
-        image.getTags().forEach(tag -> {
-          if (tag.toLowerCase().contains(searchTerm)) {
-            results.put(key, image);
-          }
-        }));
+            image.getTags().forEach(tag -> {
+              if (tag.toLowerCase().contains(searchTerm)) {
+                results.put(key, image);
+              }
+            }));
 
     return results;
   }

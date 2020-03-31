@@ -49,8 +49,6 @@ public class ImageData implements Serializable {
         metadata.put(tag.getTagName(), tag.getDescription());
       }
     }
-
-    this.image = new Image("file:"+absolutePath);
     if (tags != null) {
       this.tags = tags;
     } else {
