@@ -16,9 +16,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javax.imageio.ImageIO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import javax.imageio.ImageIO;
 
 public class AddImagePageController implements Initializable {
   private Map<Integer, File> chosenImages = new HashMap<>();
@@ -53,16 +53,16 @@ public class AddImagePageController implements Initializable {
 
     // create an entry for all images in HashMap
     // TODO: do something if no images were chosen
-    chosenImages.forEach((imageIdentifier, imageFile) -> {
-      entryContainer.getChildren()
-          .add(createListEntry(imageFile.getAbsolutePath(), imageIdentifier));
-    });
+    chosenImages.forEach((imageIdentifier, imageFile) -> entryContainer.getChildren()
+          .add(createListEntry(imageFile.getAbsolutePath(), imageIdentifier))
+    );
 
     // populate name text boxes with suggested name from file
     chosenImages.forEach((imageIdentifier, imageFile) -> {
       TextField txtEntryName = (TextField) entryContainer.lookup("#txtEntryName" + imageIdentifier);
       txtEntryName.setText(imageFile.getName());
-    });  }
+    });
+  }
 
   /**
    * Method for creating an HBox that represents the entries of chosen images.
@@ -83,7 +83,12 @@ public class AddImagePageController implements Initializable {
     }
 
     // get nodes by default id and add identifier at the end for later reference
-    entry.setId("entry" + identifier);
+    try {
+      entry.setId("entry" + identifier);
+    } catch (NullPointerException e) {
+      // this should never happen :-)
+      logger.error("Entry object invalid", e);
+    }
     entry.lookup("#txtEntryName").setId("txtEntryName" + identifier);
     entry.lookup("#txtEntryTags").setId("txtEntryTags" + identifier);
 
@@ -151,7 +156,7 @@ public class AddImagePageController implements Initializable {
   }
 
   /**
-   * Method for adding all images in chosenImages to HashMap and changing scene to galleryPage
+   * Method for adding all images in chosenImages to HashMap and changing scene to galleryPage.
    * @param actionEvent Event from button click
    */
   @FXML
