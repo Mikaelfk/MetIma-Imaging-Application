@@ -60,7 +60,7 @@
    <bottom>
       <HBox BorderPane.alignment="CENTER">
          <children>
-            <Button mnemonicParsing="false" text="Add all images">
+            <Button onAction="#btnAddToGallery" mnemonicParsing="false" text="Add to gallery">
                <HBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" />
                </HBox.margin>

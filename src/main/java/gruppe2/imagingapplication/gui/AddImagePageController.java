@@ -149,4 +149,33 @@ public class AddImagePageController implements Initializable {
       logger.error("File not found", exception);
     }
   }
+
+  /**
+   * Method for adding all images in chosenImages to HashMap and changing scene to galleryPage
+   * @param actionEvent Event from button click
+   */
+  @FXML
+  public void btnAddToGallery(ActionEvent actionEvent) {
+    chosenImages.forEach((imageIdentifier, imageFile) -> {
+      // get tags, pass null to ContentManager if tags are empty
+      TextField txtEntryTags = (TextField) entryContainer.lookup("#txtEntryTags" + imageIdentifier);
+      List<String> tags = null;
+      if (!txtEntryTags.getText().isEmpty()) {
+        tags = Arrays.asList(txtEntryTags.getText()
+            .split("\\s*,\\s*"));
+      }
+
+      MetImaApplication.getContentManager()
+          .addImageToDB(imageFile.getAbsolutePath(), tags);
+    });
+
+    // switch to gallery view after adding all images to gallery
+    try {
+      MetImaApplication.getScene()
+          .setRoot(FXMLLoader.load(getClass()
+              .getResource("MetIma_GalleryPage.fxml")));
+    } catch (IOException exception) {
+      logger.error("File not found", exception);
+    }
+  }
 }
