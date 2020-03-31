@@ -8,6 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -79,13 +80,34 @@ public class AddImagePageController implements Initializable {
     entry.setId("entry" + identifier);
     entry.lookup("#txtEntryName").setId("txtEntryName" + identifier);
     entry.lookup("#txtEntryTags").setId("txtEntryTags" + identifier);
-    entry.lookup("#btnEntryRemove").setId("btnEntryRemove" + identifier);
+
+    // get remove button, set onaction and new id
+    Button btnEntryRemove = (Button) entry.lookup("#btnEntryRemove");
+    btnEntryRemove.setId(String.valueOf("btnEntryRemove" + identifier));
+    btnEntryRemove.setOnAction(this::btnEntryRemove);
 
     // set image for preview
     ImageView previewImage = (ImageView) entry.lookup("#imgEntryPreview");
     previewImage.setImage(new Image("file:" + imagePath));
 
     return entry;
+  }
+
+  /**
+   * Method for removing image entries from both view and chosenImages HashMap.
+   * @param event Event from button click
+   */
+  private void btnEntryRemove(ActionEvent event) {
+    // get button clicked
+    Button btnEntryRemove = (Button) event.getSource();
+
+    // extract number from id
+    String entryIdentifier = btnEntryRemove.getId().replaceAll("[^0-9]", "");
+    // remove image and entry
+    entryContainer.getChildren().remove(entryContainer.lookup("#entry" + entryIdentifier));
+    chosenImages.remove(entryIdentifier);
+
+    logger.info("Removed entry associated with identifier {}", entryIdentifier);
   }
 
   /**
