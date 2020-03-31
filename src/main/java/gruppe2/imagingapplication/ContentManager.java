@@ -51,7 +51,8 @@ public class ContentManager {
     for (ImageData imageData : imageDataList) {
       try {
         if(images.get(imageData.getPath()) == null) {
-          images.put(imageData.getPath(), new ImageData(imageData.getPath(), new ArrayList<>()));
+
+          images.put(imageData.getPath(), new ImageData(imageData.getPath(), imageData.getTags()));
         }
       } catch(ImageProcessingException e) {
         logger.info("error");

@@ -35,7 +35,9 @@ public class ViewImagePageController implements Initializable {
     imageView.setImage(
             MetImaApplication.getContentManager().getImages().get(this.image.getPath()).getImage());
     imageName.setText("FileName:" + this.image.getImageName());
-    tags.setText("Tags:" + this.image.getTags());
+    final String[] tagText = {"Tags: "};
+    this.image.getTags().forEach(tag -> tagText[0] += (tag.toString() + ", "));
+    tags.setText(tagText[0]);
 
     for (Directory directory : image.getMetadata().getDirectories()) {
       for (Tag tag : directory.getTags()) {
