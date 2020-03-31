@@ -5,6 +5,7 @@ import gruppe2.imagingapplication.ImageData;
 import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -118,7 +119,7 @@ public class GalleryPageController implements Initializable {
    *
    * @param imageHashMap Takes a HashMap with a string as key and ImageData as value as a parameter
    */
-  public void generateGallery(HashMap<String, ImageData> imageHashMap) {
+  public void generateGallery(Map<String, ImageData> imageHashMap) {
     MetImaApplication.getContentManager().readFromDB();
     imageHashMap.keySet().forEach(path -> {
       ImageView imagePreview = new ImageView();
@@ -128,19 +129,19 @@ public class GalleryPageController implements Initializable {
       } else if(image.getWidth() > image.getHeight()) {
         PixelReader reader = image.getPixelReader();
         WritableImage newImage = new WritableImage(reader,
-                (int) (image.getWidth() / 3),
-                (int)(image.getHeight() / 4),
+                (int) (image.getWidth() / 4),
+                0,
                 (int) (image.getWidth() / 2),
-                (int) (image.getHeight() / 2));
+                (int) (image.getHeight()));
         imagePreview.setImage(newImage);
       }
       else {
         PixelReader reader = image.getPixelReader();
         WritableImage newImage = new WritableImage(reader,
-                (int) ((image.getWidth() / 4)-(image.getWidth()/50)),
-                (int)(image.getHeight() / 3),
-                (int) (image.getWidth() / 2),
-                (int) (image.getHeight() / 3));
+                0,
+                (int)(image.getHeight() / 4),
+                (int) (image.getWidth()),
+                (int) (image.getHeight() / 2));
         imagePreview.setImage(newImage);
       }
       imagePreview.setFitWidth(100);

@@ -3,9 +3,11 @@ package gruppe2.imagingapplication.gui;
 import com.drew.metadata.Directory;
 import com.drew.metadata.Tag;
 import gruppe2.imagingapplication.ImageData;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -35,9 +37,17 @@ public class ViewImagePageController implements Initializable {
     imageView.setImage(
             MetImaApplication.getContentManager().getImages().get(this.image.getPath()).getImage());
     imageName.setText("FileName:" + this.image.getImageName());
-    final String[] tagText = {"Tags: "};
-    this.image.getTags().forEach(tag -> tagText[0] += (tag.toString() + ", "));
-    tags.setText(tagText[0]);
+    StringBuilder tagText = new StringBuilder();
+    tagText.append("Tags: ");
+    this.image.getTags().forEach(tag -> {
+      tagText.append(tag);
+      tagText.append(", ");
+    });
+    if(tagText.length() > 1) {
+      tagText.setLength(tagText.length() - 2);
+    }
+    tags.setText(tagText.toString());
+
 
     image.getMetadata().forEach((key, value) -> {
       Text text = new Text();
@@ -48,6 +58,7 @@ public class ViewImagePageController implements Initializable {
 
   /**
    * This sets the image you are viewing, it uses a getter to get the correct image.
+   *
    * @param path This is the image path
    */
   public void setImage(String path) {
@@ -56,7 +67,7 @@ public class ViewImagePageController implements Initializable {
 
 
   /**
-   *This method handles the home button it takes the user to the homepage.
+   * This method handles the home button it takes the user to the homepage.
    */
   @FXML
   private void btnHome() {
@@ -111,6 +122,7 @@ public class ViewImagePageController implements Initializable {
 
   /**
    * Getter for ImageView.
+   *
    * @return ImageView, this shows an image within JavaFX
    */
   public ImageView getImageView() {
@@ -119,6 +131,7 @@ public class ViewImagePageController implements Initializable {
 
   /**
    * Setter for ImageView.
+   *
    * @param imageView This shows an image within JavaFX
    */
   public void setImageView(ImageView imageView) {
