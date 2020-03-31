@@ -9,14 +9,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import com.drew.metadata.Directory;
 import com.drew.metadata.Metadata;
 import com.drew.metadata.Tag;
-import gruppe2.imagingapplication.serializableclasses.MetadataSerializable;
 import javafx.scene.image.Image;
-
-import javax.imageio.ImageReader;
 import javax.persistence.*;
 
 
