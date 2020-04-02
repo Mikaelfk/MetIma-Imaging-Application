@@ -4,7 +4,6 @@ import gruppe2.imagingapplication.Export;
 import gruppe2.imagingapplication.ImageData;
 import java.io.IOException;
 import java.net.URL;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -126,7 +125,7 @@ public class GalleryPageController implements Initializable {
 
       if (image.getHeight() / image.getWidth() == 1) {
         imagePreview.setImage(image);
-      } else if(image.getWidth() > image.getHeight()) {
+      } else if (image.getWidth() > image.getHeight()) {
         PixelReader reader = image.getPixelReader();
         WritableImage newImage = new WritableImage(reader,
                 (int) (image.getWidth() / 4),
@@ -134,8 +133,7 @@ public class GalleryPageController implements Initializable {
                 (int) (image.getWidth() / 2),
                 (int) (image.getHeight()));
         imagePreview.setImage(newImage);
-      }
-      else {
+      } else {
         PixelReader reader = image.getPixelReader();
         WritableImage newImage = new WritableImage(reader,
                 0,

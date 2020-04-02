@@ -2,20 +2,17 @@ package gruppe2.imagingapplication;
 
 import com.drew.imaging.ImageProcessingException;
 import gruppe2.imagingapplication.gui.MetImaApplication;
-
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import javafx.scene.image.Image;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 public class ContentManager {
@@ -46,7 +43,7 @@ public class ContentManager {
     EntityManager entityManager = entityManagerFactory.createEntityManager();
     String jdbcQuery = "SELECT image FROM ImageData image";
     Query databaseQuery = entityManager.createQuery(jdbcQuery);
-    imageDataList = (List<ImageData>) databaseQuery.getResultList();
+    imageDataList = databaseQuery.getResultList();
     for (ImageData imageData : imageDataList) {
       imageData.setImage(new Image("file:" + imageData.getPath()));
       images.put(imageData.getPath(), imageData);
@@ -67,7 +64,6 @@ public class ContentManager {
    *
    * @param absolutePath The absolute path of the image to add
    * @param tags         User-defined tags to describe image, set null for no tags
-   * @return True/False for image was added/image was not added to to error respectively
    */
   public void addImageToDB(String absolutePath, List<String> tags, String name) {
     EntityManager entityManager = entityManagerFactory.createEntityManager();
@@ -78,7 +74,7 @@ public class ContentManager {
       entityManager.flush();
       entityManager.getTransaction().commit();
       entityManager.close();
-      image.setImage(new Image("file:"+absolutePath));
+      image.setImage(new Image("file:" + absolutePath));
       images.put(image.getPath(), image);
     } catch (ImageProcessingException e) {
       logger.error("Not and image file", e);

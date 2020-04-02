@@ -1,12 +1,9 @@
 package gruppe2.imagingapplication.gui;
 
-import com.drew.imaging.ImageProcessingException;
 import gruppe2.imagingapplication.ImageData;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -16,8 +13,6 @@ import javafx.scene.text.TextFlow;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 
 
 public class ViewImagePageController implements Initializable {

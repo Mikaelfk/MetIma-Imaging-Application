@@ -86,7 +86,7 @@ public class AddSingleImagePageController implements Initializable {
     try {
       MetImaApplication.getScene().setRoot(
               FXMLLoader.load(getClass().getResource("MetIma_GalleryPage.fxml")));
-    } catch(IOException e) {
+    } catch (IOException e) {
       logger.error("Could not change to gallery");
     }
   }
