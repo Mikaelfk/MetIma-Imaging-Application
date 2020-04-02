@@ -171,7 +171,7 @@ public class AddImagePageController implements Initializable {
       }
 
       MetImaApplication.getContentManager()
-          .addImageToDB(imageFile.getAbsolutePath(), tags);
+          .addImageToDB(imageFile.getAbsolutePath(), tags, imageFile.getName());
     });
 
     // switch to gallery view after adding all images to gallery
