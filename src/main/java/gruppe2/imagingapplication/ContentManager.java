@@ -104,11 +104,11 @@ public class ContentManager {
     HashMap<String, ImageData> results = new HashMap<>();
 
     gallery.forEach((String key, ImageData image) ->
-      image.getTags().forEach(tag -> {
-        if (tag.toLowerCase().contains(searchTerm)) {
-          results.put(key, image);
-        }
-      }));
+        image.getTags().forEach(tag -> {
+          if (tag.toLowerCase().contains(searchTerm)) {
+            results.put(key, image);
+          }
+        }));
 
     return results;
   }

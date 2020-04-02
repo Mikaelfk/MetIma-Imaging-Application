@@ -1,8 +1,6 @@
 package gruppe2.imagingapplication.gui;
 
-import com.drew.imaging.ImageProcessingException;
 import gruppe2.imagingapplication.ContentManager;
-import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -10,6 +8,7 @@ import javafx.stage.Stage;
 
 public class MetImaApplication extends Application {
 
+  private static Scene scene;
   private static Stage stage;
   private static ContentManager contentManager;
 
@@ -19,14 +18,14 @@ public class MetImaApplication extends Application {
     stage.setMinWidth(1000);
     stage.setMinHeight(600);
     stage.setTitle("MetIma");
-    Scene scene = new Scene(
+    scene = new Scene(
             FXMLLoader.load(getClass().getResource("MetIma_HomePage.fxml")), 1200, 800);
     stage.setScene(scene);
     setStage(stage);
     stage.show();
   }
 
-  private static void createContentManager() throws ImageProcessingException, IOException {
+  private static void createContentManager() {
     contentManager = new ContentManager();
   }
 
@@ -42,4 +41,7 @@ public class MetImaApplication extends Application {
     return contentManager;
   }
 
+  public static Scene getScene() {
+    return scene;
+  }
 }

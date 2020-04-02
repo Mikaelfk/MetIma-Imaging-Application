@@ -10,10 +10,14 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
+import javafx.geometry.Insets;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.image.PixelReader;
+import javafx.scene.image.WritableImage;
 import javafx.scene.layout.TilePane;
+import javafx.scene.layout.VBox;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -34,24 +38,22 @@ public class GalleryPageController implements Initializable {
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
     generateGallery(MetImaApplication.getContentManager().getImages());
+
+    MetImaApplication.getStage().widthProperty().addListener((obs, oldVal, newVal) ->
+            galleryImages.setPrefWidth(MetImaApplication.getStage().getWidth() - 30));
   }
 
   /**
    * This method handles what happens when the home button is pressed.
    * The button sets a new scene by using the MetIma_HomePage.fxml file
+   *
    * @param event The event is the event that occurs when the button is pressed
    */
   @FXML
   private void buttonHome(ActionEvent event) {
     try {
-      if (MetImaApplication.getStage().isFullScreen()) {
-        MetImaApplication.getStage().setMaximized(true);
-        MetImaApplication.getStage().setScene(
-            new Scene(FXMLLoader.load(getClass().getResource("MetIma_HomePage.fxml"))));
-      } else {
-        MetImaApplication.getStage().setScene(
-            new Scene(FXMLLoader.load(getClass().getResource("MetIma_HomePage.fxml"))));
-      }
+      MetImaApplication.getScene().setRoot(
+              FXMLLoader.load(getClass().getResource("MetIma_HomePage.fxml")));
     } catch (IOException exception) {
       logger.error(FILE_NOT_FOUND, exception);
     }
@@ -60,13 +62,14 @@ public class GalleryPageController implements Initializable {
   /**
    * This method handles what happens when the add image button is pressed.
    * The button sets a new scene by using the MetIma_AddImagePage.fxml file.
+   *
    * @param event The event is the event that occurs when the button is pressed
    */
   @FXML
   private void buttonAddImage(ActionEvent event) {
     try {
-      MetImaApplication.getStage().setScene(
-          new Scene(FXMLLoader.load(getClass().getResource("MetIma_AddImagePage.fxml"))));
+      MetImaApplication.getScene().setRoot(
+              FXMLLoader.load(getClass().getResource("MetIma_AddImagePage.fxml")));
     } catch (IOException exception) {
       logger.error(FILE_NOT_FOUND, exception);
     }
@@ -75,10 +78,11 @@ public class GalleryPageController implements Initializable {
   /**
    * This method handles what happens when the export button is pressed.
    * It exports everything that is shown in the gallery to a pdf document.
+   *
    * @param event The event is the event that occurs when the button is pressed
    */
   @FXML
-  private void buttonExport(ActionEvent event){
+  private void buttonExport(ActionEvent event) {
     HashMap<String, ImageData> images;
     if (!MetImaApplication.getContentManager().getSearchResults().isEmpty()) {
       images = MetImaApplication.getContentManager().getSearchResults();
@@ -91,6 +95,7 @@ public class GalleryPageController implements Initializable {
   /**
    * This button handles what happens when the search button is pressed.
    * It uses the performSearch method in ContentManager with the searchField text as its input.
+   *
    * @param actionEvent The event is the event that occurs when the button is pressed
    */
   @FXML
@@ -110,28 +115,55 @@ public class GalleryPageController implements Initializable {
   /**
    * This method generates a gallery by accessing the paths of the images.
    * If an image in clicked by a mouse it will be taken to the view image page.
+   *
    * @param imageHashMap Takes a HashMap with a string as key and ImageData as value as a parameter
    */
   public void generateGallery(HashMap<String, ImageData> imageHashMap) {
     imageHashMap.keySet().forEach(path -> {
       ImageView imagePreview = new ImageView();
-      imagePreview.setImage(MetImaApplication.getContentManager().getImages().get(path).getImage());
-      imagePreview.setFitHeight(100);
-      imagePreview.setSmooth(true);
-      imagePreview.setPreserveRatio(true);
+      Image image = MetImaApplication.getContentManager().getImages().get(path).getImage();
 
-      imagePreview.setOnMouseClicked(e -> {
+      if (image.getHeight() / image.getWidth() == 1) {
+        imagePreview.setImage(image);
+      } else if(image.getWidth() > image.getHeight()) {
+        PixelReader reader = image.getPixelReader();
+        WritableImage newImage = new WritableImage(reader,
+                (int) (image.getWidth() / 3),
+                (int)(image.getHeight() / 4),
+                (int) (image.getWidth() / 3),
+                (int) (image.getHeight() / 2));
+        imagePreview.setImage(newImage);
+      }
+      else {
+        PixelReader reader = image.getPixelReader();
+        WritableImage newImage = new WritableImage(reader,
+                (int) ((image.getWidth() / 4)-(image.getWidth()/50)),
+                (int)(image.getHeight() / 3),
+                (int) (image.getWidth() / 2),
+                (int) (image.getHeight() / 3));
+        imagePreview.setImage(newImage);
+      }
+      imagePreview.setFitWidth(100);
+      imagePreview.setFitHeight(100);
+
+      VBox vbox = new VBox(imagePreview);
+      VBox.setMargin(imagePreview, new Insets(10, 10, 10, 10));
+      vbox.setStyle("-fx-border-color: purple;");
+      vbox.setOnMouseClicked(e -> {
         try {
           FXMLLoader loader = new FXMLLoader(getClass().getResource("MetIma_ViewImagePage.fxml"));
           ViewImagePageController controller = new ViewImagePageController();
           loader.setController(controller);
           controller.setImage(path);
-          MetImaApplication.getStage().setScene(new Scene(loader.load()));
+          MetImaApplication.getScene().setRoot(loader.load());
         } catch (IOException exception) {
           logger.error(FILE_NOT_FOUND, exception);
         }
       });
-      galleryImages.getChildren().add(imagePreview);
+      galleryImages.getChildren().add(vbox);
     });
+    galleryImages.setHgap(10);
+    galleryImages.setVgap(10);
+    galleryImages.setPrefWidth(MetImaApplication.getStage().getWidth() - 30);
   }
 }
