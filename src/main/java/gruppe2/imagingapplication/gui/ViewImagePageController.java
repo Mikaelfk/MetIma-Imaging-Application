@@ -72,6 +72,7 @@ public class ViewImagePageController implements Initializable {
 
   /**
    * This method handles the home button it takes the user to the homepage.
+   *
    */
   @FXML
   private void btnHome() {
@@ -85,6 +86,7 @@ public class ViewImagePageController implements Initializable {
 
   /**
    * This method handles the gallery button, it takes the user to the gallery page.
+   *
    */
   @FXML
   private void btnGallery() {
@@ -98,6 +100,7 @@ public class ViewImagePageController implements Initializable {
 
   /**
    * This method handles the add image button, it takes you to the add Image page.
+   *
    */
   @FXML
   private void btnAddImage() {
@@ -112,6 +115,7 @@ public class ViewImagePageController implements Initializable {
 
   /**
    * This method handles the delete button, it deletes the viewed image.
+   *
    */
   @FXML
   private void btnDelete() {
@@ -141,6 +145,7 @@ public class ViewImagePageController implements Initializable {
 
   /**
    * This method handles the edit Filename button, it changes the name of a file.
+   *
    */
   @FXML
   private void btnEditFilename() {
@@ -169,7 +174,8 @@ public class ViewImagePageController implements Initializable {
 
   /**
    * This method handles the edit Tags button. It takes a list of tags,
-   * and sets them as the new tags
+   * and sets them as the new tags.
+   *
    */
   @FXML
   public void btnEditTags() {
