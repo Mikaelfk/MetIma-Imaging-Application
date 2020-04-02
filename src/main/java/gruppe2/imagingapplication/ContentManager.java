@@ -6,6 +6,7 @@ import gruppe2.imagingapplication.gui.MetImaApplication;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javafx.scene.image.Image;
 import org.slf4j.Logger;
@@ -23,8 +24,8 @@ public class ContentManager {
   /**
    * A makeshift HashMap for storing the images. This is just for storing the images for the MVP.
    */
-  private HashMap<String, ImageData> images;
-  private HashMap<String, ImageData> searchResults;
+  private Map<String, ImageData> images;
+  private Map<String, ImageData> searchResults;
 
   /**
    * Constructs a new content manager object.
@@ -57,7 +58,7 @@ public class ContentManager {
    *
    * @return Returns it as HashMap<>
    */
-  public HashMap<String, ImageData> getImages() {
+  public Map<String, ImageData> getImages() {
     return images;
   }
 
@@ -109,8 +110,8 @@ public class ContentManager {
    * @param searchTerm String to search for
    * @return Matching results in a HashMap
    */
-  public HashMap<String, ImageData> fullSearch(String searchTerm) {
-    HashMap<String, ImageData> results = new HashMap<>();
+  public Map<String, ImageData> fullSearch(String searchTerm) {
+    Map<String, ImageData> results = new HashMap<>();
 
     tagSearch(searchTerm).forEach(results::put);
     imageNameSearch(searchTerm).forEach(results::put);
@@ -124,9 +125,9 @@ public class ContentManager {
    * @param searchTerm String to search for
    * @return Matching results in a HashMap
    */
-  private HashMap<String, ImageData> tagSearch(String searchTerm) {
-    HashMap<String, ImageData> gallery = MetImaApplication.getContentManager().getImages();
-    HashMap<String, ImageData> results = new HashMap<>();
+  private Map<String, ImageData> tagSearch(String searchTerm) {
+    Map<String, ImageData> gallery = MetImaApplication.getContentManager().getImages();
+    Map<String, ImageData> results = new HashMap<>();
 
     gallery.forEach((String key, ImageData image) ->
         image.getTags().forEach(tag -> {
@@ -144,9 +145,9 @@ public class ContentManager {
    * @param searchTerm String to search for
    * @return Matching results in a HashMap
    */
-  private HashMap<String, ImageData> imageNameSearch(String searchTerm) {
-    HashMap<String, ImageData> gallery = MetImaApplication.getContentManager().getImages();
-    HashMap<String, ImageData> results = new HashMap<>();
+  private Map<String, ImageData> imageNameSearch(String searchTerm) {
+    Map<String, ImageData> gallery = MetImaApplication.getContentManager().getImages();
+    Map<String, ImageData> results = new HashMap<>();
 
     gallery.values().forEach((ImageData image) -> {
       if (image.getImageName().toLowerCase().contains(searchTerm)) {
@@ -171,7 +172,7 @@ public class ContentManager {
    *
    * @return Returns the result as HashMap<>
    */
-  public HashMap<String, ImageData> getSearchResults() {
+  public Map<String, ImageData> getSearchResults() {
     return searchResults;
   }
 }

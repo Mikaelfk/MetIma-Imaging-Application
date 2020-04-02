@@ -84,7 +84,7 @@ public class GalleryPageController implements Initializable {
    */
   @FXML
   private void buttonExport(ActionEvent event) {
-    HashMap<String, ImageData> images;
+    Map<String, ImageData> images;
     if (!MetImaApplication.getContentManager().getSearchResults().isEmpty()) {
       images = MetImaApplication.getContentManager().getSearchResults();
     } else {
