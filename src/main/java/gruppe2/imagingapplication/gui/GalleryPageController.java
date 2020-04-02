@@ -122,8 +122,7 @@ public class GalleryPageController implements Initializable {
   public void generateGallery(Map<String, ImageData> imageHashMap) {
     imageHashMap.keySet().forEach(path -> {
       ImageView imagePreview = new ImageView();
-      Image image = new Image("file:" + path);
-      imageHashMap.get(path).setImage(image);
+      Image image = MetImaApplication.getContentManager().getImages().get(path).getImage();
 
       if (image.getHeight() / image.getWidth() == 1) {
         imagePreview.setImage(image);

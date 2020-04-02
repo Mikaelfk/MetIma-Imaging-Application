@@ -75,6 +75,7 @@ public class ContentManager {
       entityManager.merge(image);
       entityManager.flush();
       entityManager.getTransaction().commit();
+      image.setImage(new Image("file:"+absolutePath));
       images.put(image.getPath(), image);
     } catch (ImageProcessingException e) {
       logger.error("Not and image file", e);
@@ -83,24 +84,6 @@ public class ContentManager {
     } finally {
       entityManager.close();
     }
-  }
-
-  /**
-   * Takes a search term and performs a search.
-   *
-   * @param searchTerm Takes a search term as String
-   */
-  public void performSearch(String searchTerm) {
-    this.searchResults = fullSearch(searchTerm);
-  }
-
-  /**
-   * Returns the search result.
-   *
-   * @return Returns the result as HashMap<>
-   */
-  public HashMap<String, ImageData> getSearchResults() {
-    return searchResults;
   }
 
   /**
@@ -165,5 +148,23 @@ public class ContentManager {
     });
 
     return results;
+  }
+
+  /**
+   * Takes a search term and performs a search.
+   *
+   * @param searchTerm Takes a search term as String
+   */
+  public void performSearch(String searchTerm) {
+    this.searchResults = fullSearch(searchTerm);
+  }
+
+  /**
+   * Returns the search result.
+   *
+   * @return Returns the result as HashMap<>
+   */
+  public HashMap<String, ImageData> getSearchResults() {
+    return searchResults;
   }
 }
