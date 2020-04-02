@@ -122,13 +122,16 @@ public class ContentManager {
    * @param path The path of the image as a String
    */
   public void removeImage(String path) {
-    logger.info("Removed image: {}", path);
     EntityManager entityManager = entityManagerFactory.createEntityManager();
-    entityManager.getTransaction().begin();
-    entityManager.remove(entityManager.find(ImageData.class, path));
-    entityManager.getTransaction().commit();
-    entityManager.close();
-    images.remove(path);
+    try {
+      logger.info("Removed image: {}", path);
+      entityManager.getTransaction().begin();
+      entityManager.remove(entityManager.find(ImageData.class, path));
+      entityManager.getTransaction().commit();
+      images.remove(path);
+    } finally {
+      entityManager.close();
+    }
   }
 
   /**
