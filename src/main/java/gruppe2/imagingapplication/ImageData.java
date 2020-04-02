@@ -45,6 +45,7 @@ public class ImageData implements Serializable {
     this.imageName = name;
     Metadata metadataObject = ImageMetadataReader.readMetadata(new File(path));
     metadata = new HashMap<>();
+    this.image = null;
     for (Directory directory : metadataObject.getDirectories()) {
       for (Tag tag : directory.getTags()) {
         if (tag.toString().length() < 255) {

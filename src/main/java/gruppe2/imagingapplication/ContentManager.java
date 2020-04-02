@@ -45,8 +45,15 @@ public class ContentManager {
     Query databaseQuery = entityManager.createQuery(jdbcQuery);
     imageDataList = databaseQuery.getResultList();
     for (ImageData imageData : imageDataList) {
-      imageData.setImage(new Image("file:" + imageData.getPath()));
-      images.put(imageData.getPath(), imageData);
+      try {
+        Image image = new Image(imageData.getPath());
+        imageData.setImage(image);
+        images.put(imageData.getPath(), imageData);
+      } catch(Exception e) {
+        logger.info("Image path changed, removed the image");
+        removeImage(imageData.getPath());
+      }
+
     }
   }
 
@@ -73,7 +80,6 @@ public class ContentManager {
       entityManager.merge(image);
       entityManager.flush();
       entityManager.getTransaction().commit();
-      entityManager.close();
       image.setImage(new Image("file:" + absolutePath));
       images.put(image.getPath(), image);
     } catch (ImageProcessingException e) {
