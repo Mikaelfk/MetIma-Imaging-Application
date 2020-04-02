@@ -99,7 +99,7 @@ public class AddImagePageController implements Initializable {
 
     // set image for preview
     ImageView previewImage = (ImageView) entry.lookup("#imgEntryPreview");
-    previewImage.setImage(new Image("file:" + imagePath));
+    previewImage.setImage(new Image("file:" + imagePath, 200, 0, true, true));
 
     return entry;
   }

@@ -2,19 +2,15 @@ package gruppe2.imagingapplication;
 
 import com.drew.imaging.ImageProcessingException;
 import gruppe2.imagingapplication.gui.MetImaApplication;
-
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import javafx.scene.image.Image;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -49,7 +45,7 @@ public class ContentManager {
     Query databaseQuery = entityManager.createQuery(jdbcQuery);
     imageDataList = databaseQuery.getResultList();
     for (ImageData imageData : imageDataList) {
-      Image image = new Image("file:" + imageData.getPath());
+      Image image = new Image("file:" + imageData.getPath(), 500, 0, true, true);
       if (image.isError()) {
         logger.info("Image path changed, image has been removed");
         removeImage(imageData.getPath());
@@ -57,8 +53,6 @@ public class ContentManager {
         imageData.setImage(image);
         images.put(imageData.getPath(), imageData);
       }
-
-
     }
   }
 
