@@ -1,5 +1,6 @@
 package gruppe2.imagingapplication.gui;
 
+import com.drew.imaging.ImageProcessingException;
 import gruppe2.imagingapplication.ImageData;
 
 import java.io.IOException;
@@ -14,6 +15,9 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 
 
 public class ViewImagePageController implements Initializable {
@@ -33,7 +37,7 @@ public class ViewImagePageController implements Initializable {
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
     imageView.setImage(
-            MetImaApplication.getContentManager().getImages().get(this.image.getPath()).getImage());
+        MetImaApplication.getContentManager().getImages().get(this.image.getPath()).getImage());
     imageName.setText("FileName: " + this.image.getImageName());
     StringBuilder tagText = new StringBuilder();
     tagText.append("Tags: ");
@@ -41,7 +45,7 @@ public class ViewImagePageController implements Initializable {
       tagText.append(tag);
       tagText.append(", ");
     });
-    if(tagText.length() > 1) {
+    if (tagText.length() > 1) {
       tagText.setLength(tagText.length() - 2);
     }
     tags.setText(tagText.toString());
@@ -71,7 +75,7 @@ public class ViewImagePageController implements Initializable {
   private void btnHome() {
     try {
       MetImaApplication.getScene().setRoot(
-              FXMLLoader.load(getClass().getResource("MetIma_HomePage.fxml")));
+          FXMLLoader.load(getClass().getResource("MetIma_HomePage.fxml")));
     } catch (IOException exception) {
       logger.error(FILE_NOT_FOUND, exception);
     }
@@ -84,7 +88,7 @@ public class ViewImagePageController implements Initializable {
   private void btnGallery() {
     try {
       MetImaApplication.getScene().setRoot(
-              FXMLLoader.load(getClass().getResource("MetIma_GalleryPage.fxml")));
+          FXMLLoader.load(getClass().getResource("MetIma_GalleryPage.fxml")));
     } catch (IOException exception) {
       logger.error(FILE_NOT_FOUND, exception);
     }
@@ -97,7 +101,7 @@ public class ViewImagePageController implements Initializable {
   private void btnAddImage() {
     try {
       MetImaApplication.getScene().setRoot(
-              FXMLLoader.load(getClass().getResource("MetIma_AddImagePage.fxml")));
+          FXMLLoader.load(getClass().getResource("MetIma_AddImagePage.fxml")));
     } catch (IOException exception) {
       logger.error(FILE_NOT_FOUND, exception);
     }
@@ -112,7 +116,7 @@ public class ViewImagePageController implements Initializable {
     MetImaApplication.getContentManager().removeImage(this.image.getPath());
     try {
       MetImaApplication.getScene().setRoot(
-              FXMLLoader.load(getClass().getResource("MetIma_GalleryPage.fxml")));
+          FXMLLoader.load(getClass().getResource("MetIma_GalleryPage.fxml")));
     } catch (IOException exception) {
       logger.error(FILE_NOT_FOUND, exception);
     }

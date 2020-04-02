@@ -2,6 +2,7 @@ package gruppe2.imagingapplication;
 
 import com.drew.imaging.ImageProcessingException;
 import gruppe2.imagingapplication.gui.MetImaApplication;
+
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -93,6 +94,11 @@ public class ContentManager {
    */
   public void removeImage(String path) {
     logger.info("Removed image: {}", path);
+    EntityManager entityManager = entityManagerFactory.createEntityManager();
+    entityManager.getTransaction().begin();
+    entityManager.remove(entityManager.find(ImageData.class, path));
+    entityManager.getTransaction().commit();
+
     images.remove(path);
   }
 
@@ -122,11 +128,11 @@ public class ContentManager {
     HashMap<String, ImageData> results = new HashMap<>();
 
     gallery.forEach((String key, ImageData image) ->
-            image.getTags().forEach(tag -> {
-              if (tag.toLowerCase().contains(searchTerm)) {
-                results.put(key, image);
-              }
-            }));
+        image.getTags().forEach(tag -> {
+          if (tag.toLowerCase().contains(searchTerm)) {
+            results.put(key, image);
+          }
+        }));
 
     return results;
   }
