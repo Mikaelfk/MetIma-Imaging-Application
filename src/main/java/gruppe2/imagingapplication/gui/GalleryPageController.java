@@ -4,7 +4,7 @@ import gruppe2.imagingapplication.Export;
 import gruppe2.imagingapplication.ImageData;
 import java.io.IOException;
 import java.net.URL;
-import java.util.HashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -40,7 +40,7 @@ public class GalleryPageController implements Initializable {
     generateGallery(MetImaApplication.getContentManager().getImages());
 
     MetImaApplication.getStage().widthProperty().addListener((obs, oldVal, newVal) ->
-            galleryImages.setPrefWidth(MetImaApplication.getStage().getWidth() - 30));
+        galleryImages.setPrefWidth(MetImaApplication.getStage().getWidth() - 30));
   }
 
   /**
@@ -53,7 +53,7 @@ public class GalleryPageController implements Initializable {
   private void buttonHome(ActionEvent event) {
     try {
       MetImaApplication.getScene().setRoot(
-              FXMLLoader.load(getClass().getResource("MetIma_HomePage.fxml")));
+          FXMLLoader.load(getClass().getResource("MetIma_HomePage.fxml")));
     } catch (IOException exception) {
       logger.error(FILE_NOT_FOUND, exception);
     }
@@ -69,7 +69,7 @@ public class GalleryPageController implements Initializable {
   private void buttonAddImage(ActionEvent event) {
     try {
       MetImaApplication.getScene().setRoot(
-              FXMLLoader.load(getClass().getResource("MetIma_AddImagePage.fxml")));
+          FXMLLoader.load(getClass().getResource("MetIma_AddImagePage.fxml")));
     } catch (IOException exception) {
       logger.error(FILE_NOT_FOUND, exception);
     }
@@ -83,7 +83,7 @@ public class GalleryPageController implements Initializable {
    */
   @FXML
   private void buttonExport(ActionEvent event) {
-    HashMap<String, ImageData> images;
+    Map<String, ImageData> images;
     if (!MetImaApplication.getContentManager().getSearchResults().isEmpty()) {
       images = MetImaApplication.getContentManager().getSearchResults();
     } else {
@@ -118,37 +118,38 @@ public class GalleryPageController implements Initializable {
    *
    * @param imageHashMap Takes a HashMap with a string as key and ImageData as value as a parameter
    */
-  public void generateGallery(HashMap<String, ImageData> imageHashMap) {
+  public void generateGallery(Map<String, ImageData> imageHashMap) {
     imageHashMap.keySet().forEach(path -> {
       ImageView imagePreview = new ImageView();
       Image image = MetImaApplication.getContentManager().getImages().get(path).getImage();
 
       if (image.getHeight() / image.getWidth() == 1) {
         imagePreview.setImage(image);
-      } else if(image.getWidth() > image.getHeight()) {
+      } else if (image.getWidth() > image.getHeight()) {
         PixelReader reader = image.getPixelReader();
         WritableImage newImage = new WritableImage(reader,
-                (int) (image.getWidth() / 3),
-                (int)(image.getHeight() / 4),
-                (int) (image.getWidth() / 3),
-                (int) (image.getHeight() / 2));
+            (int) (image.getWidth() / 4),
+            0,
+            (int) (image.getWidth() / 2),
+            (int) (image.getHeight()));
         imagePreview.setImage(newImage);
-      }
-      else {
+      } else {
         PixelReader reader = image.getPixelReader();
         WritableImage newImage = new WritableImage(reader,
-                (int) ((image.getWidth() / 4)-(image.getWidth()/50)),
-                (int)(image.getHeight() / 3),
-                (int) (image.getWidth() / 2),
-                (int) (image.getHeight() / 3));
+            0,
+            (int) (image.getHeight() / 4),
+            (int) (image.getWidth()),
+            (int) (image.getHeight() / 2));
         imagePreview.setImage(newImage);
       }
+
       imagePreview.setFitWidth(100);
       imagePreview.setFitHeight(100);
 
       VBox vbox = new VBox(imagePreview);
       VBox.setMargin(imagePreview, new Insets(10, 10, 10, 10));
       vbox.setStyle("-fx-border-color: purple;");
+
       vbox.setOnMouseClicked(e -> {
         try {
           FXMLLoader loader = new FXMLLoader(getClass().getResource("MetIma_ViewImagePage.fxml"));
@@ -162,6 +163,7 @@ public class GalleryPageController implements Initializable {
       });
       galleryImages.getChildren().add(vbox);
     });
+
     galleryImages.setHgap(10);
     galleryImages.setVgap(10);
     galleryImages.setPrefWidth(MetImaApplication.getStage().getWidth() - 30);

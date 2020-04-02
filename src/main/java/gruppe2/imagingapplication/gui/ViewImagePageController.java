@@ -1,14 +1,10 @@
 package gruppe2.imagingapplication.gui;
 
-import com.drew.metadata.Directory;
-import com.drew.metadata.Tag;
 import gruppe2.imagingapplication.ImageData;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
-
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -39,16 +35,24 @@ public class ViewImagePageController implements Initializable {
   public void initialize(URL url, ResourceBundle resourceBundle) {
     imageView.setImage(
         MetImaApplication.getContentManager().getImages().get(this.image.getPath()).getImage());
-    imageName.setText("FileName:" + this.image.getImageName());
-    tags.setText("Tags:" + this.image.getTags());
-
-    for (Directory directory : image.getMetadata().getDirectories()) {
-      for (Tag tag : directory.getTags()) {
-        Text text = new Text();
-        text.setText(tag.toString() + "\n");
-        textFlow.getChildren().add(text);
-      }
+    imageName.setText("FileName: " + this.image.getImageName());
+    StringBuilder tagText = new StringBuilder();
+    tagText.append("Tags: ");
+    this.image.getTags().forEach(tag -> {
+      tagText.append(tag);
+      tagText.append(", ");
+    });
+    if (tagText.length() > 1) {
+      tagText.setLength(tagText.length() - 2);
     }
+    tags.setText(tagText.toString());
+
+
+    image.getMetadata().forEach((key, value) -> {
+      Text text = new Text();
+      text.setText(key + ": " + value + "\n");
+      textFlow.getChildren().add(text);
+    });
   }
 
   /**
