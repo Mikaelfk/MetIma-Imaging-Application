@@ -94,6 +94,7 @@
                            </ImageView>
                         </graphic>
                      </Button>
+                     <Button mnemonicParsing="false" onAction="#btnEdit" text="Edit Button" />
                   </children>
                </VBox>
             </children>
