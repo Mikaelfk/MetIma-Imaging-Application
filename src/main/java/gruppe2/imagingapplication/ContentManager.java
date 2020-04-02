@@ -42,15 +42,12 @@ public class ContentManager {
   public void readFromDB() {
     List<ImageData> imageDataList;
     EntityManager entityManager = entityManagerFactory.createEntityManager();
-
     String jdbcQuery = "SELECT image FROM ImageData image";
     Query databaseQuery = entityManager.createQuery(jdbcQuery);
     imageDataList = (List<ImageData>) databaseQuery.getResultList();
     for (ImageData imageData : imageDataList) {
-      if ((images.get(imageData.getPath()) == null) || !images.get(imageData.getPath()).getTags().equals(imageData.getTags())) {
-        imageData.setImage(new Image("file:" + imageData.getPath()));
-        images.put(imageData.getPath(), imageData);
-      }
+      imageData.setImage(new Image("file:" + imageData.getPath()));
+      images.put(imageData.getPath(), imageData);
     }
   }
 
@@ -78,6 +75,7 @@ public class ContentManager {
       entityManager.merge(image);
       entityManager.flush();
       entityManager.getTransaction().commit();
+      images.put(image.getPath(), image);
     } catch (ImageProcessingException e) {
       logger.error("Not and image file", e);
     } catch (IOException e) {
@@ -85,7 +83,6 @@ public class ContentManager {
     } finally {
       entityManager.close();
     }
-    readFromDB();
   }
 
   /**

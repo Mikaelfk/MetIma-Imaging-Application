@@ -120,10 +120,11 @@ public class GalleryPageController implements Initializable {
    * @param imageHashMap Takes a HashMap with a string as key and ImageData as value as a parameter
    */
   public void generateGallery(Map<String, ImageData> imageHashMap) {
-    MetImaApplication.getContentManager().readFromDB();
     imageHashMap.keySet().forEach(path -> {
       ImageView imagePreview = new ImageView();
-      Image image = MetImaApplication.getContentManager().getImages().get(path).getImage();
+      Image image = new Image("file:" + path);
+      imageHashMap.get(path).setImage(image);
+
       if (image.getHeight() / image.getWidth() == 1) {
         imagePreview.setImage(image);
       } else if(image.getWidth() > image.getHeight()) {
