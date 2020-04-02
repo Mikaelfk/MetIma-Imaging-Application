@@ -4,6 +4,8 @@ import gruppe2.imagingapplication.ImageData;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -163,8 +165,39 @@ public class ViewImagePageController implements Initializable {
         logger.error(FILE_NOT_FOUND, exception);
       }
     }
+  }
+
+  /**
+   * This method handles the edit Tags button. It takes a list of tags,
+   * and sets them as the new tags
+   */
+  @FXML
+  public void btnEditTags() {
+    TextInputDialog dialog = new TextInputDialog("");
+    dialog.setTitle("Text Input Dialog");
+    dialog.setHeaderText("Look, a Text Input Dialog");
+    dialog.setContentText("Enter new filename:");
+    Optional<String> result = dialog.showAndWait();
 
 
+    if (result.isPresent()) {
+      List<String> newTags = Arrays.asList(result.get()
+          .split("\\s*,\\s*"));
+      MetImaApplication.getContentManager().editDatabaseTags(this.image.getPath(), newTags);
+      try {
+        MetImaApplication.getScene().setRoot(
+            FXMLLoader.load(getClass().getResource("MetIma_GalleryPage.fxml")));
+      } catch (IOException exception) {
+        logger.error(FILE_NOT_FOUND, exception);
+      }
+    } else {
+      try {
+        MetImaApplication.getScene().setRoot(
+            FXMLLoader.load(getClass().getResource("MetIma_GalleryPage.fxml")));
+      } catch (IOException exception) {
+        logger.error(FILE_NOT_FOUND, exception);
+      }
+    }
   }
 
   /**

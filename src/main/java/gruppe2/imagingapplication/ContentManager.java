@@ -2,15 +2,19 @@ package gruppe2.imagingapplication;
 
 import com.drew.imaging.ImageProcessingException;
 import gruppe2.imagingapplication.gui.MetImaApplication;
+
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import javafx.scene.image.Image;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -45,16 +49,14 @@ public class ContentManager {
     Query databaseQuery = entityManager.createQuery(jdbcQuery);
     imageDataList = databaseQuery.getResultList();
     for (ImageData imageData : imageDataList) {
-        Image image = new Image("file:"+imageData.getPath());
-        if(image.isError()) {
-          logger.info("Image path changed, image has been removed");
-          removeImage(imageData.getPath());
-        } else {
-          imageData.setImage(image);
-          images.put(imageData.getPath(), imageData);
-        }
-
-
+      Image image = new Image("file:" + imageData.getPath());
+      if (image.isError()) {
+        logger.info("Image path changed, image has been removed");
+        removeImage(imageData.getPath());
+      } else {
+        imageData.setImage(image);
+        images.put(imageData.getPath(), imageData);
+      }
 
 
     }
@@ -96,8 +98,9 @@ public class ContentManager {
 
   /**
    * Method for editing an existing image.
+   *
    * @param absolutePath The absolute path of the image you want to edit
-   * @param name The new name
+   * @param name         The new filename
    */
   public void editDatabaseFilename(String absolutePath, String name) {
     EntityManager entityManager = entityManagerFactory.createEntityManager();
@@ -115,8 +118,30 @@ public class ContentManager {
     } finally {
       entityManager.close();
     }
+  }
 
-
+  /**
+   * Method for editing the tags of an existing image.
+   *
+   * @param absolutePath The absolute path of the image you want to edit
+   * @param tags         A list of the new tags
+   */
+  public void editDatabaseTags(String absolutePath, List<String> tags) {
+    EntityManager entityManager = entityManagerFactory.createEntityManager();
+    try {
+      ImageData image = MetImaApplication.getContentManager().getImages().get(absolutePath);
+      image.setTags(tags);
+      entityManager.getTransaction().begin();
+      entityManager.merge(image);
+      entityManager.flush();
+      entityManager.getTransaction().commit();
+      image.setImage(new Image("file:" + image.getImageName()));
+      images.put(image.getPath(), image);
+      image.setTags(tags);
+      image.setImage(new Image("file:" + absolutePath));
+    } finally {
+      entityManager.close();
+    }
   }
 
   /**

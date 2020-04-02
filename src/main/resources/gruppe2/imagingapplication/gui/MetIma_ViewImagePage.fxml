@@ -107,7 +107,7 @@
                            </VBox>
                            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                               <children>
-                                 <Button alignment="TOP_CENTER"  mnemonicParsing="false" text="Edit tags" />
+                                 <Button alignment="TOP_CENTER" onAction="#btnEditTags" mnemonicParsing="false" text="Edit tags" />
                               </children>
                            </VBox>
                         </children>
