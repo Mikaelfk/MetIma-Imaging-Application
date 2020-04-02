@@ -14,7 +14,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 
-
 public class ViewImagePageController implements Initializable {
   @FXML
   private ImageView imageView;
@@ -115,6 +114,10 @@ public class ViewImagePageController implements Initializable {
     } catch (IOException exception) {
       logger.error(FILE_NOT_FOUND, exception);
     }
+  }
+
+  private void btnEdit() {
+
   }
 
   /**
