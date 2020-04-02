@@ -50,7 +50,7 @@ public class GalleryPageController implements Initializable {
    * @param event The event is the event that occurs when the button is pressed
    */
   @FXML
-  private void buttonHome(ActionEvent event) {
+  private void btnHome(ActionEvent event) {
     try {
       MetImaApplication.getScene().setRoot(
           FXMLLoader.load(getClass().getResource("MetIma_HomePage.fxml")));
@@ -66,7 +66,7 @@ public class GalleryPageController implements Initializable {
    * @param event The event is the event that occurs when the button is pressed
    */
   @FXML
-  private void buttonAddImage(ActionEvent event) {
+  private void btnAddImage(ActionEvent event) {
     try {
       MetImaApplication.getScene().setRoot(
           FXMLLoader.load(getClass().getResource("MetIma_AddImagePage.fxml")));
@@ -82,7 +82,7 @@ public class GalleryPageController implements Initializable {
    * @param event The event is the event that occurs when the button is pressed
    */
   @FXML
-  private void buttonExport(ActionEvent event) {
+  private void btnExport(ActionEvent event) {
     Map<String, ImageData> images;
     if (!MetImaApplication.getContentManager().getSearchResults().isEmpty()) {
       images = MetImaApplication.getContentManager().getSearchResults();
@@ -99,7 +99,7 @@ public class GalleryPageController implements Initializable {
    * @param actionEvent The event is the event that occurs when the button is pressed
    */
   @FXML
-  public void buttonSearch(ActionEvent actionEvent) {
+  public void btnSearch(ActionEvent actionEvent) {
     if (!searchField.getText().isEmpty()) {
       galleryImages.getChildren().clear();
 
