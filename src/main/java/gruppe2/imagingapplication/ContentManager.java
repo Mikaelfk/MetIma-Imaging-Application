@@ -45,14 +45,17 @@ public class ContentManager {
     Query databaseQuery = entityManager.createQuery(jdbcQuery);
     imageDataList = databaseQuery.getResultList();
     for (ImageData imageData : imageDataList) {
-      try {
-        Image image = new Image(imageData.getPath());
-        imageData.setImage(image);
-        images.put(imageData.getPath(), imageData);
-      } catch(Exception e) {
-        logger.info("Image path changed, removed the image");
-        removeImage(imageData.getPath());
-      }
+        Image image = new Image("file:"+imageData.getPath());
+        if(image.isError()) {
+          logger.info("Image path changed, image has been removed");
+          removeImage(imageData.getPath());
+        } else {
+          imageData.setImage(image);
+          images.put(imageData.getPath(), imageData);
+        }
+
+
+
 
     }
   }
