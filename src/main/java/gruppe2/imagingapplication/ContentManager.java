@@ -76,6 +76,7 @@ public class ContentManager {
       entityManager.merge(image);
       entityManager.flush();
       entityManager.getTransaction().commit();
+      entityManager.close();
       image.setImage(new Image("file:"+absolutePath));
       images.put(image.getPath(), image);
     } catch (ImageProcessingException e) {
@@ -98,7 +99,7 @@ public class ContentManager {
     entityManager.getTransaction().begin();
     entityManager.remove(entityManager.find(ImageData.class, path));
     entityManager.getTransaction().commit();
-
+    entityManager.close();
     images.remove(path);
   }
 
