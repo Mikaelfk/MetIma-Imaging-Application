@@ -86,6 +86,31 @@ public class ContentManager {
   }
 
   /**
+   * Method for editing an existing image.
+   * @param absolutePath The absolute path of the image you want to edit
+   * @param tags The new tags
+   * @param name The new name
+   */
+  public void editDatabase(String absolutePath, List<String> tags, String name) {
+    EntityManager entityManager = entityManagerFactory.createEntityManager();
+    try {
+      ImageData image = MetImaApplication.getContentManager().getImages().get(absolutePath);
+      image.setImageName(name);
+      image.setTags(tags);
+      entityManager.getTransaction().begin();
+      entityManager.merge(image);
+      entityManager.flush();
+      entityManager.getTransaction().commit();
+      image.setImage(new Image("file:" + image.getImageName()));
+      images.put(image.getPath(), image);
+    } finally {
+      entityManager.close();
+    }
+
+
+  }
+
+  /**
    * Removes an image from images by using the image path.
    *
    * @param path The path of the image as a String
