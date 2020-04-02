@@ -1,15 +1,18 @@
 package gruppe2.imagingapplication.gui;
 
 import gruppe2.imagingapplication.ImageData;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
@@ -134,7 +137,33 @@ public class ViewImagePageController implements Initializable {
 
   }
 
-  private void btnEdit() {
+  /**
+   * This method handles the edit Filename button, it changes the name of a file.
+   */
+  @FXML
+  private void btnEditFilename() {
+    TextInputDialog dialog = new TextInputDialog("");
+    dialog.setTitle("Text Input Dialog");
+    dialog.setHeaderText("Look, a Text Input Dialog");
+    dialog.setContentText("Enter new filename:");
+    Optional<String> result = dialog.showAndWait();
+    if (result.isPresent()) {
+      MetImaApplication.getContentManager().editDatabaseFilename(this.image.getPath(), result.get());
+      try {
+        MetImaApplication.getScene().setRoot(
+            FXMLLoader.load(getClass().getResource("MetIma_GalleryPage.fxml")));
+      } catch (IOException exception) {
+        logger.error(FILE_NOT_FOUND, exception);
+      }
+    } else {
+      try {
+        MetImaApplication.getScene().setRoot(
+            FXMLLoader.load(getClass().getResource("MetIma_GalleryPage.fxml")));
+      } catch (IOException exception) {
+        logger.error(FILE_NOT_FOUND, exception);
+      }
+    }
+
 
   }
 
