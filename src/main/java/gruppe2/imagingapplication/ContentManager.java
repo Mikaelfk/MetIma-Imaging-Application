@@ -167,6 +167,7 @@ public class ContentManager {
 
     tagSearch(searchTerm).forEach(results::put);
     imageNameSearch(searchTerm).forEach(results::put);
+    metadataSearch(searchTerm).forEach(results::put);
 
     return results;
   }
@@ -207,6 +208,23 @@ public class ContentManager {
       }
     });
 
+    return results;
+  }
+
+  /**
+   * Method that searches by image names and returns a Map with all matches.
+   * @param searchTerm String to search for
+   * @return Matching results in a Map
+   */
+  private Map<String, ImageData> metadataSearch(String searchTerm){
+    Map<String, ImageData> gallery = MetImaApplication.getContentManager().getImages();
+    Map<String, ImageData> results = new HashMap<>();
+
+    gallery.values().forEach((ImageData image) -> {
+      if (image.getMetadata().toString().toLowerCase().contains(searchTerm)){
+        results.put(image.getPath(), image);
+      }
+    });
     return results;
   }
 
