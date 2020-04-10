@@ -148,7 +148,7 @@ public class GalleryPageController implements Initializable {
 
       VBox vbox = new VBox(imagePreview);
       VBox.setMargin(imagePreview, new Insets(10, 10, 10, 10));
-      vbox.setStyle("-fx-border-color: purple;");
+      vbox.setStyle("-fx-border-color: #383838;");
 
       vbox.setOnMouseClicked(e -> {
         try {

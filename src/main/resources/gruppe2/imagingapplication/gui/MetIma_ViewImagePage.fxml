@@ -8,10 +8,11 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.TextFlow?>
 
-<VBox prefHeight="800.0" prefWidth="1200.0" stylesheets="@MetIma_Style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<VBox prefHeight="800.0" prefWidth="1200.0" stylesheets="@MetIma_Style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <BorderPane prefHeight="779.0" prefWidth="1076.0">
       <top>
          <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
@@ -70,21 +71,33 @@
             <children>
                <VBox alignment="CENTER" prefHeight="603.0" prefWidth="550.0">
                   <children>
-                     <Text fx:id="imageName" strokeType="OUTSIDE" strokeWidth="0.0" text="Filename" />
+                     <Text fx:id="imageName" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Filename">
+                        <font>
+                           <Font name="System Bold" size="18.0" />
+                        </font></Text>
                      <ImageView fx:id="imageView" fitHeight="476.0" fitWidth="515.0" pickOnBounds="true" preserveRatio="true" />
-                     <Text fx:id="tags" strokeType="OUTSIDE" strokeWidth="0.0" text="tags" />
+                     <Text fx:id="tags" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Tags">
+                        <font>
+                           <Font name="System Bold" size="18.0" />
+                        </font></Text>
                   </children>
                </VBox>
                <VBox alignment="CENTER" prefHeight="603.0" prefWidth="530.0">
                   <children>
-                     <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Metadata" />
-                     <ScrollPane prefHeight="473.0" prefWidth="528.0">
+                     <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Metadata">
+                        <font>
+                           <Font name="System Bold" size="18.0" />
+                        </font></Text>
+                     <ScrollPane prefHeight="473.0" prefWidth="528.0" styleClass="scroll-pane-viewImage">
                         <content>
-                           <TextFlow fx:id="textFlow" prefHeight="505.0" prefWidth="508.0" />
+                           <TextFlow fx:id="textFlow" lineSpacing="20.0" prefHeight="505.0" prefWidth="508.0" styleClass="text-flow-viewimage">
+                              <padding>
+                                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                              </padding></TextFlow>
                         </content></ScrollPane>
                      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                         <children>
-                           <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                           <VBox alignment="CENTER" prefHeight="100.0" prefWidth="63.0">
                               <children>
                                  <Button mnemonicParsing="false" onAction="#btnDelete" styleClass="button-delete">
                                     <VBox.margin>
@@ -102,12 +115,24 @@
                            </VBox>
                            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                               <children>
-                                 <Button alignment="CENTER" onAction="#btnEditFilename"  mnemonicParsing="false" text="Edit Filename" />
+                                 <Button alignment="CENTER" mnemonicParsing="false" onAction="#btnEditFilename" prefHeight="30.0" prefWidth="120.0" text="Edit Filename" textFill="WHITE">
+                                    <font>
+                                       <Font name="System Bold" size="14.0" />
+                                    </font>
+                                    <VBox.margin>
+                                       <Insets />
+                                    </VBox.margin>
+                                    <padding>
+                                       <Insets left="5.0" />
+                                    </padding></Button>
                               </children>
                            </VBox>
                            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                               <children>
-                                 <Button alignment="TOP_CENTER" onAction="#btnEditTags" mnemonicParsing="false" text="Edit tags" />
+                                 <Button alignment="TOP_CENTER" mnemonicParsing="false" onAction="#btnEditTags" prefHeight="30.0" prefWidth="78.0" text="Edit tags" textFill="WHITE">
+                                    <font>
+                                       <Font name="System Bold" size="14.0" />
+                                    </font></Button>
                               </children>
                            </VBox>
                         </children>
