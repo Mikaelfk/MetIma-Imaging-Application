@@ -1,25 +1,38 @@
 # MetIma
 
-The project is an application designed to browse images, and retrieve their metadata. 
+The project is an application designed to allow a user to import, 
+browse, organize with tags, export and read the metadata of images.  
+of an image. 
 
-### Prerequisites
+## Prerequisites
 
-The application is written in Java 11, and the prerequuisite to running the application is to have [Java Runtime Environment](https://www.java.com/en/download/manual.jsp) installed on the computer.
-### Installing
+The application is written for Java 11, but might compile and run fine with 
+never versions of Java. Compiling and running is done with Maven.
 
+For obvious reasons, the database password is not pushed to Git. For the 
+application to run the application must be configures with a  
+database before compilation.
 
-## Running the tests
-
-
-
-### Break down of tests
-
-
-
-## Built With
+## Dependencies
 
 * [Maven](https://maven.apache.org/) - Dependency Management
+* [Java Development Kit](https://www.oracle.com/java/technologies/javase-downloads.html) - Compilation of Java code
+* [Java Runtime Enviroment](https://www.java.com/en/download/manual.jsp) - Running compiled Java code
 
+## Compiling and running
+
+Before compiling, the application must be configured with a database. To do this,
+add a persistance unit in 
+[persistence.xml](/src/main/resources/META-INF/persistence.xml) according to
+the specifications 
+[found here.](https://www.objectdb.com/java/jpa/entity/persistence-unit)
+
+
+Afterwards, with Maven installed, it is as simple as executing a single Maven goal in the project root:
+
+```bash 
+mvn javafx:run
+```
 
 ## Authors
 
