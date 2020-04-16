@@ -19,6 +19,10 @@ public class ImageDataTest {
 
   }
 
+  /**
+   * Tests that metadata is extracted from the image.
+   * IF there is an error extracting metadata, the hashmap will be empty
+   */
   @Test
   public void metadataTests() {
     ImageData testImage = null;
@@ -36,6 +40,11 @@ public class ImageDataTest {
     assertFalse(testImage.getMetadata().isEmpty());
   }
 
+
+  /**
+   * Tests for making sure tags are parsed properly
+   * Checks if it gets all tags, and that all unique tags are still there
+   */
   @Test
   public void tagTests() {
     ImageData testImage = null;
