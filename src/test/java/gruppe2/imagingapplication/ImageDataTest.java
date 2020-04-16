@@ -14,11 +14,6 @@ import java.util.List;
 public class ImageDataTest {
   private Logger logger = LoggerFactory.getLogger(ImageDataTest.class);
 
-  @BeforeAll
-  void setUp() {
-
-  }
-
   /**
    * Tests that metadata is extracted from the image.
    * IF there is an error extracting metadata, the hashmap will be empty
