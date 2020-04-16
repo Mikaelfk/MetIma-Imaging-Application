@@ -30,7 +30,7 @@ public class ContentManager {
   public ContentManager() {
     images = new HashMap<>();
     searchResults = new HashMap<>();
-    entityManagerFactory = Persistence.createEntityManagerFactory("AsukaBestGrill");
+    entityManagerFactory = Persistence.createEntityManagerFactory("images-idi");
     readFromDB();
   }
 
