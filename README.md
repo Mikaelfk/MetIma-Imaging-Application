@@ -26,9 +26,12 @@ add a persistance unit in
 [persistence.xml](/src/main/resources/META-INF/persistence.xml) according to
 the specifications 
 [found here.](https://www.objectdb.com/java/jpa/entity/persistence-unit)
+All the relevant dependencies for connection to a MySQL database is included
+in the current Maven configuration.
 
 
-Afterwards, with Maven installed, it is as simple as executing a single Maven goal in the project root:
+Afterwards, with Maven installed, it is as simple as executing a single 
+Maven goal in the project root:
 
 ```bash 
 mvn javafx:run
