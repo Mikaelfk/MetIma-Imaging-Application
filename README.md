@@ -1,8 +1,7 @@
 # MetIma
 
 The project is an application designed to allow a user to import, 
-browse, organize with tags, export and read the metadata of images.  
-of an image. 
+browse, organize with tags, export and read the metadata of images.
 
 ## Prerequisites
 
