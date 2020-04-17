@@ -125,7 +125,7 @@ public class GalleryPageController implements Initializable {
       if(image.isError()) {
         logger.error("No image at given path");
         MetImaApplication.getContentManager().removeImage(path);
-      }
+      } else {
 
       if (image.getHeight() / image.getWidth() == 1) {
         imagePreview.setImage(image);
@@ -166,10 +166,12 @@ public class GalleryPageController implements Initializable {
         }
       });
       galleryImages.getChildren().add(vbox);
+    }
     });
 
     galleryImages.setHgap(10);
     galleryImages.setVgap(10);
     galleryImages.setPrefWidth(MetImaApplication.getStage().getWidth() - 30);
+
   }
 }
