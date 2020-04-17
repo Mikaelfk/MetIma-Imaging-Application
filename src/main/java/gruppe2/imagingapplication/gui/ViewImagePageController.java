@@ -37,7 +37,7 @@ public class ViewImagePageController implements Initializable {
 
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
-    imageView.setImage(new Image("file:" + this.image.getPath(), 300, 0, true, true));
+    imageView.setImage(new Image("file:" + this.image.getPath(), 1000, 0, true, true));
     imageName.setText("FileName: " + this.image.getImageName());
     StringBuilder tagText = new StringBuilder();
     tagText.append("Tags: ");

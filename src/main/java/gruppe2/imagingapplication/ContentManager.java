@@ -98,7 +98,6 @@ public class ContentManager {
       entityManager.flush();
       entityManager.getTransaction().commit();
       images.put(image.getPath(), image);
-      image.setImageName(name);
     } finally {
       entityManager.close();
     }
@@ -120,7 +119,6 @@ public class ContentManager {
       entityManager.flush();
       entityManager.getTransaction().commit();
       images.put(image.getPath(), image);
-      image.setTags(tags);
     } finally {
       entityManager.close();
     }
