@@ -45,14 +45,7 @@ public class ContentManager {
     Query databaseQuery = entityManager.createQuery(jdbcQuery);
     imageDataList = databaseQuery.getResultList();
     for (ImageData imageData : imageDataList) {
-      Image image = new Image("file:" + imageData.getPath(), 500, 0, true, true);
-      if (image.isError()) {
-        logger.info("Image path changed, image has been removed");
-        removeImage(imageData.getPath());
-      } else {
-        imageData.setImage(image);
-        images.put(imageData.getPath(), imageData);
-      }
+      images.put(imageData.getPath(), imageData);
     }
   }
 
@@ -79,7 +72,6 @@ public class ContentManager {
       entityManager.merge(image);
       entityManager.flush();
       entityManager.getTransaction().commit();
-      image.setImage(new Image("file:" + absolutePath));
       images.put(image.getPath(), image);
     } catch (ImageProcessingException e) {
       logger.error("Not and image file", e);
@@ -105,10 +97,8 @@ public class ContentManager {
       entityManager.merge(image);
       entityManager.flush();
       entityManager.getTransaction().commit();
-      image.setImage(new Image("file:" + image.getImageName()));
       images.put(image.getPath(), image);
       image.setImageName(name);
-      image.setImage(new Image("file:" + absolutePath));
     } finally {
       entityManager.close();
     }
@@ -129,10 +119,8 @@ public class ContentManager {
       entityManager.merge(image);
       entityManager.flush();
       entityManager.getTransaction().commit();
-      image.setImage(new Image("file:" + image.getImageName()));
       images.put(image.getPath(), image);
       image.setTags(tags);
-      image.setImage(new Image("file:" + absolutePath));
     } finally {
       entityManager.close();
     }

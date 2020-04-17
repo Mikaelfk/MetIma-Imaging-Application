@@ -13,6 +13,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextInputDialog;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
@@ -36,8 +37,7 @@ public class ViewImagePageController implements Initializable {
 
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
-    imageView.setImage(
-        MetImaApplication.getContentManager().getImages().get(this.image.getPath()).getImage());
+    imageView.setImage(new Image("file:" + this.image.getPath(), 300, 0, true, true));
     imageName.setText("FileName: " + this.image.getImageName());
     StringBuilder tagText = new StringBuilder();
     tagText.append("Tags: ");

@@ -28,8 +28,6 @@ public class ImageData implements Serializable {
   private List<String> tags;
   @ElementCollection
   private Map<String, String> metadata;
-  @Transient
-  private transient Image image;
 
   /**
    * This is a constructor for the Image class.
@@ -45,7 +43,6 @@ public class ImageData implements Serializable {
     this.imageName = name;
     Metadata metadataObject = ImageMetadataReader.readMetadata(new File(path));
     metadata = new HashMap<>();
-    this.image = null;
     for (Directory directory : metadataObject.getDirectories()) {
       for (Tag tag : directory.getTags()) {
         if (tag.toString().length() < 255) {
@@ -90,13 +87,5 @@ public class ImageData implements Serializable {
 
   public Map<String, String> getMetadata() {
     return metadata;
-  }
-
-  public Image getImage() {
-    return image;
-  }
-
-  public void setImage(Image image) {
-    this.image = image;
   }
 }
