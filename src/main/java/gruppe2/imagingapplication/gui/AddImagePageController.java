@@ -170,8 +170,11 @@ public class AddImagePageController implements Initializable {
             .split("\\s*,\\s*"));
       }
 
+      // get image name, field is filled out with recommended image name
+      TextField txtEntryName = (TextField) entryContainer.lookup("#txtEntryName" + imageIdentifier);
+
       MetImaApplication.getContentManager()
-          .addImageToDB(imageFile.getAbsolutePath(), tags, imageFile.getName());
+          .addImageToDB(imageFile.getAbsolutePath(), tags, txtEntryName.getText());
     });
 
     // switch to gallery view after adding all images to gallery
