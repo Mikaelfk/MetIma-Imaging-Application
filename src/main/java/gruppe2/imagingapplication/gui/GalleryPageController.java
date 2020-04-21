@@ -124,7 +124,6 @@ public class GalleryPageController implements Initializable {
       Image image = new Image("file:"+path, 200, 0, true, true);
       if(image.isError()) {
         logger.error("No image at given path");
-        MetImaApplication.getContentManager().removeImage(path);
       } else {
       if (image.getHeight() / image.getWidth() == 1) {
         imagePreview.setImage(image);
