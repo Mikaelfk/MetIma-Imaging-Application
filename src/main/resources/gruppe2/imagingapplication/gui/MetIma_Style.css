@@ -55,5 +55,6 @@
 }
 
 .scroll-pane-viewImage {
+    -fx-background: divider-color;
     -fx-background-color: divider-color;
 }
