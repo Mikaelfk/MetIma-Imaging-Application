@@ -145,12 +145,11 @@ public class GalleryPageController implements Initializable {
         imagePreview.setImage(newImage);
       }
 
-      imagePreview.setFitWidth(100);
-      imagePreview.setFitHeight(100);
+      imagePreview.setFitWidth(150);
+      imagePreview.setFitHeight(150);
 
       VBox vbox = new VBox(imagePreview);
       VBox.setMargin(imagePreview, new Insets(10, 10, 10, 10));
-      vbox.setStyle("-fx-border-color: #383838;");
 
       vbox.setOnMouseClicked(e -> {
         try {
