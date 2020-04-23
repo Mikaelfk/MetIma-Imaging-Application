@@ -154,19 +154,9 @@ public class ViewImagePageController implements Initializable {
     Optional<String> result = dialog.showAndWait();
     if (result.isPresent()) {
       MetImaApplication.getContentManager().editDatabaseFilename(this.image.getPath(), result.get());
-      try {
-        MetImaApplication.getScene().setRoot(
-            FXMLLoader.load(getClass().getResource("MetIma_GalleryPage.fxml")));
-      } catch (IOException exception) {
-        logger.error(FILE_NOT_FOUND, exception);
-      }
+      loadViewImage(image.getPath());
     } else {
-      try {
-        MetImaApplication.getScene().setRoot(
-            FXMLLoader.load(getClass().getResource("MetIma_GalleryPage.fxml")));
-      } catch (IOException exception) {
-        logger.error(FILE_NOT_FOUND, exception);
-      }
+      loadViewImage(image.getPath());
     }
   }
 
@@ -188,19 +178,9 @@ public class ViewImagePageController implements Initializable {
       List<String> newTags = Arrays.asList(result.get()
           .split("\\s*,\\s*"));
       MetImaApplication.getContentManager().editDatabaseTags(this.image.getPath(), newTags);
-      try {
-        MetImaApplication.getScene().setRoot(
-            FXMLLoader.load(getClass().getResource("MetIma_GalleryPage.fxml")));
-      } catch (IOException exception) {
-        logger.error(FILE_NOT_FOUND, exception);
-      }
+      loadViewImage(image.getPath());
     } else {
-      try {
-        MetImaApplication.getScene().setRoot(
-            FXMLLoader.load(getClass().getResource("MetIma_GalleryPage.fxml")));
-      } catch (IOException exception) {
-        logger.error(FILE_NOT_FOUND, exception);
-      }
+      loadViewImage(image.getPath());
     }
   }
 
@@ -220,5 +200,17 @@ public class ViewImagePageController implements Initializable {
    */
   public void setImageView(ImageView imageView) {
     this.imageView = imageView;
+  }
+
+  public void loadViewImage(String path) {
+    try {
+      FXMLLoader loader = new FXMLLoader(getClass().getResource("MetIma_ViewImagePage.fxml"));
+      ViewImagePageController controller = new ViewImagePageController();
+      loader.setController(controller);
+      controller.setImage(path);
+      MetImaApplication.getScene().setRoot(loader.load());
+    } catch (IOException exception) {
+      logger.error(FILE_NOT_FOUND, exception);
+    }
   }
 }
