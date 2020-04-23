@@ -46,32 +46,37 @@ public class Export {
       Image image = null;
       try {
         image = Image.getInstance("file:" + path);
+
+        // calculate page size / ratio based on standard A4 page
+        Rectangle size = new Rectangle((float) Paper.A4.getWidth(),
+                (float) Paper.A4.getWidth() * (image.getPlainHeight() / image.getPlainWidth()));
+        document.setPageSize(size);
+
+        // set image properties and position
+        image.setAbsolutePosition(0,0);
+        image.setBorderWidth(0);
+        image.scaleToFit(size);
+
+        // create new page and add image to said page
+        document.newPage();
+        try {
+          document.add(image);
+        } catch (DocumentException e) {
+          // this should never happen :-P
+          logger.error("Document is not opened");
+        }
       } catch (BadElementException e) {
-        logger.error("Error creating image object", e);
+        logger.error("Error creating image object");
       } catch (IOException e) {
-        logger.error("Error accessing image file", e);
-      }
-
-      // calculate page size / ratio based on standard A4 page
-      Rectangle size = new Rectangle((float) Paper.A4.getWidth(),
-          (float) Paper.A4.getWidth() * (image.getPlainHeight() / image.getPlainWidth()));
-      document.setPageSize(size);
-
-      // set image properties and position
-      image.setAbsolutePosition(0,0);
-      image.setBorderWidth(0);
-      image.scaleToFit(size);
-
-      // create new page and add image to said page
-      document.newPage();
-      try {
-        document.add(image);
-      } catch (DocumentException e) {
-        // this should never happen :-P
-        logger.error("Document is not opened", e);
+        logger.error("Error accessing image file");
       }
     });
-    document.close();
+    try {
+      document.close();
+    } catch (Exception e) {
+      logger.info("document is empty");
+    }
+
   }
 
   /**
