@@ -121,7 +121,7 @@ public class GalleryPageController implements Initializable {
   public void generateGallery(Map<String, ImageData> imageHashMap) {
     imageHashMap.keySet().forEach(path -> {
       ImageView imagePreview = new ImageView();
-      Image image = new Image("file:"+path, 200, 0, true, true);
+      Image image = new Image("file:" + path, 150, 0, true, true);
       if(image.isError()) {
         logger.error("No image at given path");
       } else {
