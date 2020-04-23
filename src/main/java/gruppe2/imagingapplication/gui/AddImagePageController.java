@@ -51,8 +51,6 @@ public class AddImagePageController implements Initializable {
       }
     }
 
-    // create an entry for all images in HashMap
-    // TODO: do something if no images were chosen
     chosenImages.forEach((imageIdentifier, imageFile) -> entryContainer.getChildren()
           .add(createListEntry(imageFile.getAbsolutePath(), imageIdentifier))
     );
@@ -113,7 +111,7 @@ public class AddImagePageController implements Initializable {
     Button btnEntryRemove = (Button) event.getSource();
 
     // extract number from id
-    String entryIdentifier = btnEntryRemove.getId().replaceAll("[^0-9]", "");
+    int entryIdentifier = Integer.parseInt(btnEntryRemove.getId().replaceAll("[^0-9]", ""));
     // remove image and entry
     entryContainer.getChildren().remove(entryContainer.lookup("#entry" + entryIdentifier));
     chosenImages.remove(entryIdentifier);
@@ -161,22 +159,23 @@ public class AddImagePageController implements Initializable {
    */
   @FXML
   public void btnAddToGallery(ActionEvent actionEvent) {
-    chosenImages.forEach((imageIdentifier, imageFile) -> {
-      // get tags, pass null to ContentManager if tags are empty
-      TextField txtEntryTags = (TextField) entryContainer.lookup("#txtEntryTags" + imageIdentifier);
-      List<String> tags = null;
-      if (!txtEntryTags.getText().isEmpty()) {
-        tags = Arrays.asList(txtEntryTags.getText()
-            .split("\\s*,\\s*"));
-      }
+    if (!chosenImages.isEmpty()) {
+      chosenImages.forEach((imageIdentifier, imageFile) -> {
+        // get tags, pass null to ContentManager if tags are empty
+        TextField txtEntryTags = (TextField) entryContainer.lookup("#txtEntryTags" + imageIdentifier);
+        List<String> tags = null;
+        if (!txtEntryTags.getText().isEmpty()) {
+          tags = Arrays.asList(txtEntryTags.getText()
+              .split("\\s*,\\s*"));
+        }
 
-      // get image name, field is filled out with recommended image name
-      TextField txtEntryName = (TextField) entryContainer.lookup("#txtEntryName" + imageIdentifier);
+        // get image name, field is filled out with recommended image name
+        TextField txtEntryName = (TextField) entryContainer.lookup("#txtEntryName" + imageIdentifier);
 
-      MetImaApplication.getContentManager()
-          .addImageToDB(imageFile.getAbsolutePath(), tags, txtEntryName.getText());
-    });
-
+        MetImaApplication.getContentManager()
+            .addImageToDB(imageFile.getAbsolutePath(), tags, txtEntryName.getText());
+      });
+    }
     // switch to gallery view after adding all images to gallery
     try {
       MetImaApplication.getScene()
