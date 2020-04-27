@@ -26,6 +26,10 @@ public class MetImaApplication extends Application {
     stage.show();
   }
 
+  public static void main(String[] args) {
+    launch();
+  }
+
   private static void createContentManager() {
     contentManager = new ContentManager();
   }
