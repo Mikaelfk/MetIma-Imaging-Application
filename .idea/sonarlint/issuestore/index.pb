@@ -1,17 +1,19 @@
 
 9
-	README.md,8\e\8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
+	README.md,8/e/8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
 g
 7src/main/java/gruppe2/imagingapplication/ImageData.java,1\3\139e4022e89571b7b968a673fadd1fda5f200390
 w
 Gsrc/main/java/gruppe2/imagingapplication/gui/GalleryPageController.java,3\f\3f11c600e8cc4e28e967afd0a2735f2ed17905d1
 t
-Dsrc/main/java/gruppe2/imagingapplication/gui/HomePageController.java,8\b\8b626847cc61199c693b56063be72418221fef3e
+Dsrc/main/java/gruppe2/imagingapplication/gui/HomePageController.java,8/b/8b626847cc61199c693b56063be72418221fef3e
 y
 Isrc/main/java/gruppe2/imagingapplication/gui/ViewImagePageController.java,f\c\fc4cdb081a6830b43dee4bca25b23b80e2c7f81c
 s
-Csrc/main/java/gruppe2/imagingapplication/gui/MetImaApplication.java,c\a\ca26655748a1b59849e765423f2286527c6ae273
+Csrc/main/java/gruppe2/imagingapplication/gui/MetImaApplication.java,c/a/ca26655748a1b59849e765423f2286527c6ae273
 l
 <src/main/java/gruppe2/imagingapplication/ContentManager.java,f\5\f510e9765d430471ec3db98bc15cbf9ec7d0e6e8
 d
 4src/main/java/gruppe2/imagingapplication/Export.java,d\c\dc3db241eec0c9bd1bdf9aac5fc440128e9debe7
+k
+;src/test/java/gruppe2/imagingapplication/ImageDataTest.java,c/e/ce10fbc245e5125d00add0e1360abadf480169bf

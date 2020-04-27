@@ -148,8 +148,8 @@ public class ViewImagePageController implements Initializable {
   @FXML
   private void btnEditFilename() {
     TextInputDialog dialog = new TextInputDialog("");
-    dialog.setTitle("Text Input Dialog");
-    dialog.setHeaderText("Look, a Text Input Dialog");
+    dialog.setTitle("Edit filename");
+    dialog.setHeaderText("Edit filename");
     dialog.setContentText("Enter new filename:");
     Optional<String> result = dialog.showAndWait();
     if (result.isPresent()) {
@@ -168,8 +168,8 @@ public class ViewImagePageController implements Initializable {
   @FXML
   public void btnEditTags() {
     TextInputDialog dialog = new TextInputDialog("");
-    dialog.setTitle("Text Input Dialog");
-    dialog.setHeaderText("Look, a Text Input Dialog");
+    dialog.setTitle("Edit tags");
+    dialog.setHeaderText("Edit tags");
     dialog.setContentText("Enter new filename:");
     Optional<String> result = dialog.showAndWait();
 
