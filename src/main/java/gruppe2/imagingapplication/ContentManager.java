@@ -6,11 +6,12 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import javafx.scene.image.Image;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
+
+import javafx.scene.image.Image;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -45,7 +46,11 @@ public class ContentManager {
     Query databaseQuery = entityManager.createQuery(jdbcQuery);
     imageDataList = databaseQuery.getResultList();
     for (ImageData imageData : imageDataList) {
-      images.put(imageData.getPath(), imageData);
+      if(new Image("file:" + imageData.getPath(), 1, 0, false, false).isError()) {
+        logger.info("Image does not exist at the path");
+      } else {
+        images.put(imageData.getPath(), imageData);
+      }
     }
   }
 
