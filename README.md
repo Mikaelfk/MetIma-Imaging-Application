@@ -3,38 +3,24 @@
 The project is an application designed to allow a user to import, 
 browse, organize with tags, export and read the metadata of images.
 
-## Prerequisites
+## Prerequesites
 
-The application is written for Java 11, but might compile and run fine with 
-never versions of Java. Compiling and running is done with Maven.
+# Dependencies
+* [Java 11 Runtime Enviroment](https://www.java.com/en/download/manual.jsp) - Running compiled Java code
 
-For obvious reasons, the database password is not pushed to Git. For the 
-application to run the application must be configures with a  
-database before compilation.
-
-## Dependencies
-
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [Java Development Kit](https://www.oracle.com/java/technologies/javase-downloads.html) - Compilation of Java code
-* [Java Runtime Enviroment](https://www.java.com/en/download/manual.jsp) - Running compiled Java code
-
-## Compiling and running
-
-Before compiling, the application must be configured with a database. To do this,
-add a persistance unit in 
-[persistence.xml](/src/main/resources/META-INF/persistence.xml) according to
-the specifications 
-[found here.](https://www.objectdb.com/java/jpa/entity/persistence-unit)
-All the relevant dependencies for connection to a MySQL database is included
-in the current Maven configuration.
+The application requires the user to have the Java 11 Runtime installed for
+it to run properly.
 
 
-Afterwards, with Maven installed, it is as simple as executing a single 
-Maven goal in the project root:
+## Running
 
-```bash 
-mvn javafx:run
-```
+Get the latest jar-file from 
+[the releases page](https://gitlab.stud.idi.ntnu.no/group-2/imaging-application/-/releases)
+and run it as you would any other program. It is completely self contained, 
+and does not require any other setup.
+
+## Compiling
+For compiling, look at the wiki page related to compiling.
 
 ## Authors
 
