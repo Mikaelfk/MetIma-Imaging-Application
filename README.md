@@ -5,7 +5,7 @@ browse, organize with tags, export and read the metadata of images.
 
 ## Prerequesites
 
-# Dependencies
+### Dependencies
 * [Java 11 Runtime Enviroment](https://www.java.com/en/download/manual.jsp) - Running compiled Java code
 
 The application requires the user to have the Java 11 Runtime installed for
