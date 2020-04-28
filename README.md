@@ -20,7 +20,7 @@ and run it as you would any other program. It is completely self contained,
 and does not require any other setup.
 
 ## Compiling
-For compiling, look at the wiki page related to compiling.
+For compiling, look at the [wiki page related to compiling.](https://gitlab.stud.idi.ntnu.no/group-2/imaging-application/-/wikis/System/Compiling%20and%20installing)
 
 ## Authors
 
