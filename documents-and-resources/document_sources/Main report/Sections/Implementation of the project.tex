@@ -1,0 +1,88 @@
+\section{Implementation of the Project}
+    \subsection{Predefined Goals}
+        Before the project commenced, there were three main goals in the vision document, as well as a few smaller goals. There were three main goal categories; efficiency, result, and process. While the efficiency and result goals partially overlap, they were important enough to keep separate.
+ 
+    \begin{itemize}
+        \item Efficiency goals
+  
+        The application should enable an easier method of organizing a digital image collection. By giving the user an automated way to have their images easily search- and browse able, it will be easier to work with a large collection of images. The application will also be easy to use for all users no matter their computer proficiency. 
+        
+        \item Result goals
+  
+        The main result goal for the MetIma application was to increase the productivity of the user. Both for storing and accessing digitally stored images. The less time a user has to spend doing mundane tasks, the better. The other result goal is increased earnings in a business environment where "time is money". While this overlaps with the main result goal, it is more of a commercial goal. A user can spend more time working in a business and earning money than organizing images, which usually does not net a lot of money for businesses. 
+    
+        \item Process goals
+  
+        A goal during the process was to improve the developers competence. By using new libraries, tools and strategies, the developers would improve their personal development skills. This newfound skill is useful both in future projects and later in this project if code needs refactoring. Since this was a group project, the collaborative part of the process was also very important. The developers had to work closely both with each other, and potential users for usability testing. This provides experience that will be very valuable in the future. 
+    \end{itemize}
+  
+    \subsection{Evaluation of Final Result}
+        \subsubsection{Goals}
+            \begin{itemize}
+                \item Efficiency goals
+  
+                The final application very much fulfills the efficiency goals that were set. All images added to the application are easily searchable. The application can display results for search terms based on image name, user specified tags, and automatically extracted metadata. While the tags must be specified manually by the user, the application will automatically choose an image name based on file name, save metadata in a readable format for the user to access.
+
+                \item Result goals
+
+                The result goals overlap somewhat with the efficiency goals, and therefore are mostly fulfilled as well. The application allows the user to add many images at once, and set names and tags for all of them before they are added to the gallery. It therefore makes it much quicker for the user to later access these images, which fulfills the goal.
+                
+                \item Process goals
+  
+                While writing the application, a lot of different solutions and libraries were tested before ending up with a final solution. By trying out and testing different solutions, the developers learned several skills and obtained information about possible solutions that, while not in this project, can be very useful elsewhere. Collaborative skills from working with solutions like Git were also greatly improved, as Git was used extensively throughout the entire project.
+
+            \end{itemize}
+        \subsubsection{Technical Requirements}
+            As mentioned in section 3, "Assignment Description", the application had a few technical requirements it had to meet. The final MetIma application fulfills all of these requirements.
+            
+            The application is written using Java and Java libraries. It does not require any other software to work, other than a database connection, which is not a part of the application itself. This follows the first requirement, which is "Must be a standalone Java application".
+            
+            The next two requirements, "Use the MySQL database at the university and use ORM technology" and "Use a connection pool with one connection", were also both fulfilled. While it does not specify to only do this and not include other solutions, it was decided to not branch out too far from the requirements and do unnecessary work that was not required.
+            
+            For code testing, there was only one requirement, which was to "Test at least all the classes that read image metadata with JUnit". This was done internally, and there are several tests run when the application is compiled to make sure it works properly before it's distributed. 
+            
+            The application had to be designed according to WCAG 2.1 principle 1, perceivable. This was done by implementing text alternatives for non-text content so that it can be changed into other forms people need, such as speech.
+
+        \subsection{Problems and Solutions}
+            During the development process there were several problems with the application that had to be solved. Some of these problems came from planned features that turned out to be hard to implement, and some came from refactoring and reworks that had to be done mid-development. These reworks or refactors were the result of solutions that weren't good enough, or a mistake in the planning that was not predicted beforehand.  
+            
+            The first big issue that was discovered was that the planned page for adding images was very ineffective and lacked options that would be very basic in an application like MetIma. With the planned design, it was not possible to more than one image at a time. This made the application really slow to use for a user that wanted to add a large amount of images. 
+            
+            A temporary and dirty solution to this was to allow the selection of more images, but the page design did not have room to set names or tags for the images. So all images added at the same time received the same image name and tags. While this was a solution, it was still not satisfactory. This led to a complete rewrite of both the design of the page and the controller, which resulted in more time spent than planned on this part of the application.
+            
+            The second big problem occurred when setting up the application for working with a database instead of a temporary solution that was set up for testing purposes. For extracting the image metadata, a library called "metadata-extractor" was used. The library provides a class for storing and working with extracted metadata. Then original plan was to store this whole object in the database, which turned out not to be possible without rewriting most of the library. 
+            
+            While there were a lot of attempts made at trying to make the class serializable, it required so much work that it was decided to develop a different solution. The final solution ended up being a simple hashmap that stored the human friendly name of a tag and it's value. This meant some data loss, as the raw tag id was lost, but for our use case, that value was not needed and could be discarded. 
+            
+            % AH 256GB RAM
+            The third and last problem that had to be solved was the amount of memory the application was using. Since the application has to display the images to the user, all these images have to be loaded into memory so they can be displayed when the user opens the gallery. In our application, when the user opened the gallery, the application would load images into memory and keep them there. If the user went back to the gallery after having been on a different page, it would load the images into memory again, even if they already were there and increase the memory usage.
+            
+            The unsatisfactory solution to this was to create new image objects and redraw the images for each time the user viewed the gallery page. Before the fix, the images were supposed to be cached in memory, but our solution was unable to retrieve the cached images and kept trying to cache them over and over again. The solution makes the application slower the more images the user has in the gallery, but it makes sure the application does not use huge amounts of memory.
+        
+        \subsection{Evaluation of Risk}
+            In the vision document some risk were laid out which could be detrimental to the success of the project. It was considered unlikely that the development team would exceed the budget and deadline for the launch of the application. We have been working on a comfortable budget and have had limited expenses. The main expense is salary, since the developers use their personal computers and development tools were supplied by the client. The development team managed to stay under budget because the project was completed earlier than expected.  Another concern was planning to create something over-ambitious, that the developers could not deliver. The foundations we set in the planning phase proved to be solid, and the application is well within the realm of feasibility. 
+            
+            The risk that was considered most likely to derail the project was that the developers could not exclusively work on the MetIma project. This partially happened where the developers also had other responsibilities they had to focus on. This lead to the work was preformed in creative sprints, where large amounts of programming was done in a short span of time. Other times the project was left unattended for longer periods of time. This is reflected in the GitLab activity and time sheet. However,the project has been completed in a satisfactory way on schedule. 
+            
+            \subsection{Teamwork and Workload} 
+            As mentioned in section 4.2, "Project responsibilities", all developers had gotten their own working areas and responsibilities. While the plan was to keep this separation of roles throughout the while development process, after a while the tasks started mixing and the roles became less clear. This was mostly because of our main process goal, which includes "improve the developers competence" and it seemed in the developers best interest to try their hand at different tasks as long as it did not have negative consequences on the product. 
+        
+        \subsection{Evaluation of Teamwork}
+            The teamwork aspect of the project has been on of the aspects that has worked the best. There has been no personal conflicts, and all the developers have worked well together. For the most part the work has been conducted in a group setting, where all four developers program at the same time. This made it possible to consult with each other and collaborate on tasks. Since everyone's responsibilities started mixing, it made the most sense to work in a group. For future projects we want to focus more on individual work, where a developers does not feel forced to work at a certain time, and work more at their own pace. In this case more defined tasks would make it easier to work individually.
+        
+            The teamwork for this project has been conducted in a very informal manner. All the developers on the development team are familiar with each other, and are on good terms. This has positive and negative aspects. While the project has gone very smoothly, the group has ignored many aspects of the planning process. This was because we were in frequent contact with each other  We simply contacted each other on Discord and initiated a work session. Milestones and goals have been met, not because of proper planning, but because the group happened to work enough. 
+            
+            During the development of the application the development team utilized different collaborative tools to coordinate the workflow. GitLab and Overleaf was mentioned in section 4.4 "Brief description of standard software used"
+ 
+            \begin{itemize}
+                
+                \item Google drive
+                
+                Google drive is a freemium cloud storage software which is integrated with your google account. \cite{website:GDrive} This was useful for storing non overleaf documents like our collaboration agreement. Google drive is organized such that everyone shares a cloud storage, and can access the same documents. 
+                
+                \item Discord
+                
+                We used discord as our main communication platform. Discord is a freeware VoIP application designed for video game communities. It specializes in text, image, video, and audio communication between users in a chat channel. \cite{website:digitaltrends}
+
+            \end{itemize}{}
+            Due to complications the group was unable to meet up in person, therefore these collaborative tools have been essential for completing the project.

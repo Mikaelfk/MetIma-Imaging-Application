@@ -1,25 +1,26 @@
 # MetIma
 
-The project is an application designed to browse images, and retrieve their metadata. 
+The project is an application designed to allow a user to import, 
+browse, organize with tags, export and read the metadata of images.
 
-### Prerequisites
+## Prerequesites
 
-The application is written in Java 11, and the prerequuisite to running the application is to have [Java Runtime Environment](https://www.java.com/en/download/manual.jsp) installed on the computer.
-### Installing
+### Dependencies
+* [Java 11 Runtime Enviroment](https://www.java.com/en/download/manual.jsp) - Running compiled Java code
 
-
-## Running the tests
-
-
-
-### Break down of tests
+The application requires the user to have the Java 11 Runtime installed for
+it to run properly.
 
 
+## Running
 
-## Built With
+Get the latest jar-file from 
+[the releases page](https://gitlab.stud.idi.ntnu.no/group-2/imaging-application/-/releases)
+and run it as you would any other program. It is completely self contained, 
+and does not require any other setup.
 
-* [Maven](https://maven.apache.org/) - Dependency Management
-
+## Compiling
+For compiling, look at the [wiki page related to compiling.](https://gitlab.stud.idi.ntnu.no/group-2/imaging-application/-/wikis/System/Compiling%20and%20installing)
 
 ## Authors
 

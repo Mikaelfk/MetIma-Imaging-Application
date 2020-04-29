@@ -1,16 +1,19 @@
 package gruppe2.imagingapplication.gui;
 
-import com.drew.metadata.Directory;
-import com.drew.metadata.Tag;
 import gruppe2.imagingapplication.ImageData;
-
 import java.io.IOException;
 import java.net.URL;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
-
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.TextInputDialog;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
@@ -34,18 +37,25 @@ public class ViewImagePageController implements Initializable {
 
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
-    imageView.setImage(
-        MetImaApplication.getContentManager().getImages().get(this.image.getPath()).getImage());
-    imageName.setText("FileName:" + this.image.getImageName());
-    tags.setText("Tags:" + this.image.getTags());
-
-    for (Directory directory : image.getMetadata().getDirectories()) {
-      for (Tag tag : directory.getTags()) {
-        Text text = new Text();
-        text.setText(tag.toString() + "\n");
-        textFlow.getChildren().add(text);
-      }
+    imageView.setImage(new Image("file:" + this.image.getPath(), 1000, 0, true, true));
+    imageName.setText("FileName: " + this.image.getImageName());
+    StringBuilder tagText = new StringBuilder();
+    tagText.append("Tags: ");
+    this.image.getTags().forEach(tag -> {
+      tagText.append(tag);
+      tagText.append(", ");
+    });
+    if (tagText.length() > 1) {
+      tagText.setLength(tagText.length() - 2);
     }
+    tags.setText(tagText.toString());
+
+
+    image.getMetadata().forEach((key, value) -> {
+      Text text = new Text();
+      text.setText(key + ": " + value + "\n");
+      textFlow.getChildren().add(text);
+    });
   }
 
   /**
@@ -60,6 +70,7 @@ public class ViewImagePageController implements Initializable {
 
   /**
    * This method handles the home button it takes the user to the homepage.
+   *
    */
   @FXML
   private void btnHome() {
@@ -73,6 +84,7 @@ public class ViewImagePageController implements Initializable {
 
   /**
    * This method handles the gallery button, it takes the user to the gallery page.
+   *
    */
   @FXML
   private void btnGallery() {
@@ -86,6 +98,7 @@ public class ViewImagePageController implements Initializable {
 
   /**
    * This method handles the add image button, it takes you to the add Image page.
+   *
    */
   @FXML
   private void btnAddImage() {
@@ -100,20 +113,75 @@ public class ViewImagePageController implements Initializable {
 
   /**
    * This method handles the delete button, it deletes the viewed image.
+   *
    */
   @FXML
   private void btnDelete() {
-    MetImaApplication.getContentManager().removeImage(this.image.getPath());
-    try {
-      MetImaApplication.getScene().setRoot(
-          FXMLLoader.load(getClass().getResource("MetIma_GalleryPage.fxml")));
-    } catch (IOException exception) {
-      logger.error(FILE_NOT_FOUND, exception);
+    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+    alert.setTitle("Confirmation Dialog");
+    alert.setHeaderText("You are trying to delete an image");
+    alert.setContentText("Are you sure you wish to delete?");
+    Optional<ButtonType> result = alert.showAndWait();
+    if (result.get() == ButtonType.OK) {
+      MetImaApplication.getContentManager().removeImage(this.image.getPath());
+      try {
+        MetImaApplication.getScene().setRoot(
+            FXMLLoader.load(getClass().getResource("MetIma_GalleryPage.fxml")));
+      } catch (IOException exception) {
+        logger.error(FILE_NOT_FOUND, exception);
+      }
+    } else {
+      try {
+        MetImaApplication.getScene().setRoot(
+            FXMLLoader.load(getClass().getResource("MetIma_GalleryPage.fxml")));
+      } catch (IOException exception) {
+        logger.error(FILE_NOT_FOUND, exception);
+      }
+    }
+
+  }
+
+  /**
+   * This method handles the edit Filename button, it changes the name of a file.
+   *
+   */
+  @FXML
+  private void btnEditFilename() {
+    TextInputDialog dialog = new TextInputDialog("");
+    dialog.setTitle("Edit filename");
+    dialog.setHeaderText("Edit filename");
+    dialog.setContentText("Enter new filename:");
+    Optional<String> result = dialog.showAndWait();
+    if (result.isPresent()) {
+      MetImaApplication.getContentManager().editDatabaseFilename(this.image.getPath(), result.get());
+      loadViewImage(image.getPath());
+    } else {
+      loadViewImage(image.getPath());
     }
   }
 
-  private void btnEdit() {
+  /**
+   * This method handles the edit Tags button. It takes a list of tags,
+   * and sets them as the new tags.
+   *
+   */
+  @FXML
+  public void btnEditTags() {
+    TextInputDialog dialog = new TextInputDialog("");
+    dialog.setTitle("Edit tags");
+    dialog.setHeaderText("Edit tags");
+    dialog.setContentText("Enter new filename:");
+    Optional<String> result = dialog.showAndWait();
 
+
+    if (result.isPresent()) {
+      List<String> newTags = Arrays.asList(result.get()
+          .split("\\s*,\\s*"));
+      MetImaApplication.getContentManager().editDatabaseTags(this.image.getPath(), newTags);
+      loadViewImage(image.getPath());
+    } else {
+      loadViewImage(image.getPath());
+    }
   }
 
   /**
@@ -132,5 +200,17 @@ public class ViewImagePageController implements Initializable {
    */
   public void setImageView(ImageView imageView) {
     this.imageView = imageView;
+  }
+
+  public void loadViewImage(String path) {
+    try {
+      FXMLLoader loader = new FXMLLoader(getClass().getResource("MetIma_ViewImagePage.fxml"));
+      ViewImagePageController controller = new ViewImagePageController();
+      loader.setController(controller);
+      controller.setImage(path);
+      MetImaApplication.getScene().setRoot(loader.load());
+    } catch (IOException exception) {
+      logger.error(FILE_NOT_FOUND, exception);
+    }
   }
 }

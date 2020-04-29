@@ -15,6 +15,7 @@ public class MetImaApplication extends Application {
   @Override
   public void start(Stage stage) throws Exception {
     createContentManager();
+    contentManager.readFromDB();
     stage.setMinWidth(1000);
     stage.setMinHeight(600);
     stage.setTitle("MetIma");
@@ -23,6 +24,10 @@ public class MetImaApplication extends Application {
     stage.setScene(scene);
     setStage(stage);
     stage.show();
+  }
+
+  public static void main(String[] args) {
+    launch();
   }
 
   private static void createContentManager() {
