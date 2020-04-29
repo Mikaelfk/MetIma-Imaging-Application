@@ -20,7 +20,7 @@ public class ContentManager {
   private EntityManagerFactory entityManagerFactory;
   Logger logger = LoggerFactory.getLogger(ContentManager.class);
   /**
-   * A makeshift HashMap for storing the images. This is just for storing the images for the MVP.
+   * A local HashMap for storing the ImageData class locally
    */
   private Map<String, ImageData> images;
   private Map<String, ImageData> searchResults;
